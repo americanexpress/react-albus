@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wizard without render prop should render without steps 1`] = `
+<Wizard
+  basename=""
+  className=""
+  history={
+    Object {
+      "listen": [Function],
+      "replace": [Function],
+    }
+  }
+  onNext={null}
+  render={null}
+>
+  <div
+    className=""
+  />
+</Wizard>
+`;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Steps should render correct child if controlled 1`] = `
+<FakeStep
+  path="hogwarts"
+/>
+`;

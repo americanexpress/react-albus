@@ -1,0 +1,16 @@
+# node/npm
+node_modules
+*.log
+
+# Build
+lib
+
+# OS
+.DS_Store
+[t|T]humbs.db
+
+# Testing
+coverage
+
+# IDE
+.idea

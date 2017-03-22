@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`withWizard should add the correct props to it's child 1`] = `
+<withWizard(ToWrap)>
+  <ToWrap
+    hogwarts="rules"
+  >
+    <div />
+  </ToWrap>
+</withWizard(ToWrap)>
+`;
+
+exports[`withWizard should override context with local props 1`] = `
+<withWizard(ToWrap)
+  hogwarts="drools"
+>
+  <ToWrap
+    hogwarts="drools"
+  >
+    <div />
+  </ToWrap>
+</withWizard(ToWrap)>
+`;
