@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navigation should pass down props to the child 1`] = `
+<withWizard(Navigation)>
+  <Navigation
+    hogwarts="rules"
+    render={null}
+  >
+    <Child
+      hogwarts="rules"
+    >
+      <div />
+    </Child>
+  </Navigation>
+</withWizard(Navigation)>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Step should add className to the wrapping div 1`] = `
+<Step
+  className="hogwarts"
+>
+  <div
+    className="hogwarts"
+  >
+    <div />
+  </div>
+</Step>
+`;
+
+exports[`Step should render it's children 1`] = `
+<Step
+  className=""
+>
+  <div
+    className=""
+  >
+    <div />
+  </div>
+</Step>
+`;
