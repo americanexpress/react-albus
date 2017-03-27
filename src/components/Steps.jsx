@@ -24,7 +24,7 @@ class Steps extends Component {
         path: child.props.path,
         name: child.props.name,
       }));
-      this.context.wizard._setSteps(steps); // eslint-disable-line no-underscore-dangle
+      wizard._setSteps(steps); // eslint-disable-line no-underscore-dangle
     }
   }
 
