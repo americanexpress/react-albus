@@ -16,7 +16,7 @@ import React, { Component, PropTypes } from 'react';
 
 class Steps extends Component {
   componentWillMount() {
-    const { wizard } = this.context;
+    const { wizard, wizardInit } = this.context;
 
     // Register steps with Wizard if they're not already registered
     if (wizard && !wizard.steps.length) {
@@ -24,7 +24,7 @@ class Steps extends Component {
         path: child.props.path,
         name: child.props.name,
       }));
-      wizard._setSteps(steps); // eslint-disable-line no-underscore-dangle
+      wizardInit(steps);
     }
   }
 
@@ -50,6 +50,7 @@ Steps.defaultProps = {
 
 Steps.contextTypes = {
   wizard: PropTypes.object,
+  wizardInit: PropTypes.func,
 };
 
 export default Steps;

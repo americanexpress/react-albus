@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Wizard without render prop should render without steps 1`] = `
+exports[`Wizard with render prop should render 1`] = `
 <Wizard
   basename=""
   className=""
@@ -11,10 +11,6 @@ exports[`Wizard without render prop should render without steps 1`] = `
     }
   }
   onNext={null}
-  render={null}
->
-  <div
-    className=""
-  />
-</Wizard>
+  render={[Function]}
+/>
 `;
