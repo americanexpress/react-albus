@@ -14,6 +14,7 @@
 
 import React, { Component, PropTypes } from 'react';
 import { createMemoryHistory } from 'history';
+import fixPath from '../utils';
 
 class Wizard extends Component {
   state = {
@@ -26,15 +27,15 @@ class Wizard extends Component {
   getChildContext() {
     return {
       wizard: {
-        _setSteps: this.setSteps,
         step: this.state.step,
         steps: this.steps,
         next: this.next,
-        previous: this.previous,
+        previous: this.props.history.goBack,
         push: this.push,
-        go: this.go,
+        go: this.props.history.go,
         history: this.props.history,
       },
+      wizardInit: this.init,
     };
   }
 
@@ -54,7 +55,9 @@ class Wizard extends Component {
     this.unlisten();
   }
 
-  setInitialStep() {
+  init = (steps) => {
+    this.steps = steps;
+
     if (this.props.onNext) {
       this.props.onNext({ path: null, name: null }, this.steps, this.replace);
     } else {
@@ -62,29 +65,20 @@ class Wizard extends Component {
     }
   }
 
-  setSteps = (steps) => {
-    this.steps = steps;
-    this.setInitialStep();
-  }
-
   steps = [];
-  previous = this.props.history.goBack;
-  go = this.props.history.go;
 
   get paths() {
     return this.steps.map(s => s.path);
   }
 
-  fixPath = pathname => pathname.replace(/\/\/+/g, '/');
-
   push = (step) => {
     const nextStep = step || this.paths[this.paths.indexOf(this.state.step.path) + 1];
-    this.props.history.push(this.fixPath(`${this.props.basename}/${nextStep}`));
+    this.props.history.push(fixPath(`${this.props.basename}/${nextStep}`));
   }
 
   replace = (step) => {
     const nextStep = step || this.paths[0];
-    this.props.history.replace(this.fixPath(`${this.props.basename}/${nextStep}`));
+    this.props.history.replace(fixPath(`${this.props.basename}/${nextStep}`));
   }
 
   next = () => {
@@ -131,6 +125,7 @@ Wizard.defaultProps = {
 
 Wizard.childContextTypes = {
   wizard: PropTypes.object,
+  wizardInit: PropTypes.func,
 };
 
 export default Wizard;

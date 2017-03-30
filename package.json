@@ -16,10 +16,7 @@
     "posttest": "npm run lint",
     "prepublish": "npm run build"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/americanexpress/react-albus.git"
-  },
+  "repository": "americanexpress/react-albus",
   "keywords": [
     "react",
     "react-component",
