@@ -12,7 +12,8 @@
  * the License.
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
 import { Wizard } from '../../src';

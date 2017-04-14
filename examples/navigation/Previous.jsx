@@ -12,7 +12,8 @@
  * the License.
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Previous = ({ className, disabled, label, previous }) =>
   <button className={className} onClick={previous} disabled={disabled}>{label}</button>;

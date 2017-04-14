@@ -12,7 +12,8 @@
  * the License.
  */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Step = ({ children, className }) => <div className={className}>{children}</div>;
 
