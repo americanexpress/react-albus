@@ -4,6 +4,8 @@
 >
 > \-- _Albus Dumbledore_
 
+![travis](https://travis-ci.org/americanexpress/react-albus.svg?branch=master)
+
 ## What is React [Albus](http://u.kanobu.ru/comments/images/3c682662-4e19-49c6-b85b-539db47ff838.gif)?
 React Albus is a React component library for building declarative multi-step flows (also known as Wizards).  You are responsible for writing your own steps and configuring their ordering, but React Albus will maintain the flow-related state for you.
 
