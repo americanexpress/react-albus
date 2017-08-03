@@ -13,6 +13,9 @@ React Albus also allows you to create routed flows, conditionally skip steps in 
 
 ## Example
 
+
+[see live](https://www.webpackbin.com/bins/-KqdaXhZk5UGAhwYHSAx)
+
 ```jsx
 import React from 'react';
 import { Wizard, Step, Steps, Navigation } from 'react-albus';
