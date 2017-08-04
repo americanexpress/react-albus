@@ -49,7 +49,7 @@ export default Example;
 ```
 ## Demo
 
-Check out the [demo page](https://aexp.io/react-albus)!
+Check out the [demo page](https://americanexpress.io/react-albus)!
 
 ## API
 
