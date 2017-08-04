@@ -1,10 +1,8 @@
-# React Albus
+# React Albus · [![Build Status](https://img.shields.io/travis/americanexpress/react-albus/master.svg?style=flat)](https://travis-ci.org/americanexpress/react-albus) [![Coverage Status](https://coveralls.io/repos/github/americanexpress/react-albus/badge.svg?branch=master)](https://coveralls.io/github/americanexpress/react-albus?branch=master) [![npm version](https://img.shields.io/npm/v/react-albus.svg?style=flat)](https://www.npmjs.com/package/react-albus)
 
 > “Let us `<Step>` into the night and pursue that flighty temptress, adventure.”
 >
 > \-- _Albus Dumbledore_
-
-![travis](https://travis-ci.org/americanexpress/react-albus.svg?branch=master)
 
 ## What is React [Albus](http://u.kanobu.ru/comments/images/3c682662-4e19-49c6-b85b-539db47ff838.gif)?
 React Albus is a React component library for building declarative multi-step flows (also known as Wizards).  You are responsible for writing your own steps and configuring their ordering, but React Albus will maintain the flow-related state for you.
@@ -17,18 +15,18 @@ React Albus also allows you to create routed flows, conditionally skip steps in 
 import React from 'react';
 import { Wizard, Step, Steps, Navigation } from 'react-albus';
 
-const Simple = () =>
+const Example = () =>
   <Wizard>
     <Steps>
-      <Step path="firstStep">
-        <h1>First Step</h1>
+      <Step path="merlin">
+        <h1>Merlin</h1>
         <Navigation
           render={({ next }) =>
             <button onClick={next}>Next</button>}
         />
       </Step>
-      <Step path="secondStep">
-        <h1>Second Step</h1>
+      <Step path="gandalf">
+        <h1>Gandalf</h1>
         <Navigation
           render={({ next, previous }) =>
             <div>
@@ -37,8 +35,8 @@ const Simple = () =>
             </div>}
         />
       </Step>
-      <Step path="thirdStep">
-        <h1>Third Step</h1>
+      <Step path="dumbledore">
+        <h1>Dumbledore</h1>
         <Navigation
           render={({ previous }) =>
             <button onClick={previous}>Previous</button>}
@@ -47,9 +45,11 @@ const Simple = () =>
     </Steps>
   </Wizard>;
 
-export default Simple;
+export default Example;
 ```
-To explore [more examples](https://github.com/americanexpress/react-albus/tree/master/examples), `git clone`, `npm install` and `npm start`.
+## Demo
+
+Check out the [demo page](https://aexp.io/react-albus)!
 
 ## API
 

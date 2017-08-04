@@ -15,9 +15,9 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import { Wizard, Step, Steps, Navigation } from '../src';
-import FirstStep from './components/FirstStep';
-import SecondStep from './components/SecondStep';
-import ThirdStep from './components/ThirdStep';
+import Merlin from './components/Merlin';
+import Gandalf from './components/Gandalf';
+import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
@@ -26,14 +26,14 @@ const Routed = () =>
     render={({ history, match: { url } }) =>
       <Wizard history={history} basename={url}>
         <Steps>
-          <Step path="firstStep">
-            <FirstStep />
+          <Step path="merlin">
+            <Merlin />
             <Navigation>
               <Next label="Continue" />
             </Navigation>
           </Step>
-          <Step path="secondStep">
-            <SecondStep />
+          <Step path="gandalf">
+            <Gandalf />
             <Navigation
               render={({ next, previous }) =>
                 <div>
@@ -42,8 +42,8 @@ const Routed = () =>
                 </div>}
             />
           </Step>
-          <Step path="thirdStep">
-            <ThirdStep />
+          <Step path="dumbledore">
+            <Dumbledore />
             <Navigation>
               <Previous label="Back" />
             </Navigation>

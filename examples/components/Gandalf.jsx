@@ -14,6 +14,6 @@
 
 import React from 'react';
 
-const SecondStep = () => <h1>Step 2</h1>;
+const Gandalf = () => <h1>Gandalf</h1>;
 
-export default SecondStep;
+export default Gandalf;

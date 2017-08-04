@@ -15,9 +15,9 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { Wizard, Step, Steps, Navigation } from '../src';
-import FirstStep from './components/FirstStep';
-import SecondStep from './components/SecondStep';
-import ThirdStep from './components/ThirdStep';
+import Merlin from './components/Merlin';
+import Gandalf from './components/Gandalf';
+import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
@@ -32,14 +32,14 @@ const Animated = () =>
         transitionLeaveTimeout={500}
       >
         <Steps key={step.path} step={step}>
-          <Step path="firstStep" name="First Step" className="example-step">
-            <FirstStep />
+          <Step path="merlin" className="example-step">
+            <Merlin />
             <Navigation>
               <Next label="Continue" />
             </Navigation>
           </Step>
-          <Step path="secondStep" name="Second Step" className="example-step">
-            <SecondStep />
+          <Step path="gandalf" className="example-step">
+            <Gandalf />
             <Navigation
               render={({ next, previous }) =>
                 <div>
@@ -48,8 +48,8 @@ const Animated = () =>
                 </div>}
             />
           </Step>
-          <Step path="thirdStep" name="Third Step" className="example-step">
-            <ThirdStep />
+          <Step path="dumbledore" className="example-step">
+            <Dumbledore />
             <Navigation>
               <Previous label="Back" />
             </Navigation>

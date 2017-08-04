@@ -14,9 +14,9 @@
 
 import React from 'react';
 import { Wizard, Step, Steps, Navigation } from '../src';
-import FirstStep from './components/FirstStep';
-import SecondStep from './components/SecondStep';
-import ThirdStep from './components/ThirdStep';
+import Merlin from './components/Merlin';
+import Gandalf from './components/Gandalf';
+import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
@@ -28,14 +28,14 @@ const ProgressBar = () =>
           {steps.map(s => s.path).indexOf(step.path) + 1}/{steps.length}
         </div>
         <Steps>
-          <Step path="firstStep" name="First Step">
-            <FirstStep />
+          <Step path="merlin">
+            <Merlin />
             <Navigation>
               <Next label="Continue" />
             </Navigation>
           </Step>
-          <Step path="secondStep" name="Second Step">
-            <SecondStep />
+          <Step path="gandalf">
+            <Gandalf />
             <Navigation
               render={({ next, previous }) =>
                 <div>
@@ -44,8 +44,8 @@ const ProgressBar = () =>
                 </div>}
             />
           </Step>
-          <Step path="thirdStep" name="Third Step">
-            <ThirdStep />
+          <Step path="dumbledore">
+            <Dumbledore />
             <Navigation>
               <Previous label="Back" />
             </Navigation>

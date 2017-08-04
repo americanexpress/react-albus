@@ -30,10 +30,7 @@ const Navigation = ({ children, render, ...wizard }) => {
 };
 
 Navigation.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.node,
-    PropTypes.func,
-  ]),
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   render: PropTypes.func,
   wizard: PropTypes.shape({
     setSteps: PropTypes.func,

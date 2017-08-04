@@ -24,21 +24,15 @@ const context = {
 };
 
 describe('withWizard', () => {
-  it('should add the correct props to it\'s child', () => {
+  it("should add the correct props to it's child", () => {
     const Wrapped = withWizard(ToWrap);
-    const mounted = mount(
-      <Wrapped />,
-      { context },
-    );
+    const mounted = mount(<Wrapped />, { context });
     expect(mounted).toMatchSnapshot();
   });
 
   it('should override context with local props', () => {
     const Wrapped = withWizard(ToWrap);
-    const mounted = mount(
-      <Wrapped hogwarts="drools" />,
-      { context },
-    );
+    const mounted = mount(<Wrapped hogwarts="drools" />, { context });
     expect(mounted).toMatchSnapshot();
   });
 });

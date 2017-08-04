@@ -12,7 +12,7 @@ exports[`Step should add className to the wrapping div 1`] = `
 </Step>
 `;
 
-exports[`Step should render it's children 1`] = `
+exports[`Step should render children 1`] = `
 <Step
   className=""
 >

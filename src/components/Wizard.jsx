@@ -23,7 +23,7 @@ class Wizard extends Component {
       path: null,
       name: null,
     },
-  }
+  };
 
   getChildContext() {
     return {
@@ -64,7 +64,7 @@ class Wizard extends Component {
     } else {
       this.replace();
     }
-  }
+  };
 
   steps = [];
 
@@ -75,12 +75,12 @@ class Wizard extends Component {
   push = (step) => {
     const nextStep = step || this.paths[this.paths.indexOf(this.state.step.path) + 1];
     this.props.history.push(fixPath(`${this.props.basename}/${nextStep}`));
-  }
+  };
 
   replace = (step) => {
     const nextStep = step || this.paths[0];
     this.props.history.replace(fixPath(`${this.props.basename}/${nextStep}`));
-  }
+  };
 
   next = () => {
     if (this.props.onNext) {
@@ -88,13 +88,17 @@ class Wizard extends Component {
     } else {
       this.push();
     }
-  }
+  };
 
   render() {
     if (this.props.render) {
       return this.props.render(this.getChildContext().wizard);
     }
-    return <div className={this.props.className}>{this.props.children}</div>;
+    return (
+      <div className={this.props.className}>
+        {this.props.children}
+      </div>
+    );
   }
 }
 
