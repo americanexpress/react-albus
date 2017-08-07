@@ -2,13 +2,11 @@
   "name": "react-albus",
   "version": "1.0.1",
   "description": "React component library for building declarative multi-step flows.",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "main": "lib",
   "scripts": {
     "clean": "rimraf lib",
-    "start": "webpack-dev-server --port 3000 --inline --hot",
+    "start": "webpack-dev-server --port 3000 --inline --hot --open",
     "test": "jest --coverage",
     "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
     "prebuild": "npm run clean && npm run lint",
@@ -17,23 +15,14 @@
     "prepublish": "npm run build"
   },
   "repository": "americanexpress/react-albus",
-  "keywords": [
-    "react",
-    "react-component",
-    "wizard",
-    "step",
-    "multistep",
-    "routing"
-  ],
+  "keywords": ["react", "react-component", "wizard", "step", "multistep", "routing"],
   "authors": [
     "Jack Cross <jack.cross1@aexp.com> (https://github.com/jayjaycross)",
     "Nathan Force <nathan.a.force@aexp.com> (https://github.com/nathanforce)"
   ],
   "license": "Apache-2.0",
   "jest": {
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
-    ]
+    "snapshotSerializers": ["<rootDir>/node_modules/enzyme-to-json/serializer"]
   },
   "dependencies": {
     "history": "^4.6.0",

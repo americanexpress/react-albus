@@ -14,17 +14,17 @@
 
 import React from 'react';
 import { Wizard, Step, Steps, Navigation } from '../src';
-import FirstStep from './components/FirstStep';
-import SecondStep from './components/SecondStep';
-import ThirdStep from './components/ThirdStep';
+import Merlin from './components/Merlin';
+import Gandalf from './components/Gandalf';
+import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
 const SkipStep = () => {
   const next = (step, steps, push) => {
     switch (step.path) {
-      case 'firstStep': {
-        push('thirdStep');
+      case 'merlin': {
+        push('dumbledore');
         break;
       }
       default:
@@ -35,17 +35,17 @@ const SkipStep = () => {
   return (
     <Wizard onNext={next}>
       <Steps>
-        <Step path="firstStep">
-          <FirstStep />
+        <Step path="merlin">
+          <Merlin />
           <Navigation>
             <Next label="Continue" />
           </Navigation>
         </Step>
-        <Step path="secondStep">
-          <SecondStep />
+        <Step path="gandalf">
+          <Gandalf />
         </Step>
-        <Step path="thirdStep">
-          <ThirdStep />
+        <Step path="dumbledore">
+          <Dumbledore />
           <Navigation>
             <Previous label="Back" />
           </Navigation>

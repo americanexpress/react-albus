@@ -10,13 +10,19 @@ import SkipStep from './examples/SkipStep';
 import ProgressBar from './examples/ProgressBar';
 import Animated from './examples/Animated';
 
-const Index = () => <div>
-  <Link to="/simple">simple example</Link><br />
-  <Link to="/routed">routed example</Link><br />
-  <Link to="/skip-step">skip step example</Link><br />
-  <Link to="/progress-bar">progress bar example</Link><br />
-  <Link to="/animated">animated example</Link><br />
-</div>;
+const Index = () =>
+  <div>
+    <Link to="/simple">simple example</Link>
+    <br />
+    <Link to="/routed">routed example</Link>
+    <br />
+    <Link to="/skip-step">skip step example</Link>
+    <br />
+    <Link to="/progress-bar">progress bar example</Link>
+    <br />
+    <Link to="/animated">animated example</Link>
+    <br />
+  </div>;
 
 render(
   <BrowserRouter>
@@ -29,6 +35,5 @@ render(
       <Route path="/animated" component={Animated} />
     </div>
   </BrowserRouter>,
-  // eslint-disable-next-line no-undef
   document.getElementById('root'),
 );

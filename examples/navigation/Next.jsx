@@ -16,7 +16,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Next = ({ className, disabled, label, next }) =>
-  <button className={className} onClick={next} disabled={disabled}>{label}</button>;
+  <button className={className} onClick={next} disabled={disabled}>
+    {label}
+  </button>;
 
 Next.propTypes = {
   className: PropTypes.string,

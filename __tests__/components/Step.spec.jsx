@@ -18,7 +18,7 @@ import { mount } from 'enzyme';
 import { Step } from '../../src';
 
 describe('Step', () => {
-  it('should render it\'s children', () => {
+  it('should render children', () => {
     const mounted = mount(
       <Step>
         <div />

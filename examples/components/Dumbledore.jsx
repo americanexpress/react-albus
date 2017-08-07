@@ -14,6 +14,6 @@
 
 import React from 'react';
 
-const ThirdStep = () => <h1>Step 3</h1>;
+const Dumbledore = () => <h1>Dumbledore</h1>;
 
-export default ThirdStep;
+export default Dumbledore;

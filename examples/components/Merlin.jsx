@@ -14,6 +14,6 @@
 
 import React from 'react';
 
-const FirstStep = () => <h1>Step 1</h1>;
+const Merlin = () => <h1>Merlin</h1>;
 
-export default FirstStep;
+export default Merlin;

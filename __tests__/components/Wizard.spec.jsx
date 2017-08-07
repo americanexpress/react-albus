@@ -40,9 +40,7 @@ describe('Wizard', () => {
         listen: () => () => null,
       };
 
-      mounted = mount(
-        <Wizard history={history} render={() => null} />,
-      );
+      mounted = mount(<Wizard history={history} render={() => null} />);
     });
 
     it('should render', () => {
@@ -81,10 +79,7 @@ describe('Wizard', () => {
         </Wizard>,
       );
 
-      init([
-        { path: 'gryffindor' },
-        { path: 'slytherin' },
-      ]);
+      init([{ path: 'gryffindor' }, { path: 'slytherin' }]);
     });
 
     it('should go to the next and previous steps', () => {
@@ -132,12 +127,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard onNext={onNext}>
           <ExposeWizard>
-            {({
-              wizard: {
-                next: wizardNext,
-              },
-              wizardInit,
-            }) => {
+            {({ wizard: { next: wizardNext }, wizardInit }) => {
               next = wizardNext;
               init = wizardInit;
               return null;
@@ -146,10 +136,7 @@ describe('Wizard', () => {
         </Wizard>,
       );
 
-      init([
-        { path: 'gryffindor' },
-        { path: 'slytherin' },
-      ]);
+      init([{ path: 'gryffindor' }, { path: 'slytherin' }]);
     });
 
     it('should go to the next step and call onNext', () => {

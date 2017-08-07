@@ -31,9 +31,11 @@ class Steps extends Component {
 
   render() {
     const currentStep = this.props.step || this.context.wizard.step;
-    return React.Children.toArray(this.props.children).filter(step =>
-      currentStep && step.props.path === currentStep.path,
-    )[0] || null;
+    return (
+      React.Children
+        .toArray(this.props.children)
+        .filter(step => currentStep && step.props.path === currentStep.path)[0] || null
+    );
   }
 }
 

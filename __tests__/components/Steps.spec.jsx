@@ -40,11 +40,7 @@ describe('Steps', () => {
   it('should not call _init if wizard already has steps', () => {
     const context = {
       wizard: {
-        steps: [
-          'we',
-          'have',
-          'steps',
-        ],
+        steps: ['we', 'have', 'steps'],
       },
       wizardInit: jest.fn(),
     };
