@@ -31,17 +31,17 @@ class Wizard extends Component {
         step: this.state.step,
         steps: this.steps,
         next: this.next,
-        previous: this.props.history.goBack,
+        previous: this.history.goBack,
         push: this.push,
-        go: this.props.history.go,
-        history: this.props.history,
+        go: this.history.go,
+        history: this.history,
       },
       wizardInit: this.init,
     };
   }
 
   componentWillMount() {
-    this.unlisten = this.props.history.listen(({ pathname }) => {
+    this.unlisten = this.history.listen(({ pathname }) => {
       const path = pathname.split('/').pop();
       const step = this.steps.filter(s => s.path === path)[0];
       if (step) {
@@ -56,7 +56,14 @@ class Wizard extends Component {
     this.unlisten();
   }
 
-  init = (steps) => {
+  get paths() {
+    return this.steps.map(s => s.path);
+  }
+
+  history = this.props.history || createMemoryHistory();
+  steps = [];
+
+  init = steps => {
     this.steps = steps;
 
     if (this.props.onNext) {
@@ -66,20 +73,14 @@ class Wizard extends Component {
     }
   };
 
-  steps = [];
-
-  get paths() {
-    return this.steps.map(s => s.path);
-  }
-
-  push = (step) => {
+  push = step => {
     const nextStep = step || this.paths[this.paths.indexOf(this.state.step.path) + 1];
-    this.props.history.push(fixPath(`${this.props.basename}/${nextStep}`));
+    this.history.push(fixPath(`${this.props.basename}/${nextStep}`));
   };
 
-  replace = (step) => {
+  replace = step => {
     const nextStep = step || this.paths[0];
-    this.props.history.replace(fixPath(`${this.props.basename}/${nextStep}`));
+    this.history.replace(fixPath(`${this.props.basename}/${nextStep}`));
   };
 
   next = () => {
@@ -123,7 +124,7 @@ Wizard.defaultProps = {
   basename: '',
   children: null,
   className: '',
-  history: createMemoryHistory(),
+  history: null,
   onNext: null,
   render: null,
 };

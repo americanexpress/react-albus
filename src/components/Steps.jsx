@@ -21,21 +21,20 @@ class Steps extends Component {
 
     // Register steps with Wizard if they're not already registered
     if (wizard && !wizard.steps.length) {
-      const steps = React.Children.map(this.props.children, child => ({
-        path: child.props.path,
-        name: child.props.name,
-      }));
+      const steps = React.Children.map(
+        this.props.children,
+        ({ props: { children, render, ...config } }) => config
+      );
       wizardInit(steps);
     }
   }
 
   render() {
     const currentStep = this.props.step || this.context.wizard.step;
-    return (
-      React.Children
-        .toArray(this.props.children)
-        .filter(step => currentStep && step.props.path === currentStep.path)[0] || null
-    );
+    const [child = null] = React.Children
+      .toArray(this.props.children)
+      .filter(step => currentStep && step.props.path === currentStep.path);
+    return child;
   }
 }
 

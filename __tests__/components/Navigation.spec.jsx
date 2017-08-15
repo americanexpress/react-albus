@@ -29,12 +29,12 @@ describe('Navigation', () => {
 
     mount(
       <Navigation
-        render={(props) => {
+        render={props => {
           wizard = props;
           return <noscript />;
         }}
       />,
-      { context },
+      { context }
     );
 
     expect(wizard).toEqual({
@@ -47,12 +47,12 @@ describe('Navigation', () => {
 
     mount(
       <Navigation>
-        {(props) => {
+        {props => {
           wizard = props;
           return <noscript />;
         }}
       </Navigation>,
-      { context },
+      { context }
     );
 
     expect(wizard).toEqual({
@@ -66,7 +66,7 @@ describe('Navigation', () => {
       <Navigation>
         <Child />
       </Navigation>,
-      { context },
+      { context }
     );
 
     expect(mounted).toMatchSnapshot();

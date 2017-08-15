@@ -22,7 +22,7 @@ describe('Step', () => {
     const mounted = mount(
       <Step>
         <div />
-      </Step>,
+      </Step>
     );
 
     expect(mounted).toMatchSnapshot();
@@ -32,7 +32,7 @@ describe('Step', () => {
     const mounted = mount(
       <Step className="hogwarts">
         <div />
-      </Step>,
+      </Step>
     );
 
     expect(mounted).toMatchSnapshot();

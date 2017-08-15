@@ -1,6 +1,6 @@
 {
   "name": "react-albus",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "React component library for building declarative multi-step flows.",
   "files": ["lib"],
   "main": "lib",
@@ -22,7 +22,8 @@
   ],
   "license": "Apache-2.0",
   "jest": {
-    "snapshotSerializers": ["<rootDir>/node_modules/enzyme-to-json/serializer"]
+    "snapshotSerializers": ["<rootDir>/node_modules/enzyme-to-json/serializer"],
+    "testPathIgnorePatterns": [".eslintrc.js"]
   },
   "dependencies": {
     "history": "^4.6.0",
@@ -42,14 +43,14 @@
     "css-loader": "^0.26.2",
     "enzyme": "^2.7.0",
     "enzyme-to-json": "^1.4.5",
-    "eslint": "^3.13.1",
-    "eslint-config-airbnb": "^14.0.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.1",
-    "eslint-plugin-react": "6.10.0",
+    "eslint": "^3.19.0",
+    "eslint-config-amex": "^6.0.0",
+    "eslint-config-prettier": "^2.2.0",
+    "eslint-plugin-prettier": "^2.1.2",
     "import-glob-loader": "^1.1.0",
     "jest": "^19.0.0",
     "node-sass": "^4.5.0",
+    "prettier": "^1.4.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^15.5.4",

@@ -15,7 +15,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const withWizard = (component) => {
+const withWizard = component => {
   const WithWizard = (props, { wizard }) =>
     React.createElement(component, {
       ...wizard,
@@ -27,6 +27,8 @@ const withWizard = (component) => {
   };
 
   WithWizard.displayName = `withWizard(${component.displayName || component.name})`;
+  WithWizard.WrappedComponent = component;
+
   return WithWizard;
 };
 

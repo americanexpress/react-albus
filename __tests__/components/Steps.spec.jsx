@@ -32,7 +32,7 @@ describe('Steps', () => {
       <Steps>
         <FakeStep path="hogwarts" />
       </Steps>,
-      { context },
+      { context }
     );
     expect(context.wizardInit).toHaveBeenCalled();
   });
@@ -49,7 +49,7 @@ describe('Steps', () => {
       <Steps>
         <FakeStep path="hogwarts" />
       </Steps>,
-      { context },
+      { context }
     );
     expect(context.wizardInit).not.toHaveBeenCalled();
   });
@@ -62,7 +62,7 @@ describe('Steps', () => {
         <FakeStep path="hogwarts" />
         <FakeStep path="gryffindor" />
       </Steps>,
-      { context },
+      { context }
     );
 
     expect(mounted).toMatchSnapshot();
