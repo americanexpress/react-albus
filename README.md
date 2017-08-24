@@ -94,6 +94,8 @@ Unique key for each step.
 ##### `className`: string *(optional)*
 CSS classes to be added to the `<div>` created by `<Step>`.
 
+In addition to `path` and `className`, any additional props added to `<Step>` will be available on each `step` object.  This can be used to add names, descriptions, or other metadata to each step.
+
 ---
 
 ### `<Steps>`
