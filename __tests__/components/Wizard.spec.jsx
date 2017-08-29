@@ -76,7 +76,7 @@ describe('Wizard', () => {
               return null;
             }}
           </ExposeWizard>
-        </Wizard>,
+        </Wizard>
       );
 
       init([{ path: 'gryffindor' }, { path: 'slytherin' }]);
@@ -133,7 +133,7 @@ describe('Wizard', () => {
               return null;
             }}
           </ExposeWizard>
-        </Wizard>,
+        </Wizard>
       );
 
       init([{ path: 'gryffindor' }, { path: 'slytherin' }]);

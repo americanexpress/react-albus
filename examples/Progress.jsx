@@ -13,6 +13,7 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Wizard, Step, Steps, Navigation } from '../src';
 import Merlin from './components/Merlin';
 import Gandalf from './components/Gandalf';
@@ -20,21 +21,19 @@ import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
-const ProgressBar = () =>
+const Progress = () =>
   <Wizard
     render={({ step, steps }) =>
       <div>
-        <div>
-          {steps.map(s => s.path).indexOf(step.path) + 1}/{steps.length}
-        </div>
+        <ProgressBar step={step} steps={steps} />
         <Steps>
-          <Step path="merlin">
+          <Step path="merlin" name="Merlin" location="Britain">
             <Merlin />
             <Navigation>
               <Next label="Continue" />
             </Navigation>
           </Step>
-          <Step path="gandalf">
+          <Step path="gandalf" name="Gandalf" location="Middle Earth">
             <Gandalf />
             <Navigation
               render={({ next, previous }) =>
@@ -44,7 +43,7 @@ const ProgressBar = () =>
                 </div>}
             />
           </Step>
-          <Step path="dumbledore">
+          <Step path="dumbledore" name="Dumbledore" location="Hogwarts">
             <Dumbledore />
             <Navigation>
               <Previous label="Back" />
@@ -54,4 +53,20 @@ const ProgressBar = () =>
       </div>}
   />;
 
-export default ProgressBar;
+const ProgressBar = ({ step, steps }) =>
+  <div>
+    {steps.map(s => s.path).indexOf(step.path) + 1}/{steps.length} - {step.name} - {step.location}
+  </div>;
+
+const stepShape = PropTypes.shape({
+  path: PropTypes.string,
+  name: PropTypes.string,
+  location: PropTypes.string,
+});
+
+ProgressBar.propTypes = {
+  step: stepShape.isRequired,
+  steps: PropTypes.arrayOf(stepShape).isRequired,
+};
+
+export default Progress;

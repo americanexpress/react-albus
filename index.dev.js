@@ -7,33 +7,38 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Simple from './examples/Simple';
 import Routed from './examples/Routed';
 import SkipStep from './examples/SkipStep';
-import ProgressBar from './examples/ProgressBar';
+import Progress from './examples/Progress';
 import Animated from './examples/Animated';
 
 const Index = () =>
-  <div>
-    <Link to="/simple">simple example</Link>
-    <br />
-    <Link to="/routed">routed example</Link>
-    <br />
-    <Link to="/skip-step">skip step example</Link>
-    <br />
-    <Link to="/progress-bar">progress bar example</Link>
-    <br />
-    <Link to="/animated">animated example</Link>
-    <br />
-  </div>;
+  <ul>
+    <li>
+      <Link to="/simple">Simple</Link>
+    </li>
+    <li>
+      <Link to="/routed">Routed</Link>
+    </li>
+    <li>
+      <Link to="/skip-step">Skip Step</Link>
+    </li>
+    <li>
+      <Link to="/progress-bar">Progress Bar</Link>
+    </li>
+    <li>
+      <Link to="/animated">Animated</Link>
+    </li>
+  </ul>;
 
 render(
   <BrowserRouter>
     <div>
-      <Route path="/" exact component={Index} />
+      <Route path="/" exact={true} component={Index} />
       <Route path="/simple" component={Simple} />
       <Route path="/routed" component={Routed} />
       <Route path="/skip-step" component={SkipStep} />
-      <Route path="/progress-bar" component={ProgressBar} />
+      <Route path="/progress-bar" component={Progress} />
       <Route path="/animated" component={Animated} />
     </div>
   </BrowserRouter>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );

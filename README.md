@@ -91,10 +91,10 @@ Wraps all the content that will be conditionally shown when the step is active.
 #### Props
 ##### `path`: string
 Unique key for each step.
-##### `name`: string *(optional)*
-A name for the step that can later be accessed on [`context.wizard`](#contextwizard).
 ##### `className`: string *(optional)*
 CSS classes to be added to the `<div>` created by `<Step>`.
+
+In addition to `path` and `className`, any additional props added to `<Step>` will be available on each `step` object.  This can be used to add names, descriptions, or other metadata to each step.
 
 ---
 

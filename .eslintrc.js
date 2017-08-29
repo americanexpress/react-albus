@@ -1,17 +1,16 @@
 module.exports = {
-  parser: 'babel-eslint',
-  env: {
-    browser: true,
-    node: true,
-    jest: true,
+  extends: ['amex', 'prettier', 'prettier/react'],
+  plugins: ['prettier'],
+  rules: {
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        trailingComma: 'es5',
+        bracketSpacing: true,
+        jsxBracketSameLine: false,
+        printWidth: 100,
+      },
+    ],
   },
-  plugins: [
-    'jsx-a11y',
-    'react',
-  ],
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'airbnb',
-  ],
 };
