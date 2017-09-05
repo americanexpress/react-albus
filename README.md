@@ -69,7 +69,7 @@ Check out the [demo page](http://americanexpress.io/react-albus)!
 A function that will be called by Wizard to determine the next step to proceed to.
 
 ##### Params
-* `step`: An object describing the current step with the signature: `{ path: string, name: string }`.
+* `step`: An object describing the current step with the structure: `{ path: string, name: string }`.
 * `steps`: An array of `step` objects in the order they were declared in `<Steps>`.
 * `push(path)`: A function that can be called with the `path` of the step that you want to proceed to.  Calling this function without arguments will proceed to the next step.
 
@@ -103,7 +103,7 @@ Wraps all of the `<Step>` components for your flow.  The only direct children of
 
 #### Props
 ##### `step`: object ***(optional)***
-An object describing the current step with the signature: `{ path: string, name: string }`.  Defining this prop will make `<Steps>` a [controlled component](https://facebook.github.io/react/docs/forms.html).
+An object describing the current step with the structure: `{ path: string, name: string }`.  Defining this prop will make `<Steps>` a [controlled component](https://facebook.github.io/react/docs/forms.html).
 
 ---
 
@@ -126,7 +126,7 @@ A higher order component that spreads [`context.wizard`](#contextwizard) across 
 ### `context.wizard`
 `<Wizard>` adds this object to context with the following properties:
 
-* `step` (object): Describes the current step with signature: `{ path: string, name: string }`.
+* `step` (object): Describes the current step with structure: `{ path: string, name: string }`.
 * `steps` (array): Array of `step` objects in the order they were declared within `<Steps>`.
 * `history` (object): The backing [`history`](https://github.com/ReactTraining/history#properties) object.
 * `next()` (function): Moves to the next step in order.
