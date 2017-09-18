@@ -10,7 +10,7 @@ import SkipStep from './examples/SkipStep';
 import Progress from './examples/Progress';
 import Animated from './examples/Animated';
 
-const Index = () =>
+const Index = () => (
   <ul>
     <li>
       <Link to="/simple">Simple</Link>
@@ -27,7 +27,8 @@ const Index = () =>
     <li>
       <Link to="/animated">Animated</Link>
     </li>
-  </ul>;
+  </ul>
+);
 
 render(
   <BrowserRouter>

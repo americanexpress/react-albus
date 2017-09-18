@@ -20,7 +20,7 @@ import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
-const Simple = () =>
+const Simple = () => (
   <Wizard>
     <Steps>
       <Step path="merlin">
@@ -32,11 +32,12 @@ const Simple = () =>
       <Step path="gandalf">
         <Gandalf />
         <Navigation
-          render={({ next, previous }) =>
+          render={({ next, previous }) => (
             <div>
               <Previous previous={previous} label="Back" />
               <Next next={next} label="Continue" />
-            </div>}
+            </div>
+          )}
         />
       </Step>
       <Step path="dumbledore">
@@ -46,6 +47,7 @@ const Simple = () =>
         </Navigation>
       </Step>
     </Steps>
-  </Wizard>;
+  </Wizard>
+);
 
 export default Simple;

@@ -15,10 +15,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Step = ({ children, className }) =>
-  <div className={className}>
-    {children}
-  </div>;
+const Step = ({ children, className }) => <div className={className}>{children}</div>;
 
 Step.propTypes = {
   children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,

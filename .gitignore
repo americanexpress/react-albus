@@ -10,7 +10,7 @@ lib
 [t|T]humbs.db
 
 # Testing
-coverage
+test-results
 
 # IDE
 .idea

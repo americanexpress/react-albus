@@ -95,11 +95,7 @@ class Wizard extends Component {
     if (this.props.render) {
       return this.props.render(this.getChildContext().wizard);
     }
-    return (
-      <div className={this.props.className}>
-        {this.props.children}
-      </div>
-    );
+    return <div className={this.props.className}>{this.props.children}</div>;
   }
 }
 

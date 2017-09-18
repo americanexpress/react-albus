@@ -21,9 +21,9 @@ import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
-const Progress = () =>
+const Progress = () => (
   <Wizard
-    render={({ step, steps }) =>
+    render={({ step, steps }) => (
       <div>
         <ProgressBar step={step} steps={steps} />
         <Steps>
@@ -36,11 +36,12 @@ const Progress = () =>
           <Step path="gandalf" name="Gandalf" location="Middle Earth">
             <Gandalf />
             <Navigation
-              render={({ next, previous }) =>
+              render={({ next, previous }) => (
                 <div>
                   <Previous previous={previous} label="Back" />
                   <Next next={next} label="Continue" />
-                </div>}
+                </div>
+              )}
             />
           </Step>
           <Step path="dumbledore" name="Dumbledore" location="Hogwarts">
@@ -50,13 +51,16 @@ const Progress = () =>
             </Navigation>
           </Step>
         </Steps>
-      </div>}
-  />;
+      </div>
+    )}
+  />
+);
 
-const ProgressBar = ({ step, steps }) =>
+const ProgressBar = ({ step, steps }) => (
   <div>
     {steps.map(s => s.path).indexOf(step.path) + 1}/{steps.length} - {step.name} - {step.location}
-  </div>;
+  </div>
+);
 
 const stepShape = PropTypes.shape({
   path: PropTypes.string,

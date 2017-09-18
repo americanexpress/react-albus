@@ -21,9 +21,9 @@ import Dumbledore from './components/Dumbledore';
 import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
-const Routed = () =>
+const Routed = () => (
   <Route
-    render={({ history, match: { url } }) =>
+    render={({ history, match: { url } }) => (
       <Wizard history={history} basename={url}>
         <Steps>
           <Step path="merlin">
@@ -35,11 +35,12 @@ const Routed = () =>
           <Step path="gandalf">
             <Gandalf />
             <Navigation
-              render={({ next, previous }) =>
+              render={({ next, previous }) => (
                 <div>
                   <Previous previous={previous} label="Back" />
                   <Next next={next} label="Continue" />
-                </div>}
+                </div>
+              )}
             />
           </Step>
           <Step path="dumbledore">
@@ -49,7 +50,9 @@ const Routed = () =>
             </Navigation>
           </Step>
         </Steps>
-      </Wizard>}
-  />;
+      </Wizard>
+    )}
+  />
+);
 
 export default Routed;
