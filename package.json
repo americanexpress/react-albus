@@ -2,12 +2,14 @@
   "name": "react-albus",
   "version": "1.1.0",
   "description": "React component library for building declarative multi-step flows.",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "main": "lib",
   "scripts": {
     "clean": "rimraf lib",
     "start": "webpack-dev-server --port 3000 --inline --hot --open",
-    "test": "jest --coverage",
+    "test": "jest",
     "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
     "prebuild": "npm run clean && npm run lint",
     "build": "babel src -d lib --copy-files",
@@ -15,15 +17,24 @@
     "prepublish": "npm run build"
   },
   "repository": "americanexpress/react-albus",
-  "keywords": ["react", "react-component", "wizard", "step", "multistep", "routing"],
+  "keywords": [
+    "react",
+    "react-component",
+    "wizard",
+    "step",
+    "multistep",
+    "routing"
+  ],
   "authors": [
     "Jack Cross <jack.cross1@aexp.com> (https://github.com/jayjaycross)",
     "Nathan Force <nathan.a.force@aexp.com> (https://github.com/nathanforce)"
   ],
   "license": "Apache-2.0",
   "jest": {
-    "snapshotSerializers": ["<rootDir>/node_modules/enzyme-to-json/serializer"],
-    "testPathIgnorePatterns": [".eslintrc.js"]
+    "preset": "amex-jest-preset-react",
+    "testPathIgnorePatterns": [
+      ".eslintrc.js"
+    ]
   },
   "dependencies": {
     "history": "^4.6.0",
@@ -31,6 +42,7 @@
     "react": "^15.4.2"
   },
   "devDependencies": {
+    "amex-jest-preset-react": "^3.0.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0",
@@ -50,7 +62,7 @@
     "import-glob-loader": "^1.1.0",
     "jest": "^19.0.0",
     "node-sass": "^4.5.0",
-    "prettier": "^1.4.4",
+    "prettier": "^1.6.1",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^15.5.4",

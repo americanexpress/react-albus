@@ -23,9 +23,9 @@ import Previous from './navigation/Previous';
 
 require('./animations/exampleAnimation.scss');
 
-const Animated = () =>
+const Animated = () => (
   <Wizard
-    render={({ step }) =>
+    render={({ step }) => (
       <ReactCSSTransitionGroup
         transitionName="example"
         transitionEnterTimeout={500}
@@ -41,11 +41,12 @@ const Animated = () =>
           <Step path="gandalf" className="example-step">
             <Gandalf />
             <Navigation
-              render={({ next, previous }) =>
+              render={({ next, previous }) => (
                 <div>
                   <Previous previous={previous} label="Back" />
                   <Next next={next} label="Continue" />
-                </div>}
+                </div>
+              )}
             />
           </Step>
           <Step path="dumbledore" className="example-step">
@@ -55,7 +56,9 @@ const Animated = () =>
             </Navigation>
           </Step>
         </Steps>
-      </ReactCSSTransitionGroup>}
-  />;
+      </ReactCSSTransitionGroup>
+    )}
+  />
+);
 
 export default Animated;

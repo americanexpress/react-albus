@@ -15,10 +15,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Previous = ({ className, disabled, label, previous }) =>
+const Previous = ({ className, disabled, label, previous }) => (
   <button className={className} onClick={previous} disabled={disabled}>
     {label}
-  </button>;
+  </button>
+);
 
 Previous.propTypes = {
   className: PropTypes.string,
