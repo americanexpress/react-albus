@@ -38,8 +38,7 @@
   },
   "dependencies": {
     "history": "^4.6.0",
-    "prop-types": "^15.5.8",
-    "react": "^15.4.2"
+    "prop-types": "^15.5.8"
   },
   "devDependencies": {
     "amex-jest-preset-react": "^3.0.0",
@@ -63,6 +62,7 @@
     "jest": "^19.0.0",
     "node-sass": "^4.5.0",
     "prettier": "^1.6.1",
+    "react": "^15.4.2",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^15.5.4",
@@ -72,5 +72,8 @@
     "style-loader": "^0.13.2",
     "webpack": "^2.0.0",
     "webpack-dev-server": "^2.0.0"
+  },
+  "peerDependencies": {
+    "react": "^15.0.0 || ^16.0.0"
   }
 }
