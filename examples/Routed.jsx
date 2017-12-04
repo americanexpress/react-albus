@@ -14,40 +14,27 @@
 
 import React from 'react';
 import { Route } from 'react-router-dom';
-import { Wizard, Step, Steps, Navigation } from '../src';
-import Merlin from './components/Merlin';
-import Gandalf from './components/Gandalf';
-import Dumbledore from './components/Dumbledore';
-import Next from './navigation/Next';
-import Previous from './navigation/Previous';
+import { Wizard, Step, Steps } from '../src';
+import { Merlin, Gandalf, Dumbledore } from './components';
+import { Next, Previous } from './navigation';
 
 const Routed = () => (
   <Route
     render={({ history, match: { url } }) => (
       <Wizard history={history} basename={url}>
         <Steps>
-          <Step path="merlin">
+          <Step id="merlin">
             <Merlin />
-            <Navigation>
-              <Next label="Continue" />
-            </Navigation>
+            <Next />
           </Step>
-          <Step path="gandalf">
+          <Step id="gandalf">
             <Gandalf />
-            <Navigation
-              render={({ next, previous }) => (
-                <div>
-                  <Previous previous={previous} label="Back" />
-                  <Next next={next} label="Continue" />
-                </div>
-              )}
-            />
+            <Previous />
+            <Next />
           </Step>
-          <Step path="dumbledore">
+          <Step id="dumbledore">
             <Dumbledore />
-            <Navigation>
-              <Previous label="Back" />
-            </Navigation>
+            <Previous />
           </Step>
         </Steps>
       </Wizard>

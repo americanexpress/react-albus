@@ -4,46 +4,57 @@
 >
 > \-- _Albus Dumbledore_
 
-## What is React [Albus](http://u.kanobu.ru/comments/images/3c682662-4e19-49c6-b85b-539db47ff838.gif)?
-React Albus is a React component library for building declarative multi-step flows (also known as Wizards).  You are responsible for writing your own steps and configuring their ordering, but React Albus will maintain the flow-related state for you.
+## What is React Albus?
+React Albus is a React component library used to build declarative multi-step journeys (also known as Wizards).  You define your step content and ordering and React Albus will manage the journey-related state for you.
 
-React Albus also allows you to create routed flows, conditionally skip steps in your flow, and create custom elements to suit your needs.
+React Albus is otherwise unopinionated and allows you to compose funcionality such as routing, animation, and analytics however you see fit.
+
+## Installation
+
+```
+npm install react-albus
+```
 
 ## Example
 
 ```jsx
 import React from 'react';
-import { Wizard, Step, Steps, Navigation } from 'react-albus';
+import { Wizard, Steps, Step } from 'react-albus';
 
-const Example = () =>
+const Example = () => (
   <Wizard>
     <Steps>
-      <Step path="merlin">
-        <h1>Merlin</h1>
-        <Navigation
-          render={({ next }) =>
-            <button onClick={next}>Next</button>}
-        />
-      </Step>
-      <Step path="gandalf">
-        <h1>Gandalf</h1>
-        <Navigation
-          render={({ next, previous }) =>
-            <div>
-              <button onClick={next}>Next</button>
-              <button onClick={previous}>Previous</button>
-            </div>}
-        />
-      </Step>
-      <Step path="dumbledore">
-        <h1>Dumbledore</h1>
-        <Navigation
-          render={({ previous }) =>
-            <button onClick={previous}>Previous</button>}
-        />
-      </Step>
+      <Step
+        id="merlin"
+        render={({ next }) => (
+          <div>
+            <h1>Merlin</h1>
+            <button onClick={next}>Next</button>
+          </div>
+        )}
+      />
+      <Step
+        id="gandalf"
+        render={({ next, previous }) => (
+          <div>
+            <h1>Gandalf</h1>
+            <button onClick={next}>Next</button>
+            <button onClick={previous}>Previous</button>
+          </div>
+        )}
+      />
+      <Step
+        id="dumbledore"
+        render={({ previous }) => (
+          <div>
+            <h1>Dumbledore</h1>
+            <button onClick={previous}>Previous</button>
+          </div>
+        )}
+      />
     </Steps>
-  </Wizard>;
+  </Wizard>
+);
 
 export default Example;
 ```
@@ -54,10 +65,10 @@ Check out the [demo page](http://americanexpress.io/react-albus)!
 ## API
 
 - [`<Wizard>`](#wizard)
-- [`<Step>`](#step)
 - [`<Steps>`](#steps)
-- [`<Navigation>`](#navigation)
+- [`<Step>`](#step)
 - [`withWizard`](#withwizard)
+- [`wizardShape`](#wizardShape)
 - [`context.wizard`](#contextwizard)
 
 ---
@@ -65,78 +76,68 @@ Check out the [demo page](http://americanexpress.io/react-albus)!
 ### `<Wizard>`
 
 #### Props
-##### `onNext(step, steps, push)`: function *(optional)*
-A function that will be called by Wizard to determine the next step to proceed to.
+##### `onNext(wizard)`: function *(optional)*
+A function that will be called by `<Wizard>` to determine the next step to proceed to.
 
 ##### Params
-* `step`: An object describing the current step with the structure: `{ path: string, name: string }`.
-* `steps`: An array of `step` objects in the order they were declared in `<Steps>`.
-* `push(path)`: A function that can be called with the `path` of the step that you want to proceed to.  Calling this function without arguments will proceed to the next step.
+
+* `wizard` (object): The [`context.wizard`](#contextwizard) object.
 
 If you do not pass an `onNext` prop, `<Wizard>` will proceed directly to the next step.
 
-##### `className`: string *(optional)*
-CSS classes to be added to the `<div>` created by `<Wizard>`.
 ##### `render(wizard)`: function *(optional)*
 A function that will be used as the render function of `<Wizard>`.
 
 ##### Params
-* `wizard`: The [`context.wizard`](#contextwizard) object.
-
----
-
-### `<Step>`
-Wraps all the content that will be conditionally shown when the step is active.
-
-#### Props
-##### `path`: string
-Unique key for each step.
-##### `className`: string *(optional)*
-CSS classes to be added to the `<div>` created by `<Step>`.
-
-In addition to `path` and `className`, any additional props added to `<Step>` will be available on each `step` object.  This can be used to add names, descriptions, or other metadata to each step.
+* `wizard` (object): The [`context.wizard`](#contextwizard) object.
 
 ---
 
 ### `<Steps>`
-Wraps all of the `<Step>` components for your flow.  The only direct children of `<Steps>` should be `<Step>` components.
+Wraps all of the `<Step>` components in your journey.  The only direct children of `<Steps>` should be `<Step>` components.
 
 #### Props
 ##### `step`: object ***(optional)***
-An object describing the current step with the structure: `{ path: string, name: string }`.  Defining this prop will make `<Steps>` a [controlled component](https://facebook.github.io/react/docs/forms.html).
+An object describing the current step with the structure: `{ id: string }`.  Defining a `step` prop will make `<Steps>` a [controlled component](https://facebook.github.io/react/docs/forms.html).
 
----
+------
 
-### `<Navigation>`
-Exposes the Wizard navigation functionality for your components to use.  Extends its child's props with [`context.wizard`](#contextwizard) and passes [`context.wizard`](#contextwizard) to its render prop.
+### `<Step>`
+
+Wraps all the content that will be conditionally shown when the step is active.
+
 #### Props
-##### `render(wizard)`: function *(optional)*
-A function that will be used as the render function of `<Navigation>`.
 
-##### Params
-* `wizard`: The [`context.wizard`](#contextwizard) object.
+##### `id`: string
+
+Unique key for each step.
+
+In addition to `id`, any additional props added to `<Step>` will be available on each `step` object.  This can be used to add names, descriptions, or other metadata to each step.
+
+`<WithWizard>` is an alias for `<Step>` that can be used to access [`context.wizard`](#contextwizard) anywhere within the `<Wizard>` tree.
 
 ---
 
 ### `withWizard()`
-A higher order component that spreads [`context.wizard`](#contextwizard) across the wrapped component's props.
+A higher order component that adds [`context.wizard`](#contextwizard) as a `wizard  ` prop on the wrapped component.
 
 ---
 
 ### `context.wizard`
-`<Wizard>` adds this object to context with the following properties:
+`<Wizard>` provides an object on context with the following properties:
 
-* `step` (object): Describes the current step with structure: `{ path: string, name: string }`.
+* `step` (object): Describes the current step with structure: `{ id: string }`.
 * `steps` (array): Array of `step` objects in the order they were declared within `<Steps>`.
 * `history` (object): The backing [`history`](https://github.com/ReactTraining/history#properties) object.
 * `next()` (function): Moves to the next step in order.
 * `previous()` (function): Moves to the previous step in order.
-* `go(n)` (function): Moves *n* steps in history.
-* `push(path)` (function): Moves to the step with prop `path`.
+* `go(n)` (function): Moves `n` steps in history.
+* `push(id)` (function): Pushes the step with corresponding `id` onto history.
+* `replace(id)` (function): Replaces the current step in history with the step with corresponding `id`.
 
 ## Usage with React Router
 
-Internally, React Albus uses [history](https://github.com/ReactTraining/history) to maintain the ordering of steps.  This makes integrating with React Router (or any other router) as easy as providing Albus with a `history` object and a `basename` where it is living.
+Internally, React Albus uses [history](https://github.com/ReactTraining/history) to maintain the ordering of steps.  This makes integrating with React Router (or any other router) as easy as providing `<Wizard>` with `history` and `basename` props.
 
 ```jsx
 import React from 'react';

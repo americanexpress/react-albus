@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { Wizard, Step, Steps, Navigation } from '../src';
+import { Wizard, Step, Steps } from '../src';
 import Merlin from './components/Merlin';
 import Gandalf from './components/Gandalf';
 import Dumbledore from './components/Dumbledore';
@@ -21,8 +21,8 @@ import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
 const SkipStep = () => {
-  const next = (step, steps, push) => {
-    switch (step.path) {
+  const skip = ({ step, push }) => {
+    switch (step.id) {
       case 'merlin': {
         push('dumbledore');
         break;
@@ -33,22 +33,18 @@ const SkipStep = () => {
   };
 
   return (
-    <Wizard onNext={next}>
+    <Wizard onNext={skip}>
       <Steps>
-        <Step path="merlin">
+        <Step id="merlin">
           <Merlin />
-          <Navigation>
-            <Next label="Continue" />
-          </Navigation>
+          <Next />
         </Step>
-        <Step path="gandalf">
+        <Step id="gandalf">
           <Gandalf />
         </Step>
-        <Step path="dumbledore">
+        <Step id="dumbledore">
           <Dumbledore />
-          <Navigation>
-            <Previous label="Back" />
-          </Navigation>
+          <Previous />
         </Step>
       </Steps>
     </Wizard>

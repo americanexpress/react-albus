@@ -12,16 +12,21 @@
  * the License.
  */
 
-import * as api from '../src';
+import PropTypes from 'prop-types';
 
-describe('API', () => {
-  it('should export the correct API', () => {
-    expect(api).toMatchObject({
-      Wizard: expect.any(Function),
-      Step: expect.any(Function),
-      Steps: expect.any(Function),
-      Navigation: expect.any(Function),
-      withWizard: expect.any(Function),
-    });
-  });
+export default PropTypes.shape({
+  go: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  next: PropTypes.func.isRequired,
+  previous: PropTypes.func.isRequired,
+  push: PropTypes.func.isRequired,
+  replace: PropTypes.func.isRequired,
+  step: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
+  steps: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 });

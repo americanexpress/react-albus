@@ -14,57 +14,41 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-
 import { Steps } from '../../src';
 
-const FakeStep = () => <div />;
+const Step = () => null;
+
+const context = {
+  wizard: {
+    step: {
+      id: null,
+    },
+    steps: [],
+    init: jest.fn(),
+  },
+};
 
 describe('Steps', () => {
-  it('should call _init', () => {
-    const context = {
-      wizard: {
-        steps: [],
-      },
-      wizardInit: jest.fn(),
-    };
-
+  it('should call init', () => {
     shallow(
       <Steps>
-        <FakeStep path="hogwarts" />
+        <Step id="hogwarts" />
       </Steps>,
       { context }
     );
-    expect(context.wizardInit).toHaveBeenCalled();
-  });
 
-  it('should not call _init if wizard already has steps', () => {
-    const context = {
-      wizard: {
-        steps: ['we', 'have', 'steps'],
-      },
-      wizardInit: jest.fn(),
-    };
-
-    shallow(
-      <Steps>
-        <FakeStep path="hogwarts" />
-      </Steps>,
-      { context }
-    );
-    expect(context.wizardInit).not.toHaveBeenCalled();
+    expect(context.wizard.init).toHaveBeenCalledWith([{ id: 'hogwarts' }]);
   });
 
   it('should render correct child if controlled', () => {
-    const context = {};
-
-    const mounted = shallow(
-      <Steps step={{ path: 'hogwarts', step: 'hogwarts' }}>
-        <FakeStep path="hogwarts" />
-        <FakeStep path="gryffindor" />
+    const rendered = shallow(
+      <Steps step={{ id: 'hogwarts' }}>
+        <Step id="hogwarts" />
+        <Step id="gryffindor" />
       </Steps>,
       { context }
     );
 
-    expect(mounted).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 });

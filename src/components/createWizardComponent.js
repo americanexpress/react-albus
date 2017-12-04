@@ -12,12 +12,19 @@
  * the License.
  */
 
-import fixPath from '../../src/utils';
+import PropTypes from 'prop-types';
+import renderCallback from '../utils/renderCallback';
 
-describe('fixPath', () => {
-  it('should remove duplicate forward slashes', () => {
-    const path = 'path//to/something';
-    const fixedPath = fixPath(path);
-    expect(fixedPath).toBe('path/to/something');
-  });
-});
+const createWizardComponent = name => {
+  const WizardComponent = (props, { wizard: { init, ...wizard } }) => renderCallback(props, wizard);
+
+  WizardComponent.contextTypes = {
+    wizard: PropTypes.object,
+  };
+
+  WizardComponent.displayName = name;
+
+  return WizardComponent;
+};
+
+export default createWizardComponent;

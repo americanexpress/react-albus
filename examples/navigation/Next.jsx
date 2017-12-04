@@ -13,26 +13,12 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { withWizard, wizardShape } from '../../src';
 
-const Next = ({ className, disabled, label, next }) => (
-  <button className={className} onClick={next} disabled={disabled}>
-    {label}
-  </button>
-);
+const Next = ({ wizard: { next } }) => <button onClick={next}>Next</button>;
 
 Next.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  label: PropTypes.string,
-  next: PropTypes.func,
+  wizard: wizardShape.isRequired,
 };
 
-Next.defaultProps = {
-  className: '',
-  disabled: false,
-  label: '',
-  next: null,
-};
-
-export default Next;
+export default withWizard(Next);

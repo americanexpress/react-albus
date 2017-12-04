@@ -17,23 +17,18 @@ import PropTypes from 'prop-types';
 
 class Steps extends Component {
   componentWillMount() {
-    const { wizard, wizardInit } = this.context;
-
-    // Register steps with Wizard if they're not already registered
-    if (wizard && !wizard.steps.length) {
-      const steps = React.Children.map(
-        this.props.children,
-        ({ props: { children, render, ...config } }) => config
-      );
-      wizardInit(steps);
-    }
+    const steps = React.Children.map(
+      this.props.children,
+      ({ props: { children, render, ...config } }) => config
+    );
+    this.context.wizard.init(steps);
   }
 
   render() {
-    const currentStep = this.props.step || this.context.wizard.step;
-    const [child = null] = React.Children
-      .toArray(this.props.children)
-      .filter(step => currentStep && step.props.path === currentStep.path);
+    const { id: activeId } = this.props.step || this.context.wizard.step;
+    const [child = null] = React.Children.toArray(this.props.children).filter(
+      ({ props: { id } }) => id === activeId
+    );
     return child;
   }
 }
@@ -41,8 +36,7 @@ class Steps extends Component {
 Steps.propTypes = {
   children: PropTypes.node.isRequired,
   step: PropTypes.shape({
-    path: PropTypes.string,
-    name: PropTypes.string,
+    id: PropTypes.string.isRequired,
   }),
 };
 
@@ -52,7 +46,6 @@ Steps.defaultProps = {
 
 Steps.contextTypes = {
   wizard: PropTypes.object,
-  wizardInit: PropTypes.func,
 };
 
 export default Steps;

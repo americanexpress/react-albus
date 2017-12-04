@@ -11,6 +11,7 @@ lib
 
 # Testing
 test-results
+.jest-cache
 
 # IDE
 .idea

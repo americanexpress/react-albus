@@ -14,25 +14,41 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { withWizard } from '../src';
+import { WithWizard } from '../../src';
 
-const WrappedComponent = () => <div />;
-const context = {
-  wizard: {
-    hogwarts: 'rules',
-  },
-};
+const context = { wizard: { drinkMore: 'butter beer' } };
 
-describe('withWizard', () => {
-  it('should add wizard prop to wrapped component', () => {
-    const Wrapped = withWizard(WrappedComponent);
-    const rendered = shallow(<Wrapped />, { context });
+describe('WithWizard', () => {
+  it('should render children', () => {
+    const rendered = shallow(
+      <WithWizard>
+        <div />
+      </WithWizard>,
+      { context }
+    );
+
     expect(rendered).toMatchSnapshot();
   });
 
-  it('should use component props over context', () => {
-    const Wrapped = withWizard(WrappedComponent);
-    const rendered = shallow(<Wrapped wizard="hogwarts" />, { context });
-    expect(rendered).toMatchSnapshot();
+  it('should pass wizard to function as child', () => {
+    shallow(
+      <WithWizard>
+        {wizard => {
+          expect(wizard).toEqual(context.wizard);
+        }}
+      </WithWizard>,
+      { context }
+    );
+  });
+
+  it('should pass wizard to render prop', () => {
+    shallow(
+      <WithWizard
+        render={wizard => {
+          expect(wizard).toEqual(context.wizard);
+        }}
+      />,
+      { context }
+    );
   });
 });
