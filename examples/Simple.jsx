@@ -13,7 +13,7 @@
  */
 
 import React from 'react';
-import { Wizard, Step, Steps, Navigation } from '../src';
+import { Wizard, Step, Steps } from '../src';
 import Merlin from './components/Merlin';
 import Gandalf from './components/Gandalf';
 import Dumbledore from './components/Dumbledore';
@@ -23,28 +23,18 @@ import Previous from './navigation/Previous';
 const Simple = () => (
   <Wizard>
     <Steps>
-      <Step path="merlin">
+      <Step id="merlin">
         <Merlin />
-        <Navigation>
-          <Next label="Continue" />
-        </Navigation>
+        <Next />
       </Step>
-      <Step path="gandalf">
+      <Step id="gandalf">
         <Gandalf />
-        <Navigation
-          render={({ next, previous }) => (
-            <div>
-              <Previous previous={previous} label="Back" />
-              <Next next={next} label="Continue" />
-            </div>
-          )}
-        />
+        <Previous />
+        <Next />
       </Step>
-      <Step path="dumbledore">
+      <Step id="dumbledore">
         <Dumbledore />
-        <Navigation>
-          <Previous label="Back" />
-        </Navigation>
+        <Previous />
       </Step>
     </Steps>
   </Wizard>

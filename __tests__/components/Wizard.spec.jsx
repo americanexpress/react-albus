@@ -13,106 +13,70 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { mount } from 'enzyme';
 
-import { Wizard } from '../../src';
-
-const ExposeWizard = ({ children }, context) => children(context);
-ExposeWizard.contextTypes = {
-  wizard: PropTypes.object,
-  wizardInit: PropTypes.func,
-};
+import { Wizard, Steps, Step, WithWizard } from '../../src';
 
 describe('Wizard', () => {
-  let mounted;
-  let init;
-  let step;
-  let next;
-  let previous;
-  let push;
-  let go;
-
-  describe('with render prop', () => {
-    beforeEach(() => {
-      const history = {
-        replace: () => null,
-        listen: () => () => null,
-      };
-
-      mounted = mount(<Wizard history={history} render={() => null} />);
-    });
-
-    it('should render', () => {
-      expect(mounted).toMatchSnapshot();
-    });
-
-    afterEach(() => {
-      mounted.unmount();
-    });
-  });
-
-  describe('with no other props', () => {
+  describe('with no props', () => {
+    let wizard;
+    let mounted;
     beforeEach(() => {
       mounted = mount(
         <Wizard>
-          <ExposeWizard>
-            {({
-              wizard: {
-                step: wizardStep,
-                next: wizardNext,
-                previous: wizardPrevious,
-                push: wizardPush,
-                go: wizardGo,
-              },
-              wizardInit,
-            }) => {
-              step = wizardStep;
-              next = wizardNext;
-              previous = wizardPrevious;
-              push = wizardPush;
-              go = wizardGo;
-              init = wizardInit;
+          <WithWizard>
+            {prop => {
+              wizard = prop;
               return null;
             }}
-          </ExposeWizard>
+          </WithWizard>
+          <Steps>
+            <Step id="gryffindor">
+              <div />
+            </Step>
+            <Step id="slytherin">
+              <div />
+            </Step>
+          </Steps>
         </Wizard>
       );
-
-      init([{ path: 'gryffindor' }, { path: 'slytherin' }]);
     });
 
     it('should go to the next and previous steps', () => {
-      expect(step).toEqual({ path: 'gryffindor' });
+      const { next, previous } = wizard;
+      expect(wizard.step).toEqual({ id: 'gryffindor' });
       next();
-      expect(step).toEqual({ path: 'slytherin' });
+      expect(wizard.step).toEqual({ id: 'slytherin' });
       previous();
-      expect(step).toEqual({ path: 'gryffindor' });
+      expect(wizard.step).toEqual({ id: 'gryffindor' });
     });
 
     it('should push steps onto the stack', () => {
-      expect(step).toEqual({ path: 'gryffindor' });
+      const { push } = wizard;
+      expect(wizard.step).toEqual({ id: 'gryffindor' });
       push('slytherin');
-      expect(step).toEqual({ path: 'slytherin' });
+      expect(wizard.step).toEqual({ id: 'slytherin' });
+    });
+
+    it('should replace steps in the stack', () => {
+      const { replace } = wizard;
+      replace();
+      expect(wizard.step).toEqual({ id: 'slytherin' });
     });
 
     it('should pull steps off the stack', () => {
-      expect(step).toEqual({ path: 'gryffindor' });
+      const { next, go } = wizard;
+      expect(wizard.step).toEqual({ id: 'gryffindor' });
       next();
-      expect(step).toEqual({ path: 'slytherin' });
+      expect(wizard.step).toEqual({ id: 'slytherin' });
       go(-1);
-      expect(step).toEqual({ path: 'gryffindor' });
+      expect(wizard.step).toEqual({ id: 'gryffindor' });
     });
 
     it('should do nothing if an invalid step is pushed', () => {
+      const { push } = wizard;
       push('hufflepuff');
-      expect(step).toEqual({ path: 'gryffindor' });
-    });
-
-    it('should unlisten on unmount', () => {
-      mounted.unmount();
-      push('slytherin');
-      expect(step.path).toEqual('gryffindor');
+      expect(wizard.step).toEqual({ id: 'gryffindor' });
     });
 
     afterEach(() => {
@@ -121,27 +85,77 @@ describe('Wizard', () => {
   });
 
   describe('with onNext prop', () => {
-    const onNext = jest.fn((onNextStep, onNextSteps, onNextPush) => onNextPush());
+    const onNext = jest.fn(({ push }) => push());
 
+    let wizard;
+    let mounted;
     beforeEach(() => {
       mounted = mount(
         <Wizard onNext={onNext}>
-          <ExposeWizard>
-            {({ wizard: { next: wizardNext }, wizardInit }) => {
-              next = wizardNext;
-              init = wizardInit;
+          <WithWizard>
+            {prop => {
+              wizard = prop;
               return null;
             }}
-          </ExposeWizard>
+          </WithWizard>
+          <Steps>
+            <Step id="gryffindor">
+              <div />
+            </Step>
+            <Step id="slytherin">
+              <div />
+            </Step>
+          </Steps>
         </Wizard>
       );
-
-      init([{ path: 'gryffindor' }, { path: 'slytherin' }]);
     });
 
-    it('should go to the next step and call onNext', () => {
+    it('call onNext and go to the next step', () => {
+      const { next } = wizard;
       next();
       expect(onNext).toHaveBeenCalled();
+      expect(wizard.step).toEqual({ id: 'slytherin' });
+    });
+
+    afterEach(() => {
+      mounted.unmount();
+    });
+  });
+
+  describe('with existing history', () => {
+    const history = {
+      replace: () => null,
+      listen: () => () => null,
+      location: {
+        pathname: '/slytherin',
+      },
+    };
+
+    let wizard;
+    let mounted;
+    beforeEach(() => {
+      mounted = mount(
+        <Wizard history={history}>
+          <WithWizard>
+            {prop => {
+              wizard = prop;
+              return null;
+            }}
+          </WithWizard>
+          <Steps>
+            <Step id="gryffindor">
+              <div />
+            </Step>
+            <Step id="slytherin">
+              <div />
+            </Step>
+          </Steps>
+        </Wizard>
+      );
+    });
+
+    it('starts at the step in history', () => {
+      expect(wizard.step).toEqual({ id: 'slytherin' });
     });
 
     afterEach(() => {

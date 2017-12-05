@@ -13,8 +13,8 @@
  */
 
 import React from 'react';
-import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-import { Wizard, Step, Steps, Navigation } from '../src';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Wizard, Step, Steps } from '../src';
 import Merlin from './components/Merlin';
 import Gandalf from './components/Gandalf';
 import Dumbledore from './components/Dumbledore';
@@ -26,37 +26,27 @@ require('./animations/exampleAnimation.scss');
 const Animated = () => (
   <Wizard
     render={({ step }) => (
-      <ReactCSSTransitionGroup
-        transitionName="example"
-        transitionEnterTimeout={500}
-        transitionLeaveTimeout={500}
-      >
-        <Steps key={step.path} step={step}>
-          <Step path="merlin" className="example-step">
-            <Merlin />
-            <Navigation>
-              <Next label="Continue" />
-            </Navigation>
-          </Step>
-          <Step path="gandalf" className="example-step">
-            <Gandalf />
-            <Navigation
-              render={({ next, previous }) => (
-                <div>
-                  <Previous previous={previous} label="Back" />
-                  <Next next={next} label="Continue" />
-                </div>
-              )}
-            />
-          </Step>
-          <Step path="dumbledore" className="example-step">
-            <Dumbledore />
-            <Navigation>
-              <Previous label="Back" />
-            </Navigation>
-          </Step>
-        </Steps>
-      </ReactCSSTransitionGroup>
+      <TransitionGroup>
+        <CSSTransition key={step.id} classNames="example" timeout={{ enter: 500, exit: 500 }}>
+          <div className="example-steps">
+            <Steps step={step}>
+              <Step id="merlin">
+                <Merlin />
+                <Next />
+              </Step>
+              <Step id="gandalf">
+                <Gandalf />
+                <Previous />
+                <Next />
+              </Step>
+              <Step id="dumbledore">
+                <Dumbledore />
+                <Previous />
+              </Step>
+            </Steps>
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
     )}
   />
 );

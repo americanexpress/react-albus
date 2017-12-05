@@ -12,6 +12,19 @@
  * the License.
  */
 
-const fixPath = pathname => pathname.replace(/\/\/+/g, '/');
+import { wizardShape } from '../src';
 
-export default fixPath;
+jest.mock('prop-types', () => ({
+  shape: shape => ({ isRequired: shape }),
+  arrayOf: item => ({ isRequired: item }),
+  func: { isRequired: 'squawk' },
+  object: { isRequired: 'squawk' },
+  string: { isRequired: 'squawk' },
+  node: { isRequired: 'squawk' },
+}));
+
+describe('wizardShape', () => {
+  it('exports the correct shape', () => {
+    expect(wizardShape).toMatchSnapshot();
+  });
+});

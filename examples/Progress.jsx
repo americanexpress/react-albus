@@ -13,8 +13,7 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Wizard, Step, Steps, Navigation } from '../src';
+import { Wizard, Step, Steps, WithWizard } from '../src';
 import Merlin from './components/Merlin';
 import Gandalf from './components/Gandalf';
 import Dumbledore from './components/Dumbledore';
@@ -22,55 +21,34 @@ import Next from './navigation/Next';
 import Previous from './navigation/Previous';
 
 const Progress = () => (
-  <Wizard
+  <Wizard>
+    <ProgressBar />
+    <Steps>
+      <Step id="merlin" name="Merlin" location="Britain">
+        <Merlin />
+        <Next />
+      </Step>
+      <Step id="gandalf" name="Gandalf" location="Middle Earth">
+        <Gandalf />
+        <Previous />
+        <Next />
+      </Step>
+      <Step id="dumbledore" name="Dumbledore" location="Hogwarts">
+        <Dumbledore />
+        <Previous />
+      </Step>
+    </Steps>
+  </Wizard>
+);
+
+const ProgressBar = () => (
+  <WithWizard
     render={({ step, steps }) => (
       <div>
-        <ProgressBar step={step} steps={steps} />
-        <Steps>
-          <Step path="merlin" name="Merlin" location="Britain">
-            <Merlin />
-            <Navigation>
-              <Next label="Continue" />
-            </Navigation>
-          </Step>
-          <Step path="gandalf" name="Gandalf" location="Middle Earth">
-            <Gandalf />
-            <Navigation
-              render={({ next, previous }) => (
-                <div>
-                  <Previous previous={previous} label="Back" />
-                  <Next next={next} label="Continue" />
-                </div>
-              )}
-            />
-          </Step>
-          <Step path="dumbledore" name="Dumbledore" location="Hogwarts">
-            <Dumbledore />
-            <Navigation>
-              <Previous label="Back" />
-            </Navigation>
-          </Step>
-        </Steps>
+        {steps.map(s => s.id).indexOf(step.id) + 1}/{steps.length} - {step.name} - {step.location}
       </div>
     )}
   />
 );
-
-const ProgressBar = ({ step, steps }) => (
-  <div>
-    {steps.map(s => s.path).indexOf(step.path) + 1}/{steps.length} - {step.name} - {step.location}
-  </div>
-);
-
-const stepShape = PropTypes.shape({
-  path: PropTypes.string,
-  name: PropTypes.string,
-  location: PropTypes.string,
-});
-
-ProgressBar.propTypes = {
-  step: stepShape.isRequired,
-  steps: PropTypes.arrayOf(stepShape).isRequired,
-};
 
 export default Progress;

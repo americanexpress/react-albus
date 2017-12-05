@@ -12,41 +12,13 @@
  * the License.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import withWizard from '../withWizard';
-
-const Navigation = ({ children, render, ...wizard }) => {
+const renderCallback = ({ render, children }, wizard) => {
   if (render) {
     return render(wizard);
   } else if (typeof children === 'function') {
     return children(wizard);
   }
-
-  return React.cloneElement(React.Children.only(children), {
-    ...wizard,
-  });
+  return children;
 };
 
-Navigation.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
-  render: PropTypes.func,
-  wizard: PropTypes.shape({
-    setSteps: PropTypes.func,
-    step: PropTypes.object,
-    steps: PropTypes.array,
-    next: PropTypes.func,
-    previous: PropTypes.func,
-    push: PropTypes.func,
-    go: PropTypes.func,
-    location: PropTypes.object,
-  }),
-};
-
-Navigation.defaultProps = {
-  children: null,
-  render: null,
-};
-
-export default withWizard(Navigation);
+export default renderCallback;

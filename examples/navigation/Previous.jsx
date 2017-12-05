@@ -13,26 +13,12 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import { withWizard, wizardShape } from '../../src';
 
-const Previous = ({ className, disabled, label, previous }) => (
-  <button className={className} onClick={previous} disabled={disabled}>
-    {label}
-  </button>
-);
+const Previous = ({ wizard: { previous } }) => <button onClick={previous}>Previous</button>;
 
 Previous.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  label: PropTypes.string,
-  previous: PropTypes.func,
+  wizard: wizardShape.isRequired,
 };
 
-Previous.defaultProps = {
-  className: '',
-  disabled: false,
-  label: '',
-  previous: null,
-};
-
-export default Previous;
+export default withWizard(Previous);

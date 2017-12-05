@@ -12,97 +12,100 @@
  * the License.
  */
 
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createMemoryHistory } from 'history';
-import fixPath from '../utils';
+import renderCallback from '../utils/renderCallback';
 
 class Wizard extends Component {
   state = {
     step: {
-      path: null,
-      name: null,
+      id: null,
     },
+    steps: [],
   };
 
   getChildContext() {
     return {
       wizard: {
-        step: this.state.step,
-        steps: this.steps,
+        go: this.history.go,
+        history: this.history,
+        init: this.init,
         next: this.next,
         previous: this.history.goBack,
         push: this.push,
-        go: this.history.go,
-        history: this.history,
+        replace: this.replace,
+        ...this.state,
       },
-      wizardInit: this.init,
     };
   }
 
   componentWillMount() {
-    this.unlisten = this.history.listen(({ pathname }) => {
-      const path = pathname.split('/').pop();
-      const step = this.steps.filter(s => s.path === path)[0];
-      if (step) {
-        this.setState({
-          step,
-        });
-      }
-    });
+    this.unlisten = this.history.listen(({ pathname }) =>
+      this.setState({ step: this.pathToStep(pathname) })
+    );
+
+    if (this.props.onNext) {
+      const { init, ...wizard } = this.getChildContext().wizard;
+      this.props.onNext(wizard);
+    }
   }
 
   componentWillUnmount() {
     this.unlisten();
   }
 
-  get paths() {
-    return this.steps.map(s => s.path);
+  get basename() {
+    return `${this.props.basename}/`;
+  }
+
+  get ids() {
+    return this.state.steps.map(s => s.id);
+  }
+
+  get nextStep() {
+    return this.ids[this.ids.indexOf(this.state.step.id) + 1];
   }
 
   history = this.props.history || createMemoryHistory();
   steps = [];
 
+  pathToStep = pathname => {
+    const id = pathname.replace(this.basename, '');
+    const [step] = this.state.steps.filter(s => s.id === id);
+    return step || this.state.step;
+  };
+
   init = steps => {
-    this.steps = steps;
-
-    if (this.props.onNext) {
-      this.props.onNext({ path: null, name: null }, this.steps, this.replace);
-    } else {
-      this.replace();
-    }
+    this.setState({ steps }, () => {
+      const step = this.pathToStep(this.history.location.pathname);
+      if (step.id) {
+        this.setState({ step });
+      } else {
+        this.history.replace(`${this.basename}${this.ids[0]}`);
+      }
+    });
   };
 
-  push = step => {
-    const nextStep = step || this.paths[this.paths.indexOf(this.state.step.path) + 1];
-    this.history.push(fixPath(`${this.props.basename}/${nextStep}`));
-  };
-
-  replace = step => {
-    const nextStep = step || this.paths[0];
-    this.history.replace(fixPath(`${this.props.basename}/${nextStep}`));
-  };
+  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
+  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
 
   next = () => {
     if (this.props.onNext) {
-      this.props.onNext(this.state.step, this.steps, this.push);
+      this.props.onNext(this.getChildContext().wizard);
     } else {
       this.push();
     }
   };
 
   render() {
-    if (this.props.render) {
-      return this.props.render(this.getChildContext().wizard);
-    }
-    return <div className={this.props.className}>{this.props.children}</div>;
+    const { init, ...wizard } = this.getChildContext().wizard;
+    return renderCallback(this.props, wizard);
   }
 }
 
 Wizard.propTypes = {
   basename: PropTypes.string,
-  children: PropTypes.node,
-  className: PropTypes.string,
   history: PropTypes.shape({
     entries: PropTypes.array,
     go: PropTypes.func,
@@ -113,13 +116,10 @@ Wizard.propTypes = {
     replace: PropTypes.func,
   }),
   onNext: PropTypes.func,
-  render: PropTypes.func,
 };
 
 Wizard.defaultProps = {
   basename: '',
-  children: null,
-  className: '',
   history: null,
   onNext: null,
   render: null,
@@ -127,7 +127,6 @@ Wizard.defaultProps = {
 
 Wizard.childContextTypes = {
   wizard: PropTypes.object,
-  wizardInit: PropTypes.func,
 };
 
 export default Wizard;

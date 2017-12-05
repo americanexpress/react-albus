@@ -13,28 +13,42 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
-
+import { shallow } from 'enzyme';
 import { Step } from '../../src';
+
+const context = { wizard: { drinkMore: 'butter beer' } };
 
 describe('Step', () => {
   it('should render children', () => {
-    const mounted = mount(
+    const rendered = shallow(
       <Step>
         <div />
-      </Step>
+      </Step>,
+      { context }
     );
 
-    expect(mounted).toMatchSnapshot();
+    expect(rendered).toMatchSnapshot();
   });
 
-  it('should add className to the wrapping div', () => {
-    const mounted = mount(
-      <Step className="hogwarts">
-        <div />
-      </Step>
+  it('should pass wizard to function as child', () => {
+    shallow(
+      <Step>
+        {wizard => {
+          expect(wizard).toEqual(context.wizard);
+        }}
+      </Step>,
+      { context }
     );
+  });
 
-    expect(mounted).toMatchSnapshot();
+  it('should pass wizard to render prop', () => {
+    shallow(
+      <Step
+        render={wizard => {
+          expect(wizard).toEqual(context.wizard);
+        }}
+      />,
+      { context }
+    );
   });
 });

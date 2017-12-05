@@ -12,22 +12,5 @@
  * the License.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
-
-const Step = ({ children, className }) => <div className={className}>{children}</div>;
-
-Step.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
-  className: PropTypes.string,
-};
-
-Step.defaultProps = {
-  className: '',
-};
-
-Step.contextTypes = {
-  wizard: PropTypes.object,
-};
-
-export default Step;
+export Next from './Next';
+export Previous from './Previous';
