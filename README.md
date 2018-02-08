@@ -7,7 +7,7 @@
 ## What is React Albus?
 React Albus is a React component library used to build declarative multi-step journeys (also known as Wizards).  You define your step content and ordering and React Albus will manage the journey-related state for you.
 
-React Albus is otherwise unopinionated and allows you to compose funcionality such as routing, animation, and analytics however you see fit.
+React Albus is otherwise unopinionated and allows you to compose functionality such as routing, animation, and analytics however you see fit.
 
 ## Installation
 
