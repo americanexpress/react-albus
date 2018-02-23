@@ -68,6 +68,7 @@
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^16.0.0",
     "react-transition-group": "^2.2.1",
+    "rc-progress": "^2.2.5",
     "rimraf": "^2.5.2",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",

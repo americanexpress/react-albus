@@ -1,3 +1,5 @@
+import path from 'path';
+
 module.exports = {
   entry: './index.dev.js',
   module: {
@@ -8,8 +10,8 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
-        test: /\.s?css$/,
-        loader: 'style-loader!css-loader!sass-loader!import-glob-loader',
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
         exclude: /node_modules/,
       },
     ],
@@ -19,5 +21,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx', '.scss'],
+    alias: {
+      'react-albus': path.resolve(__dirname, 'src'),
+    },
   },
 };
