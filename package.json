@@ -1,6 +1,6 @@
 {
-  "name": "react-albus",
-  "version": "2.0.0",
+  "name": "@shipdigital/react-albus",
+  "version": "2.1.0",
   "description": "React component library for building declarative multi-step flows.",
   "files": [
     "lib"
@@ -11,12 +11,12 @@
     "start": "webpack-dev-server --port 3000 --inline --hot --open",
     "test": "jest",
     "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
-    "prebuild": "npm run clean && npm run lint",
+    "prebuild": "npm run clean",
     "build": "babel src -d lib --copy-files",
     "posttest": "npm run lint",
     "prepublish": "npm run build"
   },
-  "repository": "americanexpress/react-albus",
+  "repository": "shipdigital/react-albus",
   "keywords": [
     "react",
     "react-component",
@@ -63,12 +63,12 @@
     "jest": "^21.2.1",
     "node-sass": "^4.5.0",
     "prettier": "^1.6.1",
+    "rc-progress": "^2.2.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^16.0.0",
     "react-transition-group": "^2.2.1",
-    "rc-progress": "^2.2.5",
     "rimraf": "^2.5.2",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",
