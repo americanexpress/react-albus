@@ -14,6 +14,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import { createMemoryHistory } from 'history';
 
 import { Wizard, Steps, Step, WithWizard } from '../../src';
 
@@ -115,6 +116,134 @@ describe('Wizard', () => {
       next();
       expect(onNext).toHaveBeenCalled();
       expect(wizard.step).toEqual({ id: 'slytherin' });
+    });
+
+    afterEach(() => {
+      mounted.unmount();
+    });
+  });
+
+  describe('with canNavigateTo prop', () => {
+    let wizard;
+    let mounted;
+
+    const canNavigate = jest.fn().mockReturnValue(true);
+    const cannotNavigate = jest.fn().mockReturnValue(false);
+
+    const getMounted = ({ steps, ...wizardProps }) =>
+      mount(
+        <Wizard {...wizardProps}>
+          <WithWizard>
+            {prop => {
+              wizard = prop;
+              return null;
+            }}
+          </WithWizard>
+          <Steps>
+            {steps.map(step => (
+              <Step id={step.id} key={step.id} canNavigateTo={step.canNavigateTo}>
+                <div />
+              </Step>
+            ))}
+          </Steps>
+        </Wizard>
+      );
+
+    describe('when canNavigateTo returns `true`', () => {
+      beforeEach(() => {
+        canNavigate.mockClear();
+        cannotNavigate.mockClear();
+        const steps = [
+          { id: 'gryffindor', canNavigateTo: canNavigate },
+          { id: 'slytherin', canNavigateTo: canNavigate },
+          { id: 'gandalf', canNavigateTo: canNavigate },
+          { id: 'yoda', canNavigateTo: canNavigate },
+        ];
+        mounted = getMounted({ steps });
+      });
+      it('call next and go to the next step', () => {
+        const { next } = wizard;
+
+        next();
+        expect(canNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('slytherin');
+      });
+    });
+
+    describe('when canNavigateTo returns `false`', () => {
+      beforeEach(() => {
+        canNavigate.mockClear();
+        cannotNavigate.mockClear();
+        const steps = [
+          { id: 'gryffindor', canNavigateTo: cannotNavigate },
+          { id: 'slytherin', canNavigateTo: cannotNavigate },
+          { id: 'gandalf', canNavigateTo: cannotNavigate },
+          { id: 'yoda', canNavigateTo: cannotNavigate },
+        ];
+        mounted = getMounted({ steps });
+      });
+      it("call next and don't go to the next step", () => {
+        const { next } = wizard;
+
+        next();
+        expect(cannotNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('gryffindor');
+      });
+    });
+
+    describe('with history (hotlinking a wizard step)', () => {
+      const steps = [
+        { id: 'gryffindor', canNavigateTo: canNavigate },
+        { id: 'slytherin', canNavigateTo: canNavigate },
+        { id: 'gandalf', canNavigateTo: cannotNavigate },
+        { id: 'yoda', canNavigateTo: cannotNavigate },
+      ];
+
+      beforeEach(() => {
+        canNavigate.mockClear();
+        cannotNavigate.mockClear();
+        const history = createMemoryHistory();
+        mounted = getMounted({ steps, history });
+      });
+
+      it('should be able to navigate to gryffindor', () => {
+        const { replace } = wizard;
+
+        replace('gryffindor');
+        expect(canNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('gryffindor');
+      });
+      it('should be able to navigate to slytherin', () => {
+        const { replace } = wizard;
+
+        replace('slytherin');
+        expect(canNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('slytherin');
+      });
+      it('should not be able to navigate to gandalf', () => {
+        const { push, replace } = wizard;
+
+        push('slytherin');
+        replace('gandalf');
+        expect(cannotNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('slytherin');
+      });
+      it('should not be able to navigate to yoda', () => {
+        const { replace } = wizard;
+
+        replace('yoda');
+        expect(cannotNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('gryffindor');
+      });
+
+      it('should not be able to navigate to gandalf via slytherin', () => {
+        const { push } = wizard;
+
+        push('slytherin');
+        push('gandalf');
+        expect(cannotNavigate).toHaveBeenCalled();
+        expect(wizard.step.id).toEqual('slytherin');
+      });
     });
 
     afterEach(() => {

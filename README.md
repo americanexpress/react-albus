@@ -116,6 +116,15 @@ In addition to `id`, any additional props added to `<Step>` will be available on
 
 `<WithWizard>` is an alias for `<Step>` that can be used to access [`context.wizard`](#contextwizard) anywhere within the `<Wizard>` tree.
 
+##### `canNavigateTo(wizard)`: function *(optional)*
+A function that will be called by `<Wizard>` to determine if the navigation targeting a specific step can happen or not.
+Useful when there are related steps and you don't want your user to jump/skip steps.
+
+##### Params
+
+* `wizard` (object): The [`context.wizard`](#contextwizard) object.
+
+If you do not pass an `canNavigateTo` prop, the default behaviour is preserved, the navigation is never prevented.
 ---
 
 ### `withWizard()`

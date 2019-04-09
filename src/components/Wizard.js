@@ -41,9 +41,17 @@ class Wizard extends Component {
   }
 
   componentWillMount() {
-    this.unlisten = this.history.listen(({ pathname }) =>
-      this.setState({ step: this.pathToStep(pathname) })
-    );
+    this.unlisten = this.history.listen(({ pathname }) => {
+      const currentStep = this.state.step;
+      const targetStep = this.pathToStep(pathname);
+      const canNavigate = targetStep.canNavigateTo || (() => true);
+      if (
+        currentStep.id === null ||
+        (currentStep.id !== null && canNavigate(this.getChildContext().wizard))
+      ) {
+        this.setState({ step: targetStep });
+      }
+    });
 
     if (this.props.onNext) {
       const { init, ...wizard } = this.getChildContext().wizard;
@@ -79,7 +87,8 @@ class Wizard extends Component {
   init = steps => {
     this.setState({ steps }, () => {
       const step = this.pathToStep(this.history.location.pathname);
-      if (step.id) {
+      const canNavigate = step.canNavigateTo || (() => true);
+      if (step.id !== null && canNavigate(this.getChildContext().wizard)) {
         this.setState({ step });
       } else {
         this.history.replace(`${this.basename}${this.ids[0]}`);
