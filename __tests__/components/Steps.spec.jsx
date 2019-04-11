@@ -40,6 +40,19 @@ describe('Steps', () => {
     expect(context.wizard.init).toHaveBeenCalledWith([{ id: 'hogwarts' }]);
   });
 
+  it('should call init excluding falsy children', () => {
+    shallow(
+      <Steps>
+        <Step id="slytherin" />
+        {false && <Step id="hogwarts" />}
+        <Step id="hufflepuff" />
+      </Steps>,
+      { context }
+    );
+
+    expect(context.wizard.init).toHaveBeenCalledWith([{ id: 'slytherin' }, { id: 'hufflepuff' }]);
+  });
+
   it('should render correct child if controlled', () => {
     const rendered = shallow(
       <Steps step={{ id: 'hogwarts' }}>
