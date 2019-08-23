@@ -59,6 +59,13 @@ class Wizard extends Component {
     return `${this.props.basename}/`;
   }
 
+  get historySuffix() {
+    return this.props.preserveSearch
+      ? this.history.location.search
+      : ''
+    ;
+  }
+
   get ids() {
     return this.state.steps.map(s => s.id);
   }
@@ -82,13 +89,13 @@ class Wizard extends Component {
       if (step.id) {
         this.setState({ step });
       } else {
-        this.history.replace(`${this.basename}${this.ids[0]}`);
+        this.history.replace(`${this.basename}${this.ids[0]}${this.historySuffix}`);
       }
     });
   };
 
-  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
-  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
+  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}${this.historySuffix}`);
+  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}${this.historySuffix}`);
 
   next = () => {
     if (this.props.onNext) {
@@ -106,6 +113,7 @@ class Wizard extends Component {
 
 Wizard.propTypes = {
   basename: PropTypes.string,
+  preserveSearch: PropTypes.bool,
   history: PropTypes.shape({
     entries: PropTypes.array,
     go: PropTypes.func,
@@ -120,6 +128,7 @@ Wizard.propTypes = {
 
 Wizard.defaultProps = {
   basename: '',
+  preserveSearch: false,
   history: null,
   onNext: null,
   render: null,
