@@ -60,10 +60,7 @@ class Wizard extends Component {
   }
 
   get historySuffix() {
-    return this.props.preserveSearch
-      ? this.history.location.search
-      : ''
-    ;
+    return this.props.preserveSearch ? this.history.location.search : '';
   }
 
   get ids() {
@@ -94,8 +91,10 @@ class Wizard extends Component {
     });
   };
 
-  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}${this.historySuffix}`);
-  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}${this.historySuffix}`);
+  push = (step = this.nextStep) =>
+    this.history.push(`${this.basename}${step}${this.historySuffix}`);
+  replace = (step = this.nextStep) =>
+    this.history.replace(`${this.basename}${step}${this.historySuffix}`);
 
   next = () => {
     if (this.props.onNext) {
