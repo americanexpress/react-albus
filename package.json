@@ -14,7 +14,8 @@
     "prebuild": "npm run clean && npm run lint",
     "build": "babel src -d lib --copy-files",
     "posttest": "npm run lint",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "prepare": "npm run build"
   },
   "repository": "americanexpress/react-albus",
   "keywords": [
