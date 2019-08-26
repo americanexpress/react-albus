@@ -129,6 +129,7 @@ A higher order component that adds [`context.wizard`](#contextwizard) as a `wiza
 * `step` (object): Describes the current step with structure: `{ id: string }`.
 * `steps` (array): Array of `step` objects in the order they were declared within `<Steps>`.
 * `history` (object): The backing [`history`](https://github.com/ReactTraining/history#properties) object.
+* `preserveSearch` (bool): Determines if react-albus should preserve search params (query string params) when it handles history navigation
 * `next()` (function): Moves to the next step in order.
 * `previous()` (function): Moves to the previous step in order.
 * `go(n)` (function): Moves `n` steps in history.

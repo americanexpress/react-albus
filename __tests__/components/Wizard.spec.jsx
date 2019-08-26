@@ -162,4 +162,48 @@ describe('Wizard', () => {
       mounted.unmount();
     });
   });
+
+  describe('with existing history and preserving search params', () => {
+    const history = {
+      replace: () => null,
+      listen: () => () => null,
+      location: {
+        pathname: '/gryffindor',
+        search: '?foo=bar',
+      },
+    };
+
+    let wizard;
+    let mounted;
+    beforeEach(() => {
+      mounted = mount(
+        <Wizard history={history} preserveSearch={true}>
+          <WithWizard>
+            {prop => {
+              wizard = prop;
+              return null;
+            }}
+          </WithWizard>
+          <Steps>
+            <Step id="gryffindor">
+              <div />
+            </Step>
+            <Step id="slytherin">
+              <div />
+            </Step>
+          </Steps>
+        </Wizard>
+      );
+    });
+
+    it('call next and ensure url params are still in the url', () => {
+      wizard.history.push = jest.fn();
+      wizard.next();
+      expect(wizard.history.push).toBeCalledWith('/slytherin?foo=bar');
+    });
+
+    afterEach(() => {
+      mounted.unmount();
+    });
+  });
 });
