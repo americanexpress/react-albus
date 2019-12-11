@@ -180,7 +180,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard history={history} exactMatch={false}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
