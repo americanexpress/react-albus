@@ -85,6 +85,7 @@ class Wizard extends Component {
     const [step] = this.state.steps.filter(
       s => (this.props.exactMatch ? s.id === id : id.startsWith(s.id))
     );
+
     return step || this.state.step;
   };
 
@@ -129,6 +130,7 @@ Wizard.propTypes = {
     replace: PropTypes.func,
   }),
   onNext: PropTypes.func,
+  exactMatch: PropTypes.bool,
 };
 
 Wizard.defaultProps = {
@@ -136,6 +138,7 @@ Wizard.defaultProps = {
   history: null,
   onNext: null,
   render: null,
+  exactMatch: true,
 };
 
 Wizard.childContextTypes = {
