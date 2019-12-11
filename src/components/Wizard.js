@@ -18,12 +18,16 @@ import { createMemoryHistory } from 'history';
 import renderCallback from '../utils/renderCallback';
 
 class Wizard extends Component {
-  state = {
-    step: {
-      id: null,
-    },
-    steps: [],
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      step: {
+        id: null,
+      },
+      steps: [],
+    };
+  }
 
   getChildContext() {
     return {
@@ -40,14 +44,16 @@ class Wizard extends Component {
     };
   }
 
-  componentWillMount() {
-    this.unlisten = this.history.listen(({ pathname }) =>
-      this.setState({ step: this.pathToStep(pathname) })
+  componentDidMount() {
+    this.unlisten = this.history.listen(
+      ({ pathname }) => this.setState({ step: this.pathToStep(pathname) })
     );
 
-    if (this.props.onNext) {
+    const { onNext } = this.props;
+
+    if (onNext) {
       const { init, ...wizard } = this.getChildContext().wizard;
-      this.props.onNext(wizard);
+      onNext(wizard);
     }
   }
 
@@ -56,27 +62,31 @@ class Wizard extends Component {
   }
 
   get basename() {
-    return `${this.props.basename}/`;
+    const { basename } = this.props;
+    return `${basename}/`;
   }
 
   get ids() {
-    return this.state.steps.map(s => s.id);
+    const { steps } = this.state;
+    return steps.map((s) => s.id);
   }
 
   get nextStep() {
-    return this.ids[this.ids.indexOf(this.state.step.id) + 1];
+    const { step } = this.state;
+    return this.ids[this.ids.indexOf(step.id) + 1];
   }
 
   history = this.props.history || createMemoryHistory();
+
   steps = [];
 
-  pathToStep = pathname => {
+  pathToStep = (pathname) => {
     const id = pathname.replace(this.basename, '');
-    const [step] = this.state.steps.filter(s => s.id === id);
+    const [step] = this.state.steps.filter((s) => s.id === id);
     return step || this.state.step;
   };
 
-  init = steps => {
+  init = (steps) => {
     this.setState({ steps }, () => {
       const step = this.pathToStep(this.history.location.pathname);
       if (step.id) {
@@ -88,6 +98,7 @@ class Wizard extends Component {
   };
 
   push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
+
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
 
   next = () => {

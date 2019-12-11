@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "start": "webpack-dev-server --port 3000 --inline --hot --open",
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
     "prebuild": "npm run clean && npm run lint",
     "build": "babel src -d lib --copy-files",
@@ -33,7 +33,7 @@
   "jest": {
     "preset": "amex-jest-preset-react",
     "testPathIgnorePatterns": [
-      ".eslintrc.js"
+      "<rootDir>/__tests__/*"
     ]
   },
   "dependencies": {
@@ -42,34 +42,24 @@
     "prop-types": "^15.5.8"
   },
   "devDependencies": {
-    "amex-jest-preset-react": "^4.0.0",
-    "babel-cli": "^6.6.5",
-    "babel-core": "^6.5.2",
-    "babel-eslint": "^6.0.0",
-    "babel-loader": "^6.2.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-react-hmre": "^1.1.0",
-    "babel-preset-stage-0": "^6.5.0",
+    "amex-jest-preset-react": "^5.0.2",
+    "babel-preset-amex": "^3.2.0",
     "coveralls": "^2.13.1",
     "css-loader": "^0.26.2",
     "enzyme": "^3.1.0",
     "enzyme-to-json": "^3.1.4",
-    "eslint": "^3.19.0",
-    "eslint-config-amex": "^6.0.0",
-    "eslint-config-prettier": "^2.2.0",
-    "eslint-plugin-prettier": "^2.1.2",
+    "eslint": "^6.7.2",
+    "eslint-config-amex": "^11.1.0",
     "import-glob-loader": "^1.1.0",
-    "jest": "^21.2.1",
+    "jest": "^24.9.0",
     "node-sass": "^4.5.0",
-    "prettier": "^1.6.1",
+    "rc-progress": "^2.2.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^16.0.0",
     "react-transition-group": "^2.2.1",
-    "rc-progress": "^2.2.5",
-    "rimraf": "^2.5.2",
+    "rimraf": "^3.0.0",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",
     "webpack": "^2.0.0",

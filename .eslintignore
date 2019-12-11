@@ -3,3 +3,5 @@ docs
 node_modules
 coverage
 !**/*.eslintrc.js
+examples/
+src/

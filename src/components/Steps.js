@@ -16,11 +16,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Steps extends Component {
-  componentWillMount() {
-    const steps = React.Children.map(
-      this.props.children,
-      ({ props: { children, render, ...config } }) => config
-    );
+  componentDidMount() {
+    const { children } = this.props;
+    const steps = React.Children.map(children, ({ props: { children, render, ...config } }) => config);
     this.context.wizard.init(steps);
   }
 
