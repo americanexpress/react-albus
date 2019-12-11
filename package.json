@@ -5,6 +5,9 @@
   "files": [
     "lib"
   ],
+  "bugs": {
+    "url": "https://github.com/americanexpress/react-albus/issues"
+  },
   "main": "lib",
   "scripts": {
     "clean": "rimraf lib",
@@ -42,6 +45,15 @@
     "prop-types": "^15.5.8"
   },
   "devDependencies": {
+    "semantic-release": "^15.13.31",
+    "@semantic-release/changelog": "^3.0.5",
+    "@semantic-release/commit-analyzer": "^6.3.2",
+    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/npm": "^5.3.4",
+    "@semantic-release/release-notes-generator": "^7.3.2",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
+    "husky": "^3.0.9",
     "amex-jest-preset-react": "^4.0.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.5.2",
@@ -77,5 +89,21 @@
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/git",
+      "@semantic-release/npm"
+    ],
+    "branch": "master"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
