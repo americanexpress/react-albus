@@ -6,13 +6,13 @@ const Navigation = () => (
     render={({ next, previous, step, steps }) => (
       <div className="example-buttons">
         {steps.indexOf(step) < steps.length - 1 && (
-          <button className="btn-fluid margin-1-b" onClick={next}>
+          <button type="button" className="btn-fluid margin-1-b" onClick={next}>
             Next
           </button>
         )}
 
         {steps.indexOf(step) > 0 && (
-          <button className="btn-fluid btn-secondary" onClick={previous}>
+          <button type="button" className="btn-fluid btn-secondary" onClick={previous}>
             Back
           </button>
         )}

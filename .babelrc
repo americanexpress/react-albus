@@ -1,9 +1,0 @@
-{
-  "presets": ["env", "react", "stage-0"],
-  "plugins": ["transform-do-expressions"],
-  "env": {
-    "development/client": {
-      "presets": ["react-hmre"]
-    }
-  }
-}

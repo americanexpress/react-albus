@@ -13,8 +13,9 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
+
+import wizardShape from './wizardShape';
 
 const withWizard = Component => {
   const WithWizard = (props, { wizard: { init, ...wizard } }) =>
@@ -24,7 +25,7 @@ const withWizard = Component => {
     });
 
   WithWizard.contextTypes = {
-    wizard: PropTypes.object,
+    wizard: wizardShape,
   };
 
   WithWizard.displayName = `withWizard(${Component.displayName || Component.name})`;
