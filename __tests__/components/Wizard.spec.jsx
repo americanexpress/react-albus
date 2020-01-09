@@ -162,4 +162,45 @@ describe('Wizard', () => {
       mounted.unmount();
     });
   });
+
+  describe('with existing history and non-strict route matching', () => {
+    const history = {
+      replace: () => null,
+      listen: () => () => null,
+      location: {
+        pathname: '/slytherin/snape',
+      },
+    };
+
+    let wizard;
+    let mounted;
+    beforeEach(() => {
+      mounted = mount(
+        <Wizard history={history} exactMatch={false}>
+          <WithWizard>
+            {prop => {
+              wizard = prop;
+              return null;
+            }}
+          </WithWizard>
+          <Steps>
+            <Step id="gryffindor">
+              <div />
+            </Step>
+            <Step id="slytherin">
+              <div />
+            </Step>
+          </Steps>
+        </Wizard>
+      );
+    });
+
+    it('matches the step', () => {
+      expect(wizard.step).toEqual({ id: 'slytherin' });
+    });
+
+    afterEach(() => {
+      mounted.unmount();
+    });
+  });
 });
