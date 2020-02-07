@@ -18,7 +18,7 @@ const AddProgressBar = () => (
               render={({ step, steps }) => (
                 <div>
                   <Line
-                    percent={(steps.indexOf(step) + 1) / steps.length * 100}
+                    percent={((steps.indexOf(step) + 1) / steps.length) * 100}
                     className="pad-b"
                   />
                   <TransitionGroup>
