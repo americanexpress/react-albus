@@ -72,8 +72,8 @@ class Wizard extends Component {
 
   pathToStep = pathname => {
     const id = pathname.replace(this.basename, '');
-    const [step] = this.state.steps.filter(
-      s => (this.props.exactMatch ? s.id === id : id.startsWith(s.id))
+    const [step] = this.state.steps.filter(s =>
+      this.props.exactMatch ? s.id === id : id.startsWith(s.id)
     );
 
     return step || this.state.step;
