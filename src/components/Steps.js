@@ -16,7 +16,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Steps extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const steps = React.Children.map(
       this.props.children,
       ({ props: { children, render, ...config } }) => config

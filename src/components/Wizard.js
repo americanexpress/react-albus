@@ -40,7 +40,7 @@ class Wizard extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.unlisten = this.history.listen(({ pathname }) =>
       this.setState({ step: this.pathToStep(pathname) })
     );
