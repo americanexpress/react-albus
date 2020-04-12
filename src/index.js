@@ -18,7 +18,8 @@ const Step = createWizardComponent('Step');
 const WithWizard = createWizardComponent('WithWizard');
 
 export { Step, WithWizard };
-export Wizard from './components/Wizard';
+export { WizardProvider as Wizard } from './components/Wizard';
 export Steps from './components/Steps';
+export useWizard from './hooks/useWizard';
 export withWizard from './withWizard';
 export wizardShape from './wizardShape';

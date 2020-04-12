@@ -12,14 +12,13 @@
  * the License.
  */
 
-import PropTypes from 'prop-types';
+import useWizard from '../hooks/useWizard';
 import renderCallback from '../utils/renderCallback';
 
 const createWizardComponent = name => {
-  const WizardComponent = (props, { wizard: { init, ...wizard } }) => renderCallback(props, wizard);
-
-  WizardComponent.contextTypes = {
-    wizard: PropTypes.object,
+  const WizardComponent = props => {
+    const wizard = useWizard();
+    return renderCallback({ ...wizard, ...props });
   };
 
   WizardComponent.displayName = name;

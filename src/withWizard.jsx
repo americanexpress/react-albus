@@ -15,13 +15,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
+import useWizard from './hooks/useWizard';
 
 const withWizard = Component => {
-  const WithWizard = (props, { wizard: { init, ...wizard } }) =>
-    React.createElement(Component, {
-      wizard,
-      ...props,
-    });
+  const WithWizard = props => {
+    const wizard = useWizard();
+
+    return <Component wizard={wizard} {...props} />;
+  };
 
   WithWizard.contextTypes = {
     wizard: PropTypes.object,

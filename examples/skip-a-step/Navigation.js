@@ -1,24 +1,23 @@
 import React from 'react';
-import { WithWizard } from 'react-albus';
+import { useWizard } from 'react-albus';
 
-const Navigation = () => (
-  <WithWizard
-    render={({ next, previous, step, steps }) => (
-      <div className="example-buttons">
-        {steps.indexOf(step) < steps.length - 1 && (
-          <button className="btn-fluid margin-1-b" onClick={next}>
-            Next
-          </button>
-        )}
+const Navigation = () => {
+  const { onNext, onPrevious, hasNext, hasPrevious } = useWizard();
 
-        {steps.indexOf(step) > 0 && (
-          <button className="btn-fluid btn-secondary" onClick={previous}>
-            Back
-          </button>
-        )}
-      </div>
-    )}
-  />
-);
+  return (
+    <div className="example-buttons">
+      {hasNext && (
+        <button className="btn-fluid margin-1-b" onClick={onNext}>
+          Next
+        </button>
+      )}
+      {hasPrevious && (
+        <button className="btn-fluid btn-secondary" onClick={onPrevious}>
+          Back
+        </button>
+      )}
+    </div>
+  );
+};
 
 export default Navigation;

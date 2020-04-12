@@ -16,15 +16,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { WithWizard } from '../../src';
 
-const context = { wizard: { drinkMore: 'butter beer' } };
+const mockWizard = { drinkMore: 'butter beer' };
+
+jest.mock('../../src/hooks/useWizard', () => jest.fn(() => mockWizard));
 
 describe('WithWizard', () => {
   it('should render children', () => {
     const rendered = shallow(
       <WithWizard>
         <div />
-      </WithWizard>,
-      { context }
+      </WithWizard>
     );
 
     expect(rendered).toMatchSnapshot();
@@ -34,10 +35,9 @@ describe('WithWizard', () => {
     shallow(
       <WithWizard>
         {wizard => {
-          expect(wizard).toEqual(context.wizard);
+          expect(wizard).toEqual(mockWizard);
         }}
-      </WithWizard>,
-      { context }
+      </WithWizard>
     );
   });
 
@@ -45,10 +45,9 @@ describe('WithWizard', () => {
     shallow(
       <WithWizard
         render={wizard => {
-          expect(wizard).toEqual(context.wizard);
+          expect(wizard).toEqual(mockWizard);
         }}
-      />,
-      { context }
+      />
     );
   });
 });

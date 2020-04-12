@@ -16,15 +16,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { Step } from '../../src';
 
-const context = { wizard: { drinkMore: 'butter beer' } };
+const mockWizard = { drinkMore: 'butter beer' };
+
+jest.mock('../../src/hooks/useWizard', () => jest.fn(() => mockWizard));
 
 describe('Step', () => {
   it('should render children', () => {
     const rendered = shallow(
       <Step>
         <div />
-      </Step>,
-      { context }
+      </Step>
     );
 
     expect(rendered).toMatchSnapshot();
@@ -34,10 +35,9 @@ describe('Step', () => {
     shallow(
       <Step>
         {wizard => {
-          expect(wizard).toEqual(context.wizard);
+          expect(wizard).toEqual(mockWizard);
         }}
-      </Step>,
-      { context }
+      </Step>
     );
   });
 
@@ -45,10 +45,9 @@ describe('Step', () => {
     shallow(
       <Step
         render={wizard => {
-          expect(wizard).toEqual(context.wizard);
+          expect(wizard).toEqual(mockWizard);
         }}
-      />,
-      { context }
+      />
     );
   });
 });

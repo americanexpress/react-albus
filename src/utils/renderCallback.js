@@ -12,7 +12,7 @@
  * the License.
  */
 
-const renderCallback = ({ render, children }, wizard) => {
+const renderCallback = ({ render, children, ...wizard }) => {
   if (render) {
     return render(wizard);
   } else if (typeof children === 'function') {
