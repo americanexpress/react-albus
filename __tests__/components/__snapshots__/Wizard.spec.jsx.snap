@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Wizard without a function as a child should render the snapshot correctly 1`] = `
+<Provider
+  basename=""
+  exactMatch={true}
+>
+  <Steps />
+</Provider>
+`;

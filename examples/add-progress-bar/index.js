@@ -13,12 +13,11 @@ const AddProgressBar = () => (
       <div className="col-xs-6 col-xs-offset-3">
         <Route
           render={({ history }) => (
-            <Wizard
-              history={history}
-              render={({ step, steps }) => (
+            <Wizard history={history}>
+              {({ steps, step }) => (
                 <div>
                   <Line
-                    percent={(steps.indexOf(step) + 1) / steps.length * 100}
+                    percent={((steps.indexOf(step) + 1) / steps.length) * 100}
                     className="pad-b"
                   />
                   <TransitionGroup>
@@ -28,7 +27,7 @@ const AddProgressBar = () => (
                       timeout={{ enter: 500, exit: 500 }}
                     >
                       <div className="example-steps fluid">
-                        <Steps key={step.id} step={step}>
+                        <Steps key={step.id}>
                           <Step id="gandalf">
                             <h1 className="text-align-center">Gandalf</h1>
                           </Step>
@@ -45,7 +44,7 @@ const AddProgressBar = () => (
                   <Navigation />
                 </div>
               )}
-            />
+            </Wizard>
           )}
         />
       </div>

@@ -4,9 +4,11 @@ exports[`wizardShape exports the correct shape 1`] = `
 Object {
   "isRequired": Object {
     "go": "squawk",
+    "hasNext": "squawk",
+    "hasPrevious": "squawk",
     "history": "squawk",
-    "next": "squawk",
-    "previous": "squawk",
+    "onNext": "squawk",
+    "onPrevious": "squawk",
     "push": "squawk",
     "replace": "squawk",
     "step": Object {

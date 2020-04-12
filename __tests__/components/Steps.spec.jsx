@@ -13,41 +13,56 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { act } from 'react-dom/test-utils';
+import { mount } from 'enzyme';
 import { Steps } from '../../src';
+import useWizard from '../../src/hooks/useWizard';
 
-const Step = () => null;
+const mockOnInit = jest.fn();
 
-const context = {
-  wizard: {
+jest.mock('../../src/hooks/useWizard', () =>
+  jest.fn(() => ({
     step: {
       id: null,
     },
-    steps: [],
-    init: jest.fn(),
-  },
-};
+    onInit: mockOnInit,
+  }))
+);
+
+const Step = () => null;
 
 describe('Steps', () => {
-  it('should call init', () => {
-    shallow(
-      <Steps>
-        <Step id="hogwarts" />
-      </Steps>,
-      { context }
-    );
+  let rendered;
 
-    expect(context.wizard.init).toHaveBeenCalledWith([{ id: 'hogwarts' }]);
+  afterEach(() => {
+    rendered.unmount();
+  });
+
+  it('should call init', () => {
+    act(() => {
+      rendered = mount(
+        <Steps>
+          <Step id="hogwarts" />
+        </Steps>
+      );
+    });
+
+    expect(mockOnInit).toHaveBeenCalledWith([{ id: 'hogwarts' }]);
   });
 
   it('should render correct child if controlled', () => {
-    const rendered = shallow(
-      <Steps step={{ id: 'hogwarts' }}>
-        <Step id="hogwarts" />
-        <Step id="gryffindor" />
-      </Steps>,
-      { context }
-    );
+    useWizard.mockImplementationOnce(() => ({
+      onInit: mockOnInit,
+    }));
+
+    act(() => {
+      rendered = mount(
+        <Steps step={{ id: 'gryffindor' }}>
+          <Step id="hogwarts" />
+          <Step id="gryffindor" />
+        </Steps>
+      );
+    });
 
     expect(rendered).toMatchSnapshot();
   });

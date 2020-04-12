@@ -16,23 +16,20 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { withWizard } from '../src';
 
+jest.mock('../src/hooks/useWizard', () => jest.fn(() => ({ hogwarts: 'rules' })));
+
 const WrappedComponent = () => <div />;
-const context = {
-  wizard: {
-    hogwarts: 'rules',
-  },
-};
 
 describe('withWizard', () => {
   it('should add wizard prop to wrapped component', () => {
     const Wrapped = withWizard(WrappedComponent);
-    const rendered = shallow(<Wrapped />, { context });
+    const rendered = shallow(<Wrapped />);
     expect(rendered).toMatchSnapshot();
   });
 
   it('should use component props over context', () => {
     const Wrapped = withWizard(WrappedComponent);
-    const rendered = shallow(<Wrapped wizard="hogwarts" />, { context });
+    const rendered = shallow(<Wrapped wizard="hogwarts" />);
     expect(rendered).toMatchSnapshot();
   });
 });

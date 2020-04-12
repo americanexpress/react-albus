@@ -13,117 +13,103 @@
  */
 
 import React from 'react';
+import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';
+import { Wizard, Steps, Step } from '../../src';
 
-import { Wizard, Steps, Step, WithWizard } from '../../src';
+function setup(wizardProps) {
+  const returnValue = {};
+
+  act(() => {
+    mount(
+      <Wizard {...wizardProps}>
+        {props => {
+          Object.assign(returnValue, props);
+
+          return (
+            <Steps>
+              <Step id="gryffindor">
+                <div />
+              </Step>
+              <Step id="slytherin">
+                <div />
+              </Step>
+            </Steps>
+          );
+        }}
+      </Wizard>
+    );
+  });
+
+  return returnValue;
+}
 
 describe('Wizard', () => {
   describe('with no props', () => {
     let wizard;
-    let mounted;
+
     beforeEach(() => {
-      mounted = mount(
-        <Wizard>
-          <WithWizard>
-            {prop => {
-              wizard = prop;
-              return null;
-            }}
-          </WithWizard>
-          <Steps>
-            <Step id="gryffindor">
-              <div />
-            </Step>
-            <Step id="slytherin">
-              <div />
-            </Step>
-          </Steps>
-        </Wizard>
-      );
+      wizard = setup();
     });
 
     it('should go to the next and previous steps', () => {
-      const { next, previous } = wizard;
+      const { onNext, onPrevious } = wizard;
       expect(wizard.step).toEqual({ id: 'gryffindor' });
-      next();
+      act(() => onNext());
       expect(wizard.step).toEqual({ id: 'slytherin' });
-      previous();
+      act(() => onPrevious());
       expect(wizard.step).toEqual({ id: 'gryffindor' });
     });
 
     it('should push steps onto the stack', () => {
       const { push } = wizard;
       expect(wizard.step).toEqual({ id: 'gryffindor' });
-      push('slytherin');
+      act(() => push('slytherin'));
       expect(wizard.step).toEqual({ id: 'slytherin' });
     });
 
     it('should replace steps in the stack', () => {
       const { replace } = wizard;
-      replace();
+      act(() => replace());
       expect(wizard.step).toEqual({ id: 'slytherin' });
     });
 
     it('should pull steps off the stack', () => {
-      const { next, go } = wizard;
+      const { onNext, go } = wizard;
       expect(wizard.step).toEqual({ id: 'gryffindor' });
-      next();
+      act(() => onNext());
       expect(wizard.step).toEqual({ id: 'slytherin' });
-      go(-1);
+      act(() => go(-1));
       expect(wizard.step).toEqual({ id: 'gryffindor' });
     });
 
     it('should do nothing if an invalid step is pushed', () => {
       const { push } = wizard;
-      push('hufflepuff');
+      act(() => push('hufflepuff'));
       expect(wizard.step).toEqual({ id: 'gryffindor' });
-    });
-
-    afterEach(() => {
-      mounted.unmount();
     });
   });
 
   describe('with onNext prop', () => {
-    const onNext = jest.fn(({ push }) => push());
+    const onWizardNext = jest.fn(({ push }) => push());
 
     let wizard;
-    let mounted;
+
     beforeEach(() => {
-      mounted = mount(
-        <Wizard onNext={onNext}>
-          <WithWizard>
-            {prop => {
-              wizard = prop;
-              return null;
-            }}
-          </WithWizard>
-          <Steps>
-            <Step id="gryffindor">
-              <div />
-            </Step>
-            <Step id="slytherin">
-              <div />
-            </Step>
-          </Steps>
-        </Wizard>
-      );
+      wizard = setup({ onNext: onWizardNext });
     });
 
     it('call onNext and go to the next step', () => {
-      const { next } = wizard;
-      next();
-      expect(onNext).toHaveBeenCalled();
+      const { onNext } = wizard;
+      act(() => onNext());
+      expect(onWizardNext).toHaveBeenCalled();
       expect(wizard.step).toEqual({ id: 'slytherin' });
-    });
-
-    afterEach(() => {
-      mounted.unmount();
     });
   });
 
   describe('with existing history', () => {
     const history = {
+      push: () => null,
       replace: () => null,
       listen: () => () => null,
       location: {
@@ -132,39 +118,19 @@ describe('Wizard', () => {
     };
 
     let wizard;
-    let mounted;
+
     beforeEach(() => {
-      mounted = mount(
-        <Wizard history={history}>
-          <WithWizard>
-            {prop => {
-              wizard = prop;
-              return null;
-            }}
-          </WithWizard>
-          <Steps>
-            <Step id="gryffindor">
-              <div />
-            </Step>
-            <Step id="slytherin">
-              <div />
-            </Step>
-          </Steps>
-        </Wizard>
-      );
+      wizard = setup({ history });
     });
 
     it('starts at the step in history', () => {
       expect(wizard.step).toEqual({ id: 'slytherin' });
     });
-
-    afterEach(() => {
-      mounted.unmount();
-    });
   });
 
   describe('with existing history and non-strict route matching', () => {
     const history = {
+      push: () => null,
       replace: () => null,
       listen: () => () => null,
       location: {
@@ -173,34 +139,38 @@ describe('Wizard', () => {
     };
 
     let wizard;
-    let mounted;
+
     beforeEach(() => {
-      mounted = mount(
-        <Wizard history={history} exactMatch={false}>
-          <WithWizard>
-            {prop => {
-              wizard = prop;
-              return null;
-            }}
-          </WithWizard>
-          <Steps>
-            <Step id="gryffindor">
-              <div />
-            </Step>
-            <Step id="slytherin">
-              <div />
-            </Step>
-          </Steps>
-        </Wizard>
-      );
+      wizard = setup({ history, exactMatch: false });
     });
 
     it('matches the step', () => {
       expect(wizard.step).toEqual({ id: 'slytherin' });
     });
+  });
 
-    afterEach(() => {
-      mounted.unmount();
+  describe('without a function as a child', () => {
+    let mounted;
+
+    beforeEach(() => {
+      act(() => {
+        mounted = mount(
+          <Wizard>
+            <Steps>
+              <Step id="gryffindor">
+                <div />
+              </Step>
+              <Step id="slytherin">
+                <div />
+              </Step>
+            </Steps>
+          </Wizard>
+        );
+      });
+    });
+
+    it('should render the snapshot correctly', () => {
+      expect(mounted).toMatchSnapshot();
     });
   });
 });
