@@ -15,18 +15,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import wizardShape from '../wizardShape';
+
 class Steps extends Component {
-  componentWillMount() {
+  componentDidMount() {
+    const { children: ownChildren } = this.props;
+    const { wizard } = this.context;
     const steps = React.Children.map(
-      this.props.children,
+      ownChildren,
       ({ props: { children, render, ...config } }) => config
     );
-    this.context.wizard.init(steps);
+    wizard.init(steps);
   }
 
   render() {
-    const { id: activeId } = this.props.step || this.context.wizard.step;
-    const [child = null] = React.Children.toArray(this.props.children).filter(
+    const { step, children } = this.props;
+    const { wizard } = this.context;
+    const { id: activeId } = step || wizard.step;
+    const [child = null] = React.Children.toArray(children).filter(
       ({ props: { id } }) => id === activeId
     );
     return child;
@@ -45,7 +51,7 @@ Steps.defaultProps = {
 };
 
 Steps.contextTypes = {
-  wizard: PropTypes.object,
+  wizard: wizardShape,
 };
 
 export default Steps;

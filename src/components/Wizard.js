@@ -16,14 +16,21 @@ import { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createMemoryHistory } from 'history';
 import renderCallback from '../utils/renderCallback';
+import wizardShape from '../wizardShape';
 
 class Wizard extends Component {
-  state = {
-    step: {
-      id: null,
-    },
-    steps: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      step: {
+        id: null,
+      },
+      steps: [],
+    };
+    const { history: historyFromProps } = this.props;
+    this.history = historyFromProps || createMemoryHistory();
+    this.steps = [];
+  }
 
   getChildContext() {
     return {
@@ -40,14 +47,15 @@ class Wizard extends Component {
     };
   }
 
-  componentWillMount() {
-    this.unlisten = this.history.listen(({ pathname }) =>
-      this.setState({ step: this.pathToStep(pathname) })
-    );
+  componentDidMount() {
+    const { onNext } = this.props;
+    this.unlisten = this.history.listen(({ pathname }) => {
+      this.setState({ step: this.pathToStep(pathname) });
+    });
 
-    if (this.props.onNext) {
+    if (onNext) {
       const { init, ...wizard } = this.getChildContext().wizard;
-      this.props.onNext(wizard);
+      onNext(wizard);
     }
   }
 
@@ -56,27 +64,26 @@ class Wizard extends Component {
   }
 
   get basename() {
-    return `${this.props.basename}/`;
+    const { basename } = this.props;
+    return `${basename}/`;
   }
 
   get ids() {
-    return this.state.steps.map(s => s.id);
+    const { steps } = this.state;
+    return steps.map(s => s.id);
   }
 
   get nextStep() {
-    return this.ids[this.ids.indexOf(this.state.step.id) + 1];
+    const { step } = this.state;
+    return this.ids[this.ids.indexOf(step.id) + 1];
   }
 
-  history = this.props.history || createMemoryHistory();
-  steps = [];
-
   pathToStep = pathname => {
+    const { exactMatch } = this.props;
+    const { step: stepFromState, steps } = this.state;
     const id = pathname.replace(this.basename, '');
-    const [step] = this.state.steps.filter(
-      s => (this.props.exactMatch ? s.id === id : id.startsWith(s.id))
-    );
-
-    return step || this.state.step;
+    const [step] = steps.filter(s => (exactMatch ? s.id === id : id.startsWith(s.id)));
+    return step || stepFromState;
   };
 
   init = steps => {
@@ -91,11 +98,13 @@ class Wizard extends Component {
   };
 
   push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
+
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
 
   next = () => {
-    if (this.props.onNext) {
-      this.props.onNext(this.getChildContext().wizard);
+    const { onNext } = this.props;
+    if (onNext) {
+      onNext(this.getChildContext().wizard);
     } else {
       this.push();
     }
@@ -120,6 +129,8 @@ Wizard.propTypes = {
   }),
   onNext: PropTypes.func,
   exactMatch: PropTypes.bool,
+  // eslint-disable-next-line react/no-unused-prop-types
+  render: PropTypes.func,
 };
 
 Wizard.defaultProps = {
@@ -131,7 +142,7 @@ Wizard.defaultProps = {
 };
 
 Wizard.childContextTypes = {
-  wizard: PropTypes.object,
+  wizard: wizardShape,
 };
 
 export default Wizard;
