@@ -7,12 +7,12 @@ const Navigation = () => {
   return (
     <div className="example-buttons">
       {hasNext && (
-        <button className="btn-fluid margin-1-b" onClick={onNext}>
+        <button type="button" className="btn-fluid margin-1-b" onClick={onNext}>
           Next
         </button>
       )}
       {hasPrevious && (
-        <button className="btn-fluid btn-secondary" onClick={onPrevious}>
+        <button type="button" className="btn-fluid btn-secondary" onClick={onPrevious}>
           Back
         </button>
       )}

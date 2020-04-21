@@ -15,3 +15,6 @@ test-results
 
 # IDE
 .idea
+
+# Visual Studio Code
+.vscode

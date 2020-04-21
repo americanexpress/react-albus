@@ -12,6 +12,7 @@
  * the License.
  */
 
+/* eslint react/jsx-props-no-spreading: 0 */
 import React from 'react';
 import { act } from 'react-dom/test-utils';
 import { mount } from 'enzyme';

@@ -1,0 +1,22 @@
+# test
+__tests__
+.jest-cache
+test-results
+
+# meta
+.eslintrc.json
+.eslintignore
+.babelrc
+*.tgz
+.editorconfig
+index.dev.js
+index.html
+
+# examples
+examples/
+
+# docs
+docs/
+
+# ci-cd
+.travis.yml
