@@ -4,18 +4,18 @@
 >
 > \-- _Albus Dumbledore_
 
-## What is React Albus?
+## 🤹‍ What is React Albus?
 React Albus is a React component library used to build declarative multi-step journeys (also known as Wizards).  You define your step content and ordering and React Albus will manage the journey-related state for you.
 
 React Albus is otherwise unopinionated and allows you to compose functionality such as routing, animation, and analytics however you see fit.
 
-## Installation
+## 💻 Installation
 
 ```
 npm install react-albus
 ```
 
-## Example
+## 📘 Example
 
 ```jsx
 import React from 'react';
@@ -58,11 +58,11 @@ const Example = () => (
 
 export default Example;
 ```
-## Demo
+## ✨ Demo
 
 Check out the [demo page](http://americanexpress.io/react-albus)!
 
-## API
+## 🎛️ API
 
 - [`<Wizard>`](#wizard)
 - [`<Steps>`](#steps)
@@ -135,7 +135,7 @@ A higher order component that adds [`context.wizard`](#contextwizard) as a `wiza
 * `push(id)` (function): Pushes the step with corresponding `id` onto history.
 * `replace(id)` (function): Replaces the current step in history with the step with corresponding `id`.
 
-## Usage with React Router
+## 📘 Usage with React Router
 
 Internally, React Albus uses [history](https://github.com/ReactTraining/history) to maintain the ordering of steps.  This makes integrating with React Router (or any other router) as easy as providing `<Wizard>` with `history` and `basename` props.
 
@@ -156,13 +156,13 @@ export default RoutedWizard;
 ```
 
 
-## Contributing
+## 🏆 Contributing
 We welcome Your interest in the American Express Open Source Community on Github. Any Contributor to any Open Source Project managed by the American Express Open Source Community must accept and sign an Agreement indicating agreement to the terms below. Except for the rights granted in this Agreement to American Express and to recipients of software distributed by American Express, You reserve all right, title, and interest, if any, in and to Your Contributions. Please [fill out the Agreement](https://cla-assistant.io/americanexpress/react-albus).
 
-## License
+## 🗝️ License
 Any contributions made under this project will be governed by the [Apache License 2.0](https://github.com/americanexpress/react-albus/blob/master/LICENSE.txt).
 
-## Code of Conduct
+## 🗣️ Code of Conduct
 This project adheres to the [American Express Community Guidelines](https://github.com/americanexpress/react-albus/wiki/Code-of-Conduct).
 By participating, you are expected to honor these guidelines.
 
