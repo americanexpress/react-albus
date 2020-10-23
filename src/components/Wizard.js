@@ -67,6 +67,10 @@ class Wizard extends Component {
     return this.ids[this.ids.indexOf(this.state.step.id) + 1];
   }
 
+  get previousStep() {
+    return this.ids[this.ids.indexOf(this.state.step.id) - 1];
+  }
+
   history = this.props.history || createMemoryHistory();
   steps = [];
 
@@ -92,6 +96,7 @@ class Wizard extends Component {
 
   push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
+  pushPrevious = (step = this.previousStep) => this.history.push(`${this.basename}${step}`);
 
   next = () => {
     if (this.props.onNext) {
@@ -102,7 +107,7 @@ class Wizard extends Component {
   };
 
   previous = () => {
-    this.history.goBack();
+    this.pushPrevious();
   };
 
   render() {
