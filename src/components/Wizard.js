@@ -32,7 +32,7 @@ class Wizard extends Component {
         history: this.history,
         init: this.init,
         next: this.next,
-        previous: this.history.goBack,
+        previous: this.previous,
         push: this.push,
         replace: this.replace,
         ...this.state,
@@ -99,6 +99,10 @@ class Wizard extends Component {
     } else {
       this.push();
     }
+  };
+
+  previous = () => {
+    this.history.goBack();
   };
 
   render() {
