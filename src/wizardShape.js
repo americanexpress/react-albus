@@ -16,6 +16,7 @@ import PropTypes from 'prop-types';
 
 export default PropTypes.shape({
   go: PropTypes.func.isRequired,
+  set: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
   next: PropTypes.func.isRequired,
   previous: PropTypes.func.isRequired,
