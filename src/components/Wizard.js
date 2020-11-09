@@ -97,7 +97,7 @@ class Wizard extends Component {
 
   set = step => this.history.push(`${this.basename}${step}`);
   push = (step = this.nextStep) => this.set(step);
-  replace = (step = this.nextStep) => this.set(step);
+  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
   pushPrevious = (step = this.previousStep) => this.set(step);
 
   next = () => {
