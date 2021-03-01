@@ -29,6 +29,7 @@ class Wizard extends Component {
     return {
       wizard: {
         go: this.history.go,
+        set: this.set,
         history: this.history,
         init: this.init,
         next: this.next,
@@ -94,9 +95,10 @@ class Wizard extends Component {
     });
   };
 
-  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
+  set = step => this.history.push(`${this.basename}${step}`);
+  push = (step = this.nextStep) => this.set(step);
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
-  pushPrevious = (step = this.previousStep) => this.history.push(`${this.basename}${step}`);
+  pushPrevious = (step = this.previousStep) => this.set(step);
 
   next = () => {
     if (this.props.onNext) {
