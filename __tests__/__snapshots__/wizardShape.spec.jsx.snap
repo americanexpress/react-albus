@@ -9,6 +9,7 @@ Object {
     "previous": "squawk",
     "push": "squawk",
     "replace": "squawk",
+    "set": "squawk",
     "step": Object {
       "id": "squawk",
     },
