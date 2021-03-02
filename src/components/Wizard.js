@@ -29,10 +29,11 @@ class Wizard extends Component {
     return {
       wizard: {
         go: this.history.go,
+        set: this.set,
         history: this.history,
         init: this.init,
         next: this.next,
-        previous: this.history.goBack,
+        previous: this.previous,
         push: this.push,
         replace: this.replace,
         ...this.state,
@@ -67,6 +68,10 @@ class Wizard extends Component {
     return this.ids[this.ids.indexOf(this.state.step.id) + 1];
   }
 
+  get previousStep() {
+    return this.ids[this.ids.indexOf(this.state.step.id) - 1];
+  }
+
   history = this.props.history || createMemoryHistory();
   steps = [];
 
@@ -90,8 +95,10 @@ class Wizard extends Component {
     });
   };
 
-  push = (step = this.nextStep) => this.history.push(`${this.basename}${step}`);
+  set = step => this.history.push(`${this.basename}${step}`);
+  push = (step = this.nextStep) => this.set(step);
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
+  pushPrevious = (step = this.previousStep) => this.set(step);
 
   next = () => {
     if (this.props.onNext) {
@@ -99,6 +106,10 @@ class Wizard extends Component {
     } else {
       this.push();
     }
+  };
+
+  previous = () => {
+    this.pushPrevious();
   };
 
   render() {

@@ -134,6 +134,7 @@ A higher order component that adds [`context.wizard`](#contextwizard) as a `wiza
 * `go(n)` (function): Moves `n` steps in history.
 * `push(id)` (function): Pushes the step with corresponding `id` onto history.
 * `replace(id)` (function): Replaces the current step in history with the step with corresponding `id`.
+* `set(id)` (function): Move to step `id`.
 
 ## 📘 Usage with React Router
 
