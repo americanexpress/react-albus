@@ -45,11 +45,6 @@ class Wizard extends Component {
     this.unlisten = this.history.listen(({ pathname }) =>
       this.setState({ step: this.pathToStep(pathname) })
     );
-
-    if (this.props.onNext) {
-      const { init, ...wizard } = this.getChildContext().wizard;
-      this.props.onNext(wizard);
-    }
   }
 
   componentWillUnmount() {

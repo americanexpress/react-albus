@@ -111,6 +111,7 @@ describe('Wizard', () => {
     });
 
     it('call onNext and go to the next step', () => {
+      expect(onNext).not.toHaveBeenCalled();
       const { next } = wizard;
       next();
       expect(onNext).toHaveBeenCalled();
