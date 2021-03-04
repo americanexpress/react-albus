@@ -77,7 +77,7 @@ Check out the [demo page](http://americanexpress.io/react-albus)!
 
 #### Props
 ##### `onNext(wizard)`: function *(optional)*
-A function that will be called by `<Wizard>` to determine the next step to proceed to.
+A function that will be called by `<Wizard>` to determine the next step to proceed to.  An action must be taken within `onNext` to navigate to a `Step`.  To navigate to the next `Step`, use `push()`.
 
 ##### Params
 
@@ -132,7 +132,7 @@ A higher order component that adds [`context.wizard`](#contextwizard) as a `wiza
 * `next()` (function): Moves to the next step in order.
 * `previous()` (function): Moves to the previous step in order.
 * `go(n)` (function): Moves `n` steps in history.
-* `push(id)` (function): Pushes the step with corresponding `id` onto history.
+* `push(id)` (function): Pushes the step with corresponding `id` onto history.  If no `id` is provided, the next step will be pushed onto history.
 * `replace(id)` (function): Replaces the current step in history with the step with corresponding `id`.
 * `set(id)` (function): Move to step `id`.
 
