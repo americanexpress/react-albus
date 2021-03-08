@@ -16,9 +16,9 @@ import React from "react";
 import { shallow } from "enzyme";
 import { Step } from "../../src";
 
-const mockWizard = { drinkMore: 'butter beer' };
+const mockWizard = { drinkMore: "butter beer" };
 
-jest.mock('../../src/hooks/useWizard', () => jest.fn(() => mockWizard));
+jest.mock("../../src/hooks/useWizard", () => jest.fn(() => mockWizard));
 
 describe("Step", () => {
   it("should render children", () => {

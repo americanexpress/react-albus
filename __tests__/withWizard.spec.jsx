@@ -16,7 +16,9 @@ import React from "react";
 import { shallow } from "enzyme";
 import { withWizard } from "../src";
 
-jest.mock('../src/hooks/useWizard', () => jest.fn(() => ({ hogwarts: 'rules' })));
+jest.mock("../src/hooks/useWizard", () =>
+  jest.fn(() => ({ hogwarts: "rules" }))
+);
 
 const WrappedComponent = () => <div />;
 

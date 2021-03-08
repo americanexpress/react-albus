@@ -12,8 +12,8 @@
  * the License.
  */
 
-import useWizard from '../hooks/useWizard';
-import renderCallback from '../utils/renderCallback';
+import useWizard from "../hooks/useWizard";
+import renderCallback from "../utils/renderCallback";
 
 const createWizardComponent = name => {
   const WizardComponent = props => {

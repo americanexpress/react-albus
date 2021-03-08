@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import useHistory from '../hooks/useHistory';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import useHistory from "../hooks/useHistory";
+import historyShape from "../historyShape";
 
 const Context = React.createContext({});
 
 const Provider = ({ children, basename, history, exactMatch, onNext }) => {
   const [steps, setSteps] = useState([]);
 
-  const getStepFromPath = path => steps.find(step => step.id === path) || { id: null };
+  const getStepFromPath = path =>
+    steps.find(step => step.id === path) || { id: null };
 
   const { pathname, ...wizardHistory } = useHistory({
     steps: steps.map(step => step.id),
     basename,
     history,
-    exactMatch,
+    exactMatch
   });
 
   useEffect(() => {
@@ -27,7 +29,7 @@ const Provider = ({ children, basename, history, exactMatch, onNext }) => {
       onNext({
         steps,
         step: getStepFromPath(pathname),
-        ...wizardHistory,
+        ...wizardHistory
       });
     } else {
       wizardHistory.push();
@@ -45,37 +47,30 @@ const Provider = ({ children, basename, history, exactMatch, onNext }) => {
     onInit: setSteps,
     hasNext: indexOfStep < steps.length - 1,
     hasPrevious: indexOfStep > 0,
-    ...wizardHistory,
+    ...wizardHistory
   };
 
   return (
     <Context.Provider value={context}>
-      {typeof children === 'function' ? children(context) : children}
+      {typeof children === "function" ? children(context) : children}
     </Context.Provider>
   );
 };
 
 Provider.propTypes = {
-  history: PropTypes.shape({
-    entries: PropTypes.array,
-    go: PropTypes.func,
-    goBack: PropTypes.func,
-    listen: PropTypes.func,
-    location: PropTypes.object,
-    push: PropTypes.func,
-    replace: PropTypes.func,
-  }),
+  history: historyShape,
   basename: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
   onNext: PropTypes.func,
-  exactMatch: PropTypes.bool,
+  // eslint-disable-next-line react/boolean-prop-naming
+  exactMatch: PropTypes.bool
 };
 
 Provider.defaultProps = {
-  basename: '',
+  basename: "",
   history: undefined,
   onNext: undefined,
-  exactMatch: true,
+  exactMatch: true
 };
 
 export const WizardProvider = Provider;

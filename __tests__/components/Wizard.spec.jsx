@@ -12,10 +12,10 @@
  * the License.
  */
 
-import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
-import { Wizard, Steps, Step } from '../../src';
+import React from "react";
+import { act } from "react-dom/test-utils";
+import { mount } from "enzyme";
+import { Wizard, Steps, Step } from "../../src";
 
 function setup(wizardProps) {
   const returnValue = {};
@@ -52,45 +52,45 @@ describe("Wizard", () => {
       wizard = setup();
     });
 
-    it('should go to the next and previous steps', () => {
+    it("should go to the next and previous steps", () => {
       const { onNext, onPrevious } = wizard;
-      expect(wizard.step).toEqual({ id: 'gryffindor' });
+      expect(wizard.step).toEqual({ id: "gryffindor" });
       act(() => onNext());
-      expect(wizard.step).toEqual({ id: 'slytherin' });
+      expect(wizard.step).toEqual({ id: "slytherin" });
       act(() => onPrevious());
-      expect(wizard.step).toEqual({ id: 'gryffindor' });
+      expect(wizard.step).toEqual({ id: "gryffindor" });
     });
 
     it("should push steps onto the stack", () => {
       const { push } = wizard;
-      expect(wizard.step).toEqual({ id: 'gryffindor' });
-      act(() => push('slytherin'));
-      expect(wizard.step).toEqual({ id: 'slytherin' });
+      expect(wizard.step).toEqual({ id: "gryffindor" });
+      act(() => push("slytherin"));
+      expect(wizard.step).toEqual({ id: "slytherin" });
     });
 
     it("should replace steps in the stack", () => {
       const { replace } = wizard;
       act(() => replace());
-      expect(wizard.step).toEqual({ id: 'slytherin' });
+      expect(wizard.step).toEqual({ id: "slytherin" });
     });
 
-    it('should pull steps off the stack', () => {
+    it("should pull steps off the stack", () => {
       const { onNext, go } = wizard;
-      expect(wizard.step).toEqual({ id: 'gryffindor' });
+      expect(wizard.step).toEqual({ id: "gryffindor" });
       act(() => onNext());
-      expect(wizard.step).toEqual({ id: 'slytherin' });
+      expect(wizard.step).toEqual({ id: "slytherin" });
       act(() => go(-1));
-      expect(wizard.step).toEqual({ id: 'gryffindor' });
+      expect(wizard.step).toEqual({ id: "gryffindor" });
     });
 
     it("should do nothing if an invalid step is pushed", () => {
       const { push } = wizard;
-      act(() => push('hufflepuff'));
-      expect(wizard.step).toEqual({ id: 'gryffindor' });
+      act(() => push("hufflepuff"));
+      expect(wizard.step).toEqual({ id: "gryffindor" });
     });
   });
 
-  describe('with onNext prop', () => {
+  describe("with onNext prop", () => {
     const onWizardNext = jest.fn(({ push }) => push());
 
     let wizard;
@@ -99,11 +99,11 @@ describe("Wizard", () => {
       wizard = setup({ onNext: onWizardNext });
     });
 
-    it('call onNext and go to the next step', () => {
+    it("call onNext and go to the next step", () => {
       const { onNext } = wizard;
       act(() => onNext());
       expect(onWizardNext).toHaveBeenCalled();
-      expect(wizard.step).toEqual({ id: 'slytherin' });
+      expect(wizard.step).toEqual({ id: "slytherin" });
     });
   });
 
@@ -149,7 +149,7 @@ describe("Wizard", () => {
     });
   });
 
-  describe('without a function as a child', () => {
+  describe("without a function as a child", () => {
     let mounted;
 
     beforeEach(() => {
@@ -169,7 +169,7 @@ describe("Wizard", () => {
       });
     });
 
-    it('should render the snapshot correctly', () => {
+    it("should render the snapshot correctly", () => {
       expect(mounted).toMatchSnapshot();
     });
   });

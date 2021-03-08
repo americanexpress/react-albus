@@ -6,8 +6,6 @@ Object {
     "go": "squawk",
     "hasNext": "squawk",
     "hasPrevious": "squawk",
-    "onNext": "squawk",
-    "onPrevious": "squawk",
     "history": Object {
       "isRequired": Object {
         "entries": Object {
@@ -67,8 +65,8 @@ Object {
         },
       },
     },
-    "next": "squawk",
-    "previous": "squawk",
+    "onNext": "squawk",
+    "onPrevious": "squawk",
     "push": "squawk",
     "replace": "squawk",
     "set": "squawk",
