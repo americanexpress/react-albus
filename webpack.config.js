@@ -2,6 +2,10 @@ const path = require("path");
 
 module.exports = {
   entry: "./index.dev.js",
+  mode: "development",
+  output: {
+    filename: "bundle.js"
+  },
   module: {
     rules: [
       {
@@ -15,17 +19,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-        ],
-        exclude: /node_modules/,
-      },
-    ],
+        use: ["style-loader", "css-loader"],
+        exclude: /node_modules/
+      }
+    ]
   },
   devServer: {
     historyApiFallback: true
