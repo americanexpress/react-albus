@@ -13,24 +13,21 @@
  */
 
 import PropTypes from 'prop-types';
-import historyShape from './historyShape';
+
+const location = PropTypes.shape({
+  hash: PropTypes.string,
+  key: PropTypes.string,
+  pathname: PropTypes.string,
+  search: PropTypes.string,
+  state: PropTypes.shape({}),
+});
 
 export default PropTypes.shape({
-  go: PropTypes.func.isRequired,
-  set: PropTypes.func.isRequired,
-  history: historyShape,
-  onNext: PropTypes.func.isRequired,
-  onPrevious: PropTypes.func.isRequired,
-  hasNext: PropTypes.bool.isRequired,
-  hasPrevious: PropTypes.bool.isRequired,
-  push: PropTypes.func.isRequired,
-  replace: PropTypes.func.isRequired,
-  step: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }).isRequired,
-  steps: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  location,
+  entries: PropTypes.arrayOf(location),
+  go: PropTypes.func,
+  goBack: PropTypes.func,
+  listen: PropTypes.func,
+  push: PropTypes.func,
+  replace: PropTypes.func,
 });

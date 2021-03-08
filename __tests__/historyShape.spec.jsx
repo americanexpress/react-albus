@@ -12,25 +12,19 @@
  * the License.
  */
 
-import PropTypes from 'prop-types';
-import historyShape from './historyShape';
+import historyShape from '../src/historyShape';
 
-export default PropTypes.shape({
-  go: PropTypes.func.isRequired,
-  set: PropTypes.func.isRequired,
-  history: historyShape,
-  onNext: PropTypes.func.isRequired,
-  onPrevious: PropTypes.func.isRequired,
-  hasNext: PropTypes.bool.isRequired,
-  hasPrevious: PropTypes.bool.isRequired,
-  push: PropTypes.func.isRequired,
-  replace: PropTypes.func.isRequired,
-  step: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }).isRequired,
-  steps: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+jest.mock('prop-types', () => ({
+  shape: (shape) => ({ isRequired: shape }),
+  arrayOf: (item) => ({ isRequired: item }),
+  func: { isRequired: 'squawk' },
+  object: { isRequired: 'squawk' },
+  string: { isRequired: 'squawk' },
+  node: { isRequired: 'squawk' },
+}));
+
+describe('historyShape', () => {
+  it('exports the correct shape', () => {
+    expect(historyShape).toMatchSnapshot();
+  });
 });

@@ -52,4 +52,4 @@ const AddProgressBar = () => (
   </BrowserRouter>
 );
 
-render(<AddProgressBar />, document.getElementById('add-progress-bar'));
+render(<AddProgressBar />, document.querySelector('#add-progress-bar'));
