@@ -60,7 +60,7 @@ export default Example;
 ```
 ## ✨ Demo
 
-Check out the [demo page](http://americanexpress.io/react-albus)!
+Check out the [demo page](https://americanexpress.io/react-albus)!
 
 ## 🎛️ API
 
