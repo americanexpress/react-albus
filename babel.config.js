@@ -1,3 +1,3 @@
 module.exports = {
-  presets: ['amex'],
+  presets: ["amex"]
 };

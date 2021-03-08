@@ -26,10 +26,11 @@ const withWizard = Component => {
   };
 
   WithWizard.contextTypes = {
-    wizard: wizardShape,
+    wizard: wizardShape
   };
 
-  WithWizard.displayName = `withWizard(${Component.displayName || Component.name})`;
+  WithWizard.displayName = `withWizard(${Component.displayName ||
+    Component.name})`;
   WithWizard.WrappedComponent = Component;
 
   return hoistStatics(WithWizard, Component);

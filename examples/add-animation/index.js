@@ -1,10 +1,10 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { Wizard, Steps, Step } from 'react-albus';
-import Navigation from './Navigation';
-import './exampleAnimation.css';
+import React from "react";
+import { render } from "react-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Wizard, Steps, Step } from "react-albus";
+import Navigation from "./Navigation";
+import "./exampleAnimation.css";
 
 const AddAnimation = () => (
   <BrowserRouter>
@@ -48,4 +48,4 @@ const AddAnimation = () => (
   </BrowserRouter>
 );
 
-render(<AddAnimation />, document.querySelector('#add-animation'));
+render(<AddAnimation />, document.querySelector("#add-animation"));

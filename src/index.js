@@ -12,10 +12,10 @@
  * the License.
  */
 
-import createWizardComponent from './components/createWizardComponent';
+import createWizardComponent from "./components/createWizardComponent";
 
-const Step = createWizardComponent('Step');
-const WithWizard = createWizardComponent('WithWizard');
+const Step = createWizardComponent("Step");
+const WithWizard = createWizardComponent("WithWizard");
 
 export { Step, WithWizard };
 export { WizardProvider as Wizard } from './components/Wizard';

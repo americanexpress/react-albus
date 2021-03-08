@@ -12,8 +12,8 @@
  * the License.
  */
 
-import PropTypes from 'prop-types';
-import historyShape from './historyShape';
+import PropTypes from "prop-types";
+import historyShape from "./historyShape";
 
 export default PropTypes.shape({
   go: PropTypes.func.isRequired,
@@ -26,11 +26,11 @@ export default PropTypes.shape({
   push: PropTypes.func.isRequired,
   replace: PropTypes.func.isRequired,
   step: PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
   }).isRequired,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired
     }).isRequired
-  ).isRequired,
+  ).isRequired
 });

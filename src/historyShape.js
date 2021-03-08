@@ -12,14 +12,14 @@
  * the License.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const location = PropTypes.shape({
   hash: PropTypes.string,
   key: PropTypes.string,
   pathname: PropTypes.string,
   search: PropTypes.string,
-  state: PropTypes.shape({}),
+  state: PropTypes.shape({})
 });
 
 export default PropTypes.shape({
@@ -29,5 +29,5 @@ export default PropTypes.shape({
   goBack: PropTypes.func,
   listen: PropTypes.func,
   push: PropTypes.func,
-  replace: PropTypes.func,
+  replace: PropTypes.func
 });

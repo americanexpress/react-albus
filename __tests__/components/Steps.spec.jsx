@@ -23,7 +23,7 @@ const mockOnInit = jest.fn();
 jest.mock('../../src/hooks/useWizard', () =>
   jest.fn(() => ({
     step: {
-      id: null,
+      id: null
     },
     onInit: mockOnInit,
   }))

@@ -12,19 +12,19 @@
  * the License.
  */
 
-import historyShape from '../src/historyShape';
+import historyShape from "../src/historyShape";
 
-jest.mock('prop-types', () => ({
-  shape: (shape) => ({ isRequired: shape }),
-  arrayOf: (item) => ({ isRequired: item }),
-  func: { isRequired: 'squawk' },
-  object: { isRequired: 'squawk' },
-  string: { isRequired: 'squawk' },
-  node: { isRequired: 'squawk' },
+jest.mock("prop-types", () => ({
+  shape: shape => ({ isRequired: shape }),
+  arrayOf: item => ({ isRequired: item }),
+  func: { isRequired: "squawk" },
+  object: { isRequired: "squawk" },
+  string: { isRequired: "squawk" },
+  node: { isRequired: "squawk" }
 }));
 
-describe('historyShape', () => {
-  it('exports the correct shape', () => {
+describe("historyShape", () => {
+  it("exports the correct shape", () => {
     expect(historyShape).toMatchSnapshot();
   });
 });

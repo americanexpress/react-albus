@@ -12,7 +12,7 @@
  * the License.
  */
 
-import { wizardShape } from '../src';
+import { wizardShape } from "../src";
 
 jest.mock('prop-types', () => ({
   shape: shape => ({ isRequired: shape }),
@@ -25,8 +25,8 @@ jest.mock('prop-types', () => ({
   node: { isRequired: 'squawk' },
 }));
 
-describe('wizardShape', () => {
-  it('exports the correct shape', () => {
+describe("wizardShape", () => {
+  it("exports the correct shape", () => {
     expect(wizardShape).toMatchSnapshot();
   });
 });
