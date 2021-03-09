@@ -8,7 +8,7 @@
   "main": "lib",
   "scripts": {
     "clean": "rimraf lib",
-    "start": "webpack-dev-server --config webpack.config.babel.js --port 3000 --inline --hot --open",
+    "start": "webpack-dev-server --port 3000 --inline --hot --open",
     "test": "jest",
     "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
     "prebuild": "npm run clean && npm run lint",
@@ -58,7 +58,6 @@
     "eslint-plugin-prettier": "^3.1.2",
     "import-glob-loader": "^1.1.0",
     "jest": "^24.9.0",
-    "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
     "rc-progress": "^2.2.5",
