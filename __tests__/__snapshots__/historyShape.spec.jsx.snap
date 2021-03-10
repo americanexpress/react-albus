@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`historyShape exports the correct shape 1`] = `
+Object {
+  "isRequired": Object {
+    "entries": Object {
+      "isRequired": Object {
+        "isRequired": Object {
+          "hash": Object {
+            "isRequired": "squawk",
+          },
+          "key": Object {
+            "isRequired": "squawk",
+          },
+          "pathname": Object {
+            "isRequired": "squawk",
+          },
+          "search": Object {
+            "isRequired": "squawk",
+          },
+          "state": Object {
+            "isRequired": Object {},
+          },
+        },
+      },
+    },
+    "go": Object {
+      "isRequired": "squawk",
+    },
+    "goBack": Object {
+      "isRequired": "squawk",
+    },
+    "listen": Object {
+      "isRequired": "squawk",
+    },
+    "location": Object {
+      "isRequired": Object {
+        "hash": Object {
+          "isRequired": "squawk",
+        },
+        "key": Object {
+          "isRequired": "squawk",
+        },
+        "pathname": Object {
+          "isRequired": "squawk",
+        },
+        "search": Object {
+          "isRequired": "squawk",
+        },
+        "state": Object {
+          "isRequired": Object {},
+        },
+      },
+    },
+    "push": Object {
+      "isRequired": "squawk",
+    },
+    "replace": Object {
+      "isRequired": "squawk",
+    },
+  },
+}
+`;

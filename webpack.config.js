@@ -1,7 +1,11 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
-  entry: './index.dev.js',
+  entry: "./index.dev.js",
+  mode: "development",
+  output: {
+    filename: "bundle.js"
+  },
   module: {
     rules: [
       {
@@ -9,31 +13,24 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'babel-loader',
-          },
-        ],
+            loader: "babel-loader"
+          }
+        ]
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-        ],
-        exclude: /node_modules/,
-      },
-    ],
+        use: ["style-loader", "css-loader"],
+        exclude: /node_modules/
+      }
+    ]
   },
   devServer: {
-    historyApiFallback: true,
+    historyApiFallback: true
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: [".js", ".jsx", ".scss"],
     alias: {
-      'react-albus': path.resolve(__dirname, 'src'),
-    },
-  },
+      "react-albus": path.resolve(__dirname, "src")
+    }
+  }
 };

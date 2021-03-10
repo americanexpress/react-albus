@@ -12,18 +12,22 @@
  * the License.
  */
 
-import useWizard from "../hooks/useWizard";
-import renderCallback from "../utils/renderCallback";
+import PropTypes from "prop-types";
 
-const createWizardComponent = name => {
-  const WizardComponent = props => {
-    const wizard = useWizard();
-    return renderCallback({ ...wizard, ...props });
-  };
+const location = PropTypes.shape({
+  hash: PropTypes.string,
+  key: PropTypes.string,
+  pathname: PropTypes.string,
+  search: PropTypes.string,
+  state: PropTypes.shape({})
+});
 
-  WizardComponent.displayName = name;
-
-  return WizardComponent;
-};
-
-export default createWizardComponent;
+export default PropTypes.shape({
+  location,
+  entries: PropTypes.arrayOf(location),
+  go: PropTypes.func,
+  goBack: PropTypes.func,
+  listen: PropTypes.func,
+  push: PropTypes.func,
+  replace: PropTypes.func
+});

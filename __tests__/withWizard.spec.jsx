@@ -12,22 +12,24 @@
  * the License.
  */
 
-import React from 'react';
-import { shallow } from 'enzyme';
-import { withWizard } from '../src';
+import React from "react";
+import { shallow } from "enzyme";
+import { withWizard } from "../src";
 
-jest.mock('../src/hooks/useWizard', () => jest.fn(() => ({ hogwarts: 'rules' })));
+jest.mock("../src/hooks/useWizard", () =>
+  jest.fn(() => ({ hogwarts: "rules" }))
+);
 
 const WrappedComponent = () => <div />;
 
-describe('withWizard', () => {
-  it('should add wizard prop to wrapped component', () => {
+describe("withWizard", () => {
+  it("should add wizard prop to wrapped component", () => {
     const Wrapped = withWizard(WrappedComponent);
     const rendered = shallow(<Wrapped />);
     expect(rendered).toMatchSnapshot();
   });
 
-  it('should use component props over context', () => {
+  it("should use component props over context", () => {
     const Wrapped = withWizard(WrappedComponent);
     const rendered = shallow(<Wrapped wizard="hogwarts" />);
     expect(rendered).toMatchSnapshot();

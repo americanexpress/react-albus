@@ -1,13 +1,15 @@
-import { useEffect, useRef, useState } from 'react';
-import { createMemoryHistory } from 'history';
+import { useEffect, useRef, useState } from "react";
+import { createMemoryHistory } from "history";
 
 function useHistory({ steps, basename, history, exactMatch }) {
-  const [activePath, setActivePath] = useState('');
+  const [activePath, setActivePath] = useState("");
   const historyRef = useRef(history || createMemoryHistory());
 
   const getPathToStep = pathname => {
-    const id = pathname.replace(`${basename}/`, '');
-    const [step] = steps.filter(s => (exactMatch ? s === id : id.startsWith(s)));
+    const id = pathname.replace(`${basename}/`, "");
+    const [step] = steps.filter(s =>
+      exactMatch ? s === id : id.startsWith(s)
+    );
     return step;
   };
 
@@ -39,7 +41,7 @@ function useHistory({ steps, basename, history, exactMatch }) {
     ...historyRef.current,
     pathname: activePath,
     push: handleNext(historyRef.current.push),
-    replace: handleNext(historyRef.current.replace),
+    replace: handleNext(historyRef.current.replace)
   };
 }
 
