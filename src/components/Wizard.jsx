@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import useHistory from "../hooks/useHistory";
 import historyShape from "../historyShape";
+import WizardContext from "../wizardContext";
 
-const Context = React.createContext({});
-
-const Provider = ({ children, basename, history, exactMatch, onNext }) => {
+const Wizard = ({ children, basename, history, exactMatch, onNext }) => {
   const [steps, setSteps] = useState([]);
 
   const getStepFromPath = path =>
@@ -51,13 +50,13 @@ const Provider = ({ children, basename, history, exactMatch, onNext }) => {
   };
 
   return (
-    <Context.Provider value={context}>
+    <WizardContext.Provider value={context}>
       {typeof children === "function" ? children(context) : children}
-    </Context.Provider>
+    </WizardContext.Provider>
   );
 };
 
-Provider.propTypes = {
+Wizard.propTypes = {
   history: historyShape,
   basename: PropTypes.string,
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
@@ -66,13 +65,11 @@ Provider.propTypes = {
   exactMatch: PropTypes.bool
 };
 
-Provider.defaultProps = {
+Wizard.defaultProps = {
   basename: "",
   history: undefined,
   onNext: undefined,
   exactMatch: true
 };
 
-export const WizardProvider = Provider;
-
-export default Context;
+export default Wizard;

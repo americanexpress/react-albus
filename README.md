@@ -67,8 +67,7 @@ Check out the [demo page](https://americanexpress.io/react-albus)!
 - [`<Wizard>`](#wizard)
 - [`<Steps>`](#steps)
 - [`<Step>`](#step)
-- [`withWizard`](#withwizard)
-- [`wizardShape`](#wizardShape)
+- [`useWizard`](#usewizard)
 - [`context.wizard`](#contextwizard)
 
 ---
@@ -114,12 +113,11 @@ Unique key for each step.
 
 In addition to `id`, any additional props added to `<Step>` will be available on each `step` object.  This can be used to add names, descriptions, or other metadata to each step.
 
-`<WithWizard>` is an alias for `<Step>` that can be used to access [`context.wizard`](#contextwizard) anywhere within the `<Wizard>` tree.
-
 ---
 
-### `withWizard()`
-A higher order component that adds [`context.wizard`](#contextwizard) as a `wizard  ` prop on the wrapped component.
+### `useWizard`
+
+The `useWizard` hook gives you access to the [`context.wizard`](#contextwizard) object anywhere within the `<Wizard>` tree.
 
 ---
 

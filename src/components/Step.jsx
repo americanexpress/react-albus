@@ -15,15 +15,9 @@
 import useWizard from "../hooks/useWizard";
 import renderCallback from "../utils/renderCallback";
 
-const createWizardComponent = name => {
-  const WizardComponent = props => {
-    const wizard = useWizard();
-    return renderCallback({ ...wizard, ...props });
-  };
-
-  WizardComponent.displayName = name;
-
-  return WizardComponent;
+const Step = props => {
+  const wizard = useWizard();
+  return renderCallback({ ...wizard, ...props });
 };
 
-export default createWizardComponent;
+export default Step;
