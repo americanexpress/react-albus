@@ -12,24 +12,26 @@
  * the License.
  */
 
-import React from 'react';
-import hoistStatics from 'hoist-non-react-statics';
-import useWizard from './hooks/useWizard';
+import React from "react";
+import hoistStatics from "hoist-non-react-statics";
+import useWizard from "./hooks/useWizard";
 
-import wizardShape from './wizardShape';
+import wizardShape from "./wizardShape";
 
 const withWizard = Component => {
   const WithWizard = props => {
     const wizard = useWizard();
 
+    // eslint-disable-next-line react/jsx-props-no-spreading
     return <Component wizard={wizard} {...props} />;
   };
 
   WithWizard.contextTypes = {
-    wizard: wizardShape,
+    wizard: wizardShape
   };
 
-  WithWizard.displayName = `withWizard(${Component.displayName || Component.name})`;
+  WithWizard.displayName = `withWizard(${Component.displayName ||
+    Component.name})`;
   WithWizard.WrappedComponent = Component;
 
   return hoistStatics(WithWizard, Component);

@@ -12,33 +12,33 @@
  * the License.
  */
 
-import React from 'react';
-import { act } from 'react-dom/test-utils';
-import { mount } from 'enzyme';
-import { Steps } from '../../src';
-import useWizard from '../../src/hooks/useWizard';
+import React from "react";
+import { act } from "react-dom/test-utils";
+import { mount } from "enzyme";
+import { Steps } from "../../src";
+import useWizard from "../../src/hooks/useWizard";
 
 const mockOnInit = jest.fn();
 
-jest.mock('../../src/hooks/useWizard', () =>
+jest.mock("../../src/hooks/useWizard", () =>
   jest.fn(() => ({
     step: {
-      id: null,
+      id: null
     },
-    onInit: mockOnInit,
+    onInit: mockOnInit
   }))
 );
 
 const Step = () => null;
 
-describe('Steps', () => {
+describe("Steps", () => {
   let rendered;
 
   afterEach(() => {
     rendered.unmount();
   });
 
-  it('should call init', () => {
+  it("should call init", () => {
     act(() => {
       rendered = mount(
         <Steps>
@@ -47,17 +47,17 @@ describe('Steps', () => {
       );
     });
 
-    expect(mockOnInit).toHaveBeenCalledWith([{ id: 'hogwarts' }]);
+    expect(mockOnInit).toHaveBeenCalledWith([{ id: "hogwarts" }]);
   });
 
-  it('should render correct child if controlled', () => {
+  it("should render correct child if controlled", () => {
     useWizard.mockImplementationOnce(() => ({
-      onInit: mockOnInit,
+      onInit: mockOnInit
     }));
 
     act(() => {
       rendered = mount(
-        <Steps step={{ id: 'gryffindor' }}>
+        <Steps step={{ id: "gryffindor" }}>
           <Step id="hogwarts" />
           <Step id="gryffindor" />
         </Steps>

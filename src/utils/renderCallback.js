@@ -16,7 +16,7 @@ const renderCallback = ({ render, children, ...wizard }) => {
   if (render) {
     return render(wizard);
   }
-  if (typeof children === 'function') {
+  if (typeof children === "function") {
     return children(wizard);
   }
   return children;

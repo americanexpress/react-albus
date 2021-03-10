@@ -1,16 +1,16 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { Wizard, Steps, Step } from 'react-albus';
-import { Line } from 'rc-progress';
-import Navigation from './Navigation';
-import './exampleAnimation.css';
+import React from "react";
+import { render } from "react-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { Wizard, Steps, Step } from "react-albus";
+import { Line } from "rc-progress";
+import Navigation from "./Navigation";
+import "./exampleAnimation.css";
 
 const skip = ({ step, push }) => {
   switch (step.id) {
-    case 'gandalf': {
-      push('ice-king');
+    case "gandalf": {
+      push("ice-king");
       break;
     }
     default:
@@ -63,4 +63,4 @@ const SkipAStep = () => (
   </BrowserRouter>
 );
 
-render(<SkipAStep />, document.getElementById('skip-a-step'));
+render(<SkipAStep />, document.querySelector("#skip-a-step"));

@@ -1,6 +1,6 @@
-import React, { memo, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import useWizard from '../hooks/useWizard';
+import React, { memo, useEffect } from "react";
+import PropTypes from "prop-types";
+import useWizard from "../hooks/useWizard";
 
 const Steps = ({ step, children: childSteps }) => {
   const { step: wizardStep, onInit } = useWizard();
@@ -8,7 +8,7 @@ const Steps = ({ step, children: childSteps }) => {
   useEffect(() => {
     const steps = React.Children.map(childSteps, child => {
       const {
-        props: { children, ...config },
+        props: { children, ...config }
       } = child;
       return config;
     });
@@ -27,12 +27,12 @@ const Steps = ({ step, children: childSteps }) => {
 Steps.propTypes = {
   children: PropTypes.node.isRequired,
   step: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-  }),
+    id: PropTypes.string.isRequired
+  })
 };
 
 Steps.defaultProps = {
-  step: null,
+  step: null
 };
 
 export default memo(Steps);

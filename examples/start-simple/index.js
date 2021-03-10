@@ -1,7 +1,7 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Wizard, Steps, Step } from 'react-albus';
-import Navigation from './Navigation';
+import React from "react";
+import { render } from "react-dom";
+import { Wizard, Steps, Step } from "react-albus";
+import Navigation from "./Navigation";
 
 const StartSimple = () => (
   <div className="row pad-t">
@@ -24,4 +24,4 @@ const StartSimple = () => (
   </div>
 );
 
-render(<StartSimple />, document.getElementById('start-simple'));
+render(<StartSimple />, document.querySelector("#start-simple"));
