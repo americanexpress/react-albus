@@ -173,4 +173,30 @@ describe("Wizard", () => {
       expect(mounted).toMatchSnapshot();
     });
   });
+  describe("with a function as a child", () => {
+    let mounted;
+
+    beforeEach(() => {
+      act(() => {
+        mounted = mount(
+          <Wizard>
+            {() => (
+              <Steps>
+                <Step id="gryffindor">
+                  <div />
+                </Step>
+                <Step id="slytherin">
+                  <div />
+                </Step>
+              </Steps>
+            )}
+          </Wizard>
+        );
+      });
+    });
+
+    it("should render the snapshot correctly", () => {
+      expect(mounted).toMatchSnapshot();
+    });
+  });
 });

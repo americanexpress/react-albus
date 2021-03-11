@@ -32,22 +32,18 @@ describe("Step", () => {
   });
 
   it("should pass wizard to function as child", () => {
-    shallow(
+    const rendered = shallow(
       <Step>
         {wizard => {
-          expect(wizard).toEqual(mockWizard);
+          return <h1>{wizard.drinkMore}</h1>;
         }}
       </Step>
     );
+
+    expect(rendered.html()).toBe("<h1>butter beer</h1>");
   });
 
-  it("should pass wizard to render prop", () => {
-    shallow(
-      <Step
-        render={wizard => {
-          expect(wizard).toEqual(mockWizard);
-        }}
-      />
-    );
+  it("should pass wizard to children function", () => {
+    shallow(<Step>{wizard => expect(wizard).toEqual(mockWizard)}</Step>);
   });
 });
