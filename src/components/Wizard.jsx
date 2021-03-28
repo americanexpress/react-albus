@@ -38,7 +38,7 @@ const Wizard = ({ children, basename, history, exactMatch, onNext }) => {
   const step = getStepFromPath(pathname);
   const indexOfStep = steps.indexOf(step);
 
-  const context = {
+  const wizard = {
     step,
     steps,
     onNext: handleNext,
@@ -50,8 +50,8 @@ const Wizard = ({ children, basename, history, exactMatch, onNext }) => {
   };
 
   return (
-    <WizardContext.Provider value={context}>
-      {typeof children === "function" ? children(context) : children}
+    <WizardContext.Provider value={wizard}>
+      {typeof children === "function" ? children(wizard) : children}
     </WizardContext.Provider>
   );
 };
