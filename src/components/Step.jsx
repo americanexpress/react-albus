@@ -13,11 +13,10 @@
  */
 
 import useWizard from "../hooks/useWizard";
-import renderCallback from "../utils/renderCallback";
 
-const Step = props => {
+const Step = ({ children }) => {
   const wizard = useWizard();
-  return renderCallback({ ...wizard, ...props });
+  return typeof children === "function" ? children(wizard) : children;
 };
 
 export default Step;
