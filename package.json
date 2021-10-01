@@ -13,7 +13,7 @@
     "test:git-history": "commitlint --from origin/main --to HEAD",
     "test:lockfile": "lockfile-lint --path yarn.lock --allowed-hosts registry.yarnpkg.com --validate-https",
     "test:lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
-    "prebuild": "npm run clean && npm run lint",
+    "prebuild": "npm run clean && npm run test:lint",
     "build": "babel src -d lib --copy-files",
     "posttest": "npm run test:lint && npm run test:git-history && npm run test:lockfile",
     "prepublish": "npm run build"
@@ -46,8 +46,8 @@
   "devDependencies": {
     "@babel/cli": "^7.13.0",
     "@babel/core": "^7.13.8",
-    "@commitlint/cli": "^13.2.0",
-    "@commitlint/config-conventional": "^13.2.0",
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
     "amex-jest-preset-react": "^6.1.0",
