@@ -1,4 +1,4 @@
-# React Albus · [![Build Status](https://img.shields.io/travis/americanexpress/react-albus/master.svg?style=flat)](https://travis-ci.org/americanexpress/react-albus) [![Coverage Status](https://coveralls.io/repos/github/americanexpress/react-albus/badge.svg?branch=master)](https://coveralls.io/github/americanexpress/react-albus?branch=master) [![npm version](https://img.shields.io/npm/v/react-albus.svg?style=flat)](https://www.npmjs.com/package/react-albus)
+# React Albus · [![Build Status](https://img.shields.io/travis/americanexpress/react-albus/main.svg?style=flat)](https://travis-ci.org/americanexpress/react-albus) [![Coverage Status](https://coveralls.io/repos/github/americanexpress/react-albus/badge.svg?branch=main)](https://coveralls.io/github/americanexpress/react-albus?branch=main) [![npm version](https://img.shields.io/npm/v/react-albus.svg?style=flat)](https://www.npmjs.com/package/react-albus)
 
 > “Let us `<Step>` into the night and pursue that flighty temptress, adventure.”
 >
