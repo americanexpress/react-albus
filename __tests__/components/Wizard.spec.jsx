@@ -15,7 +15,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Wizard, Steps, Step, WithWizard } from '../../src';
+import {
+  Wizard, Steps, Step, WithWizard,
+} from '../../src';
 
 describe('Wizard', () => {
   describe('with no props', () => {
@@ -25,7 +27,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -93,7 +95,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard onNext={onNext}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -137,7 +139,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard history={history}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -178,7 +180,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard history={history} exactMatch={false}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}

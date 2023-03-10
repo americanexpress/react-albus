@@ -145,13 +145,15 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import { Wizard } from 'react-albus';
 
-const RoutedWizard = ({ children }) =>
+const RoutedWizard = ({ children }) => (
   <Route
-    render={({ history, match: { url } }) =>
+    render={({ history, match: { url } }) => (
       <Wizard history={history} basename={url}>
         {children}
-      </Wizard>}
-  />;
+      </Wizard>
+    )}
+  />
+);
 
 export default RoutedWizard;
 ```

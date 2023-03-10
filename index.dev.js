@@ -1,5 +1,4 @@
-import './examples/start-simple';
-import './examples/add-routing';
-import './examples/add-animation';
-import './examples/add-progress-bar';
-import './examples/skip-a-step';
+// import 'Start Simple';
+// import 'Add Routing';
+// import 'Add Progress Bar';
+// import 'Skip a Step';
