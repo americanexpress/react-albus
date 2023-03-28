@@ -2,6 +2,7 @@
   "name": "react-albus",
   "version": "2.0.0",
   "description": "React component library for building declarative multi-step flows.",
+  "type": "module",
   "files": [
     "lib"
   ],
