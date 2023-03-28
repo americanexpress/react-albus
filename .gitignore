@@ -3,7 +3,7 @@ node_modules
 *.log
 
 # Build
-lib
+# lib
 
 # OS
 .DS_Store
