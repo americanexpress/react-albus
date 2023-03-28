@@ -61,7 +61,7 @@ class Wizard extends Component {
   }
 
   get ids() {
-    return this.state.steps.map(s => s.id);
+    return this.state.steps.map((s) => s.id);
   }
 
   get nextStep() {
@@ -75,16 +75,16 @@ class Wizard extends Component {
   history = this.props.history || createMemoryHistory();
   steps = [];
 
-  pathToStep = pathname => {
+  pathToStep = (pathname) => {
     const id = pathname.replace(this.basename, '');
-    const [step] = this.state.steps.filter(
-      s => (this.props.exactMatch ? s.id === id : id.startsWith(s.id))
+    const [step] = this.state.steps.filter((s) =>
+      this.props.exactMatch ? s.id === id : id.startsWith(s.id)
     );
 
     return step || this.state.step;
   };
 
-  init = steps => {
+  init = (steps) => {
     this.setState({ steps }, () => {
       const step = this.pathToStep(this.history.location.pathname);
       if (step.id) {
@@ -95,7 +95,7 @@ class Wizard extends Component {
     });
   };
 
-  set = step => this.history.push(`${this.basename}${step}`);
+  set = (step) => this.history.push(`${this.basename}${step}`);
   push = (step = this.nextStep) => this.set(step);
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
   pushPrevious = (step = this.previousStep) => this.set(step);

@@ -16,7 +16,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 
-const withWizard = Component => {
+const withWizard = (Component) => {
   const WithWizard = (props, { wizard: { init, ...wizard } }) =>
     React.createElement(Component, {
       wizard,

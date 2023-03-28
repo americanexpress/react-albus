@@ -1,0 +1,24 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["prettier"],
+    "plugins": ["prettier"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "modules": true
+        }
+    },
+    "rules": {
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": true,
+                "trailingComma": "es5",
+                "bracketSpacing": true,
+                "jsxBracketSameLine": false,
+                "printWidth": 100
+            }
+        ]
+    }
+}

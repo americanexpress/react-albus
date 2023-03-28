@@ -1,5 +1,5 @@
 module.exports = {
-  extends: '../.eslintrc.js',
+  extends: '../.eslintrc.json',
   rules: {
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
