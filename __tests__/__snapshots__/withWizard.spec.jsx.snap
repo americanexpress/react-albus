@@ -3,7 +3,7 @@
 exports[`withWizard should add wizard prop to wrapped component 1`] = `
 <WrappedComponent
   wizard={
-    Object {
+    {
       "hogwarts": "rules",
     }
   }

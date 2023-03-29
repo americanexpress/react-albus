@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`wizardShape exports the correct shape 1`] = `
-Object {
-  "isRequired": Object {
+{
+  "isRequired": {
     "go": "squawk",
     "history": "squawk",
     "next": "squawk",
@@ -10,10 +10,10 @@ Object {
     "push": "squawk",
     "replace": "squawk",
     "set": "squawk",
-    "step": Object {
+    "step": {
       "id": "squawk",
     },
-    "steps": Object {
+    "steps": {
       "id": "squawk",
     },
   },

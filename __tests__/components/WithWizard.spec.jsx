@@ -24,7 +24,7 @@ describe('WithWizard', () => {
       <WithWizard>
         <div />
       </WithWizard>,
-      { context }
+      { context },
     );
 
     expect(rendered).toMatchSnapshot();
@@ -37,7 +37,7 @@ describe('WithWizard', () => {
           expect(wizard).toEqual(context.wizard);
         }}
       </WithWizard>,
-      { context }
+      { context },
     );
   });
 
@@ -48,7 +48,7 @@ describe('WithWizard', () => {
           expect(wizard).toEqual(context.wizard);
         }}
       />,
-      { context }
+      { context },
     );
   });
 });

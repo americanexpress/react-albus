@@ -38,7 +38,7 @@ describe('Wizard', () => {
               <div />
             </Step>
           </Steps>
-        </Wizard>
+        </Wizard>,
       );
     });
 
@@ -106,7 +106,7 @@ describe('Wizard', () => {
               <div />
             </Step>
           </Steps>
-        </Wizard>
+        </Wizard>,
       );
     });
 
@@ -150,7 +150,7 @@ describe('Wizard', () => {
               <div />
             </Step>
           </Steps>
-        </Wizard>
+        </Wizard>,
       );
     });
 
@@ -191,7 +191,7 @@ describe('Wizard', () => {
               <div />
             </Step>
           </Steps>
-        </Wizard>
+        </Wizard>,
       );
     });
 

@@ -34,7 +34,7 @@ describe('Steps', () => {
       <Steps>
         <Step id="hogwarts" />
       </Steps>,
-      { context }
+      { context },
     );
 
     expect(context.wizard.init).toHaveBeenCalledWith([{ id: 'hogwarts' }]);
@@ -46,7 +46,7 @@ describe('Steps', () => {
         <Step id="hogwarts" />
         <Step id="gryffindor" />
       </Steps>,
-      { context }
+      { context },
     );
 
     expect(rendered).toMatchSnapshot();

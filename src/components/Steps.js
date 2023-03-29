@@ -19,7 +19,7 @@ class Steps extends Component {
   componentDidMount() {
     const steps = React.Children.map(
       this.props.children,
-      ({ props: { children, render, ...config } }) => config
+      ({ props: { children, render, ...config } }) => config,
     );
     this.context.wizard.init(steps);
   }
@@ -27,7 +27,7 @@ class Steps extends Component {
   render() {
     const { id: activeId } = this.props.step || this.context.wizard.step;
     const [child = null] = React.Children.toArray(this.props.children).filter(
-      ({ props: { id } }) => id === activeId
+      ({ props: { id } }) => id === activeId,
     );
     return child;
   }

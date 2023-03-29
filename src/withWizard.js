@@ -27,7 +27,9 @@ const withWizard = Component => {
     wizard: PropTypes.object,
   };
 
-  WithWizard.displayName = `withWizard(${Component.displayName || Component.name})`;
+  WithWizard.displayName = `withWizard(${
+    Component.displayName || Component.name
+  })`;
   WithWizard.WrappedComponent = Component;
 
   return hoistStatics(WithWizard, Component);

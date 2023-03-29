@@ -24,7 +24,7 @@ describe('Step', () => {
       <Step>
         <div />
       </Step>,
-      { context }
+      { context },
     );
 
     expect(rendered).toMatchSnapshot();
@@ -37,7 +37,7 @@ describe('Step', () => {
           expect(wizard).toEqual(context.wizard);
         }}
       </Step>,
-      { context }
+      { context },
     );
   });
 
@@ -48,7 +48,7 @@ describe('Step', () => {
           expect(wizard).toEqual(context.wizard);
         }}
       />,
-      { context }
+      { context },
     );
   });
 });
