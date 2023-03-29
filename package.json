@@ -38,7 +38,6 @@
     ]
   },
   "dependencies": {
-    "babel-loader": "^9.1.2",
     "history": "^4.6.0",
     "hoist-non-react-statics": "^2.3.1",
     "prop-types": "^15.8.1"
@@ -52,6 +51,7 @@
     "@babel/register": "^7.21.0",
     "amex-jest-preset": "^7.0.0",
     "amex-jest-preset-react": "^7.0.0",
+    "babel-loader": "^9.1.2",
     "babel-preset-amex": "^3.3.0",
     "babel-preset-react-hmre": "^1.1.0",
     "babel-preset-stage-0": "^6.5.0",
