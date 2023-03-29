@@ -42,13 +42,12 @@
     "prop-types": "^15.5.8"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "amex-jest-preset-react": "^4.0.0",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.5.2",
     "babel-eslint": "^6.0.0",
     "babel-loader": "^6.2.2",
     "babel-preset-env": "^1.6.0",
-    "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.5.0",
     "babel-preset-react-hmre": "^1.1.0",
     "babel-preset-stage-0": "^6.5.0",
@@ -64,12 +63,12 @@
     "jest": "^21.2.1",
     "node-sass": "^4.5.0",
     "prettier": "^1.6.1",
-    "rc-progress": "^2.2.5",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-router-dom": "^4.0.0",
     "react-test-renderer": "^16.0.0",
     "react-transition-group": "^2.2.1",
+    "rc-progress": "^2.2.5",
     "rimraf": "^2.5.2",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",
@@ -77,6 +76,6 @@
     "webpack-dev-server": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0 || ^17.00 || ^18.00"
+    "react": "^15.0.0 || ^16.0.0"
   }
 }

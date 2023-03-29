@@ -33,7 +33,7 @@ describe('Step', () => {
   it('should pass wizard to function as child', () => {
     shallow(
       <Step>
-        {(wizard) => {
+        {wizard => {
           expect(wizard).toEqual(context.wizard);
         }}
       </Step>,
@@ -44,7 +44,7 @@ describe('Step', () => {
   it('should pass wizard to render prop', () => {
     shallow(
       <Step
-        render={(wizard) => {
+        render={wizard => {
           expect(wizard).toEqual(context.wizard);
         }}
       />,
