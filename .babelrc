@@ -1,5 +1,5 @@
 {
-  "presets": ["env", "react", "stage-0"],
+  "presets": ["stage-0", "react"],
   "plugins": ["transform-do-expressions"],
   "env": {
     "development/client": {
