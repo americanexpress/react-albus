@@ -8,7 +8,7 @@
   "main": "lib",
   "scripts": {
     "clean": "rimraf lib",
-    "start": "webpack-dev-server --port 3000 --inline --hot --open",
+    "start": "webpack-dev-server --port 3000 --mode=development --hot --open",
     "test": "jest",
     "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
     "lint:fix": "eslint --ignore-path .eslintignore --fix --ext .js --ext .jsx ./",
@@ -49,6 +49,7 @@
     "@babel/plugin-syntax-jsx": "^7.18.6",
     "@babel/plugin-transform-react-jsx": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
+    "@babel/register": "^7.21.0",
     "amex-jest-preset": "^7.0.0",
     "amex-jest-preset-react": "^7.0.0",
     "babel-preset-amex": "^3.3.0",
@@ -78,6 +79,7 @@
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.2",
     "webpack": "^5.77.0",
+    "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.1"
   },
   "peerDependencies": {
