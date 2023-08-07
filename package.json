@@ -61,7 +61,7 @@
     "eslint-plugin-prettier": "^2.1.2",
     "import-glob-loader": "^1.1.0",
     "jest": "^21.2.1",
-    "node-sass": "^4.5.0",
+    "node-sass": "^7.0.0",
     "prettier": "^1.6.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
