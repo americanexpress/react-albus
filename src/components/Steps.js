@@ -45,6 +45,8 @@ Steps.defaultProps = {
 };
 
 Steps.contextTypes = {
+  // disabling due to lost context
+  // eslint-disable-next-line react/forbid-prop-types
   wizard: PropTypes.object,
 };
 
