@@ -17,6 +17,8 @@ import PropTypes from 'prop-types';
 import { createMemoryHistory } from 'history';
 import renderCallback from '../utils/renderCallback';
 
+// TODO: fix below
+/* eslint-disable no-undef */
 class Wizard extends Component {
   state = {
     step: {
@@ -77,8 +79,8 @@ class Wizard extends Component {
 
   pathToStep = pathname => {
     const id = pathname.replace(this.basename, '');
-    const [step] = this.state.steps.filter(
-      s => (this.props.exactMatch ? s.id === id : id.startsWith(s.id))
+    const [step] = this.state.steps.filter(s =>
+      this.props.exactMatch ? s.id === id : id.startsWith(s.id)
     );
 
     return step || this.state.step;
@@ -121,10 +123,14 @@ class Wizard extends Component {
 Wizard.propTypes = {
   basename: PropTypes.string,
   history: PropTypes.shape({
+    // disabling due to lost context
+    // eslint-disable-next-line react/forbid-prop-types
     entries: PropTypes.array,
     go: PropTypes.func,
     goBack: PropTypes.func,
     listen: PropTypes.func,
+    // disabling due to lost context
+    // eslint-disable-next-line react/forbid-prop-types
     location: PropTypes.object,
     push: PropTypes.func,
     replace: PropTypes.func,
@@ -142,6 +148,8 @@ Wizard.defaultProps = {
 };
 
 Wizard.childContextTypes = {
+  // disabling due to lost context
+  // eslint-disable-next-line react/forbid-prop-types
   wizard: PropTypes.object,
 };
 
