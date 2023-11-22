@@ -97,9 +97,19 @@ class Wizard extends Component {
     });
   };
 
-  set = step => this.history.push(`${this.basename}${step}`);
+  constructPath = step => {
+    if (this.props.preserveQuery) {
+      return {
+        ...this.history.location,
+        pathname: `${this.basename}${step}`,
+      };
+    }
+    return `${this.basename}${step}`;
+  };
+
   push = (step = this.nextStep) => this.set(step);
-  replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
+  set = step => this.history.push(this.constructPath(step));
+  replace = (step = this.nextStep) => this.history.replace(this.constructPath(step));
   pushPrevious = (step = this.previousStep) => this.set(step);
 
   next = () => {
@@ -122,6 +132,7 @@ class Wizard extends Component {
 
 Wizard.propTypes = {
   basename: PropTypes.string,
+  preserveQuery: PropTypes.bool,
   history: PropTypes.shape({
     // disabling due to lost context
     // eslint-disable-next-line react/forbid-prop-types
@@ -141,6 +152,7 @@ Wizard.propTypes = {
 
 Wizard.defaultProps = {
   basename: '',
+  preserveQuery: false,
   history: null,
   onNext: null,
   render: null,
