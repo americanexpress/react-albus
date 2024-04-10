@@ -1,6 +1,6 @@
 {
   "name": "react-albus",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "React component library for building declarative multi-step flows.",
   "files": [
     "lib"
@@ -10,7 +10,7 @@
     "clean": "rimraf lib",
     "start": "webpack serve --port 3000 --open",
     "test": "jest",
-    "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
+    "lint": "eslint --ignore-path .eslintignore",
     "prebuild": "npm run clean && npm run lint",
     "build": "babel src -d lib --copy-files",
     "posttest": "npm run lint",
@@ -33,7 +33,7 @@
   "jest": {
     "preset": "amex-jest-preset-react",
     "testPathIgnorePatterns": [
-      ".eslintrc.js"
+      ".eslintrc.json"
     ]
   },
   "dependencies": {
@@ -74,6 +74,10 @@
     "webpack-dev-server": "^4.11.1"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0"
+    "react": "^17.0.0 || ^18.0.0"
+  },
+  "engines": {
+    "node": "=18.x.x",
+    "npm": "=9.x.x"
   }
 }
