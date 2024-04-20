@@ -15,13 +15,11 @@
 import PropTypes from 'prop-types';
 import renderCallback from '../utils/renderCallback';
 
-const createWizardComponent = name => {
+const createWizardComponent = (name) => {
   const WizardComponent = (props, { wizard: { init, ...wizard } }) => renderCallback(props, wizard);
 
   WizardComponent.contextTypes = {
-    // disabling due to lost context
-    // eslint-disable-next-line react/forbid-prop-types
-    wizard: PropTypes.object,
+    wizard: PropTypes.shape({}),
   };
 
   WizardComponent.displayName = name;

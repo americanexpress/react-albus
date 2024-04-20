@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['12.x']
+        node: ['18.x', '20.x', '21.x']
     name: Node ${{ matrix.node }}
     steps:
     - name: Checkout
@@ -28,8 +28,8 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
     - name: Install Dependencies
-      run: yarn
+      run: npm i
       env:
         NODE_ENV: development
     - name: Run Tests
-      run: yarn run test
+      run: npm run test

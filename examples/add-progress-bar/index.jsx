@@ -3,10 +3,11 @@ import { render } from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { Wizard, Steps, Step } from 'react-albus';
+import { Line } from 'rc-progress';
 import Navigation from './Navigation';
 import './exampleAnimation.css';
 
-const AddAnimation = () => (
+const AddProgressBar = () => (
   <BrowserRouter>
     <div className="row pad-t">
       <div className="col-xs-6 col-xs-offset-3">
@@ -14,8 +15,12 @@ const AddAnimation = () => (
           render={({ history }) => (
             <Wizard
               history={history}
-              render={({ step }) => (
+              render={({ step, steps }) => (
                 <div>
+                  <Line
+                    percent={((steps.indexOf(step) + 1) / steps.length) * 100}
+                    className="pad-b"
+                  />
                   <TransitionGroup>
                     <CSSTransition
                       key={step.id}
@@ -48,4 +53,4 @@ const AddAnimation = () => (
   </BrowserRouter>
 );
 
-render(<AddAnimation />, document.getElementById('add-animation'));
+render(<AddProgressBar />, document.querySelector('#add-progress-bar'));

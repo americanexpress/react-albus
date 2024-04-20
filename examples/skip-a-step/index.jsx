@@ -65,4 +65,4 @@ const SkipAStep = () => (
   </BrowserRouter>
 );
 
-render(<SkipAStep />, document.getElementById('skip-a-step'));
+render(<SkipAStep />, document.querySelector('#skip-a-step'));

@@ -24,4 +24,4 @@ const StartSimple = () => (
   </div>
 );
 
-render(<StartSimple />, document.getElementById('start-simple'));
+render(<StartSimple />, document.querySelector('#start-simple'));
