@@ -18,7 +18,7 @@ const AddProgressBar = () => (
               render={({ step, steps }) => (
                 <div>
                   <Line
-                    percent={(steps.indexOf(step) + 1) / steps.length * 100}
+                    percent={((steps.indexOf(step) + 1) / steps.length) * 100}
                     className="pad-b"
                   />
                   <TransitionGroup>
@@ -53,4 +53,4 @@ const AddProgressBar = () => (
   </BrowserRouter>
 );
 
-render(<AddProgressBar />, document.getElementById('add-progress-bar'));
+render(<AddProgressBar />, document.querySelector('#add-progress-bar'));

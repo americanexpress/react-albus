@@ -1,6 +1,6 @@
 {
   "name": "react-albus",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "React component library for building declarative multi-step flows.",
   "files": [
     "lib"
@@ -10,7 +10,7 @@
     "clean": "rimraf lib",
     "start": "webpack-dev-server --port 3000 --inline --hot --open",
     "test": "jest",
-    "lint": "eslint --ignore-path .eslintignore --ext .js --ext .jsx ./",
+    "lint": "eslint --ignore-path .eslintignore",
     "prebuild": "npm run clean && npm run lint",
     "build": "babel src -d lib --copy-files",
     "posttest": "npm run lint",
@@ -33,49 +33,51 @@
   "jest": {
     "preset": "amex-jest-preset-react",
     "testPathIgnorePatterns": [
-      ".eslintrc.js"
+      ".eslintrc.json"
     ]
   },
   "dependencies": {
-    "history": "^4.6.0",
-    "hoist-non-react-statics": "^2.3.1",
-    "prop-types": "^15.5.8"
+    "history": "^4.10.1",
+    "hoist-non-react-statics": "^3.2.1",
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "amex-jest-preset-react": "^4.0.0",
-    "babel-cli": "^6.6.5",
-    "babel-core": "^6.5.2",
-    "babel-eslint": "^6.0.0",
-    "babel-loader": "^6.2.2",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.5.0",
-    "babel-preset-react-hmre": "^1.1.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "coveralls": "^2.13.1",
-    "css-loader": "^0.26.2",
-    "enzyme": "^3.1.0",
-    "enzyme-to-json": "^3.1.4",
-    "eslint": "^3.19.0",
-    "eslint-config-amex": "^6.0.0",
-    "eslint-config-prettier": "^2.2.0",
-    "eslint-plugin-prettier": "^2.1.2",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-react": "^7.18.6",
+    "amex-jest-preset-react": "^8.0.1",
+    "babel-eslint": "^10.1.0",
+    "babel-preset-amex": "^3.5.0",
+    "coveralls": "^3.1.1",
+    "css-loader": "^7.1.1",
+    "enzyme": "^3.11.0",
+    "enzyme-to-json": "^3.6.2",
+    "eslint": "^7.32.0",
+    "eslint-config-amex": "^15.0.0",
+    "eslint-plugin-jest": "^24.5.0",
+    "eslint-plugin-jest-dom": "^3.9.2",
     "import-glob-loader": "^1.1.0",
-    "jest": "^21.2.1",
-    "node-sass": "^4.5.0",
-    "prettier": "^1.6.1",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "react-router-dom": "^4.0.0",
-    "react-test-renderer": "^16.0.0",
-    "react-transition-group": "^2.2.1",
+    "jest": "^27.5.1",
+    "node-sass": "^8.0.0",
+    "prettier": "^2.8.4",
     "rc-progress": "^2.2.5",
-    "rimraf": "^2.5.2",
-    "sass-loader": "^6.0.2",
-    "style-loader": "^0.13.2",
-    "webpack": "^2.0.0",
-    "webpack-dev-server": "^2.0.0"
+    "react": "^18.0.2",
+    "react-dom": "^18.0.2",
+    "react-router-dom": "^6.8.1",
+    "react-test-renderer": "^18.0.2",
+    "react-transition-group": "^4.4.1",
+    "rimraf": "^4.1.2",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.75.0",
+    "webpack-dev-server": "^4.11.1"
   },
   "peerDependencies": {
-    "react": "^15.0.0 || ^16.0.0"
+    "react": "^17.0.0 || ^18.0.0"
+  },
+  "engines": {
+    "node": "=18.x.x",
+    "npm": "=9.x.x"
   }
 }

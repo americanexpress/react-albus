@@ -14,16 +14,16 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Step } from '../../src';
+import { WithWizard } from '../../src';
 
 const context = { wizard: { drinkMore: 'butter beer' } };
 
-describe('Step', () => {
+describe('WithWizard', () => {
   it('should render children', () => {
     const rendered = shallow(
-      <Step>
+      <WithWizard>
         <div />
-      </Step>,
+      </WithWizard>,
       { context }
     );
 
@@ -32,19 +32,19 @@ describe('Step', () => {
 
   it('should pass wizard to function as child', () => {
     shallow(
-      <Step>
-        {wizard => {
+      <WithWizard>
+        {(wizard) => {
           expect(wizard).toEqual(context.wizard);
         }}
-      </Step>,
+      </WithWizard>,
       { context }
     );
   });
 
   it('should pass wizard to render prop', () => {
     shallow(
-      <Step
-        render={wizard => {
+      <WithWizard
+        render={(wizard) => {
           expect(wizard).toEqual(context.wizard);
         }}
       />,

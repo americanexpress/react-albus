@@ -3,16 +3,18 @@ import { WithWizard } from 'react-albus';
 
 const Navigation = () => (
   <WithWizard
-    render={({ next, previous, step, steps }) => (
+    render={({
+      next, previous, step, steps,
+    }) => (
       <div className="example-buttons">
         {steps.indexOf(step) < steps.length - 1 && (
-          <button className="btn-fluid margin-1-b" onClick={next}>
-            Next
-          </button>
+        <button className="btn-fluid margin-1-b" onClick={next} type="button">
+          Next
+        </button>
         )}
 
         {steps.indexOf(step) > 0 && (
-          <button className="btn-fluid btn-secondary" onClick={previous}>
+          <button className="btn-fluid btn-secondary" onClick={previous} type="button">
             Back
           </button>
         )}

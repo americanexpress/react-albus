@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['18.x', '20.x', '21.x']
+    name: Node ${{ matrix.node }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        persist-credentials: false
+        ref: ${{ github.event.pull_request.head.sha }}
+    - run: |
+        git remote set-branches --add origin main
+        git fetch
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+    - name: Install Dependencies
+      run: npm i
+      env:
+        NODE_ENV: development
+    - name: Run Tests
+      run: npm run test

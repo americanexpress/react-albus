@@ -48,4 +48,4 @@ const AddAnimation = () => (
   </BrowserRouter>
 );
 
-render(<AddAnimation />, document.getElementById('add-animation'));
+render(<AddAnimation />, document.querySelector('#add-animation'));

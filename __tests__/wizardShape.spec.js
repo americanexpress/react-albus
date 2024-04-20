@@ -15,8 +15,8 @@
 import { wizardShape } from '../src';
 
 jest.mock('prop-types', () => ({
-  shape: shape => ({ isRequired: shape }),
-  arrayOf: item => ({ isRequired: item }),
+  shape: (shape) => ({ isRequired: shape }),
+  arrayOf: (item) => ({ isRequired: item }),
   func: { isRequired: 'squawk' },
   object: { isRequired: 'squawk' },
   string: { isRequired: 'squawk' },
