@@ -2,7 +2,7 @@
   "name": "Add Progress Bar",
   "version": "1.0.0",
   "private": true,
-  "main": "index.js",
+  "main": "index.jsx",
   "dependencies": {
     "prop-types": "15.6.0",
     "rc-progress": "2.2.1",

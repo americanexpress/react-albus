@@ -18,12 +18,15 @@ import { createMemoryHistory } from 'history';
 import renderCallback from '../utils/renderCallback';
 
 class Wizard extends Component {
-  state = {
-    step: {
-      id: null,
-    },
-    steps: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      step: {
+        id: null,
+      },
+      steps: [],
+    };
+  }
 
   getChildContext() {
     return {
@@ -42,13 +45,13 @@ class Wizard extends Component {
   }
 
   componentDidMount() {
-    this.unlisten = this.history.listen(({ pathname }) =>
-      this.setState({ step: this.pathToStep(pathname) })
+    this.unlisten = this.history.listen(
+      ({ pathname }) => this.setState({ step: this.pathToStep(pathname) })
     );
-
-    if (this.props.onNext) {
+    const { onNext } = this.props;
+    if (onNext) {
       const { init, ...wizard } = this.getChildContext().wizard;
-      this.props.onNext(wizard);
+      onNext(wizard);
     }
   }
 
@@ -57,34 +60,43 @@ class Wizard extends Component {
   }
 
   get basename() {
-    return `${this.props.basename}/`;
+    const { basename } = this.props;
+    return `${basename}/`;
   }
 
   get ids() {
-    return this.state.steps.map(s => s.id);
+    const { steps } = this.state;
+    return steps?.map((s) => s.id);
   }
 
   get nextStep() {
+    // eslint-disable-next-line react/destructuring-assignment -- TBD
     return this.ids[this.ids.indexOf(this.state.step.id) + 1];
   }
 
   get previousStep() {
+    // eslint-disable-next-line react/destructuring-assignment -- TBD
     return this.ids[this.ids.indexOf(this.state.step.id) - 1];
   }
 
-  history = this.props.history || createMemoryHistory();
+  // eslint-disable-next-line react/sort-comp, react/destructuring-assignment -- Naming conflict
+  history = this.props?.history || createMemoryHistory();
+
+  // eslint-disable-next-line react/no-unused-class-component-methods -- TBD
   steps = [];
 
-  pathToStep = pathname => {
+  pathToStep = (pathname) => {
+    const { exactMatch } = this.props;
+    const { steps } = this.state;
     const id = pathname.replace(this.basename, '');
-    const [step] = this.state.steps.filter(
-      s => (this.props.exactMatch ? s.id === id : id.startsWith(s.id))
+    const [step] = steps.filter(
+      (s) => (exactMatch ? s.id === id : id.startsWith(s.id))
     );
-
+    // eslint-disable-next-line react/destructuring-assignment -- Naming conflict
     return step || this.state.step;
   };
 
-  init = steps => {
+  init = (steps) => {
     this.setState({ steps }, () => {
       const step = this.pathToStep(this.history.location.pathname);
       if (step.id) {
@@ -95,14 +107,18 @@ class Wizard extends Component {
     });
   };
 
-  set = step => this.history.push(`${this.basename}${step}`);
+  set = (step) => this.history?.push(`${this.basename}${step}`);
+
   push = (step = this.nextStep) => this.set(step);
+
   replace = (step = this.nextStep) => this.history.replace(`${this.basename}${step}`);
+
   pushPrevious = (step = this.previousStep) => this.set(step);
 
   next = () => {
-    if (this.props.onNext) {
-      this.props.onNext(this.getChildContext().wizard);
+    const { onNext } = this.props;
+    if (onNext) {
+      onNext(this.getChildContext().wizard);
     } else {
       this.push();
     }
@@ -121,28 +137,29 @@ class Wizard extends Component {
 Wizard.propTypes = {
   basename: PropTypes.string,
   history: PropTypes.shape({
-    entries: PropTypes.array,
+    entries: PropTypes.shape([]),
     go: PropTypes.func,
     goBack: PropTypes.func,
     listen: PropTypes.func,
-    location: PropTypes.object,
+    location: PropTypes.shape({}),
     push: PropTypes.func,
     replace: PropTypes.func,
   }),
   onNext: PropTypes.func,
+  // eslint-disable-next-line react/boolean-prop-naming -- TBD
   exactMatch: PropTypes.bool,
+  // steps: PropTypes.shape([]),
 };
 
 Wizard.defaultProps = {
   basename: '',
   history: null,
   onNext: null,
-  render: null,
   exactMatch: true,
 };
 
 Wizard.childContextTypes = {
-  wizard: PropTypes.object,
+  wizard: PropTypes.shape({}),
 };
 
 export default Wizard;

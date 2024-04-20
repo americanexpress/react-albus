@@ -18,15 +18,19 @@ import PropTypes from 'prop-types';
 class Steps extends Component {
   componentDidMount() {
     const steps = React.Children.map(
+      // eslint-disable-next-line react/destructuring-assignment -- TBD
       this.props.children,
       ({ props: { children, render, ...config } }) => config
     );
-    this.context.wizard.init(steps);
+    const { wizard } = this.context;
+    wizard.init(steps);
   }
 
   render() {
-    const { id: activeId } = this.props.step || this.context.wizard.step;
-    const [child = null] = React.Children.toArray(this.props.children).filter(
+    const { children, step } = this.props;
+    const { wizard } = this.context;
+    const { id: activeId } = step || wizard.step;
+    const [child = null] = React.Children.toArray(children).filter(
       ({ props: { id } }) => id === activeId
     );
     return child;
@@ -45,7 +49,7 @@ Steps.defaultProps = {
 };
 
 Steps.contextTypes = {
-  wizard: PropTypes.object,
+  wizard: PropTypes.shape({}),
 };
 
 export default Steps;
