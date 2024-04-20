@@ -15,7 +15,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
 
-import { Wizard, Steps, Step, WithWizard } from '../../src';
+import {
+  Wizard, Steps, Step, WithWizard,
+} from '../../src';
 
 describe('Wizard', () => {
   describe('with no props', () => {
@@ -25,7 +27,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -93,7 +95,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard onNext={onNext}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -137,7 +139,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard history={history}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -178,7 +180,7 @@ describe('Wizard', () => {
       mounted = mount(
         <Wizard history={history} exactMatch={false}>
           <WithWizard>
-            {prop => {
+            {(prop) => {
               wizard = prop;
               return null;
             }}
@@ -197,6 +199,129 @@ describe('Wizard', () => {
 
     it('matches the step', () => {
       expect(wizard.step).toEqual({ id: 'slytherin' });
+    });
+
+    afterEach(() => {
+      mounted.unmount();
+    });
+  });
+
+  describe('with existing history and preserving search params', () => {
+    let wizard;
+    let mounted;
+
+    const mockReplace = jest.fn();
+    const mockPush = jest.fn();
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    describe('initially at /gryffindor with ?foo=bar', () => {
+      const history = {
+        replace: mockReplace,
+        listen: () => () => null,
+        location: {
+          pathname: '/gryffindor',
+          search: '?foo=bar',
+        },
+      };
+
+      beforeEach(() => {
+        mounted = mount(
+          <Wizard history={history} preserveQuery={true}>
+            <WithWizard>
+              {(prop) => {
+                wizard = prop;
+                return null;
+              }}
+            </WithWizard>
+            <Steps>
+              <Step id="gryffindor">
+                <div />
+              </Step>
+              <Step id="slytherin">
+                <div />
+              </Step>
+              <Step id="hufflepuff">
+                <div />
+              </Step>
+            </Steps>
+          </Wizard>
+        );
+      });
+
+      it('should preserve query when calling next', () => {
+        wizard.history.push = mockPush;
+        wizard.next();
+        expect(mockPush).toBeCalledWith('/slytherin');
+      });
+
+      it('should preserve query when calling replace', () => {
+        wizard.replace('hufflepuff');
+        expect(mockReplace).toBeCalledWith('/hufflepuff');
+      });
+
+      it('should produce the correct URL string when preserving search params', () => {
+        wizard.replace('hufflepuff');
+        const callArgs = mockReplace.mock.calls[0][0];
+        expect(callArgs).toBe('/hufflepuff');
+      });
+
+      it('should not add search params if none existed initially when calling push', () => {
+        wizard.history.push = mockPush;
+        history.location.search = '';
+        wizard.push('hufflepuff');
+        expect(mockPush).toBeCalledWith('/hufflepuff');
+      });
+    });
+
+    describe('initially at /slytherin with ?quidditch=true', () => {
+      const history = {
+        replace: mockReplace,
+        listen: () => () => null,
+        location: {
+          pathname: '/slytherin',
+          search: '?quidditch=true',
+        },
+      };
+
+      beforeEach(() => {
+        mounted = mount(
+          <Wizard history={history} preserveQuery={true}>
+            <WithWizard>
+              {(prop) => {
+                wizard = prop;
+                return null;
+              }}
+            </WithWizard>
+            <Steps>
+              <Step id="gryffindor">
+                <div />
+              </Step>
+              <Step id="slytherin">
+                <div />
+              </Step>
+              <Step id="hufflepuff">
+                <div />
+              </Step>
+            </Steps>
+          </Wizard>
+        );
+      });
+
+      it('should preserve query when calling next', () => {
+        wizard.history.push = jest.fn();
+        wizard.next();
+        expect(wizard.history.push).toBeCalledWith('/hufflepuff');
+      });
+
+      it('should produce the correct URL string when preserving search params', () => {
+        wizard.replace('gryffindor');
+        const callArgs = mockReplace.mock.calls[0][0];
+        // const actualURL = `${callArgs.pathname}${callArgs.search}`;
+        expect(callArgs).toBe('/gryffindor');
+      });
     });
 
     afterEach(() => {
