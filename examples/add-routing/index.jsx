@@ -31,4 +31,4 @@ const AddRouting = () => (
   </BrowserRouter>
 );
 
-render(<AddRouting />, document.getElementById('add-routing'));
+render(<AddRouting />, document.querySelector('#add-routing'));
