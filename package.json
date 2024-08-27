@@ -72,7 +72,7 @@
     "rimraf": "^2.5.2",
     "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",
-    "webpack": "^2.0.0",
+    "webpack": "^5.94.0",
     "webpack-dev-server": "^2.0.0"
   },
   "peerDependencies": {
